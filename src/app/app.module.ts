@@ -23,6 +23,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthEffects } from './store/auth/auth.effects';
 import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
 import { authReducer } from './store/auth/auth.reducer';
+import { MenuComponent } from './shared/menu/menu.component';
+import { AuthLinksComponent } from './shared/auth-links/auth-links.component';
+import { SocialLinksComponent } from './shared/social-links/social-links.component';
+import { PhoneComponent } from './shared/phone/phone.component';
+import { EmailComponent } from './shared/email/email.component';
+import { ButtonComponent } from './shared/button/button.component';
+import { UserHeroComponent } from './components/user-hero/user-hero.component';
 
 
 @NgModule({
@@ -35,6 +42,13 @@ import { authReducer } from './store/auth/auth.reducer';
     FooterComponent,
     TrainerdashboardComponent,
     HeaderComponent,
+    MenuComponent,
+    AuthLinksComponent,
+    SocialLinksComponent,
+    PhoneComponent,
+    EmailComponent,
+    ButtonComponent,
+    UserHeroComponent,
     
   ],
   imports: [

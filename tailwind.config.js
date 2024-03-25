@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const AnimateCSS = require('animated-tailwindcss')
+module.exports = AnimateCSS({
   content: [
     "./src/**/*.{html,ts}",
   ],
@@ -7,7 +8,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require("tailwindcss-animate"),
+    
   ],
   
-}
+})
