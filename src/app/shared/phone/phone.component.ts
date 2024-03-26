@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-phone',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './phone.component.scss'
 })
 export class PhoneComponent {
+
+  @Input('align')
+  align='center';
+  
 
 }

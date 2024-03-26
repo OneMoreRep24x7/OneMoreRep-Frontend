@@ -9,8 +9,10 @@
     ''
 }}
 {{
-    this.shade==='D'?
+    this.shade==='D'&& this.size!='L'?
     'border bg-orange-600 text-emerald-50 border-orange-600 hover:text-slate-700  ':
+    this.shade==='D' && this.size == 'L'?
+    'border bg-orange-600 text-emerald-50 border-orange-600  hover:text-slate-700  ':
     this.shade==='L'?
     'border bg-orange-50 text-orange-600 border-orange-600 hover:text-orange-50  ':
     this.shade==='W'?
@@ -31,8 +33,7 @@
      aspect-square w-[20%] group-hover:w-[200%] rounded-full
     -translate-x-[50%] -translate-y-[50%] z-20 opacity-0 group-hover:opacity-100
     {{
-        this.shade==='D'?
-        'bg-orange-50':'bg-orange-600'
+        this.shade==='D'?'bg-orange-50':'bg-orange-600'
     }}
     
     ">

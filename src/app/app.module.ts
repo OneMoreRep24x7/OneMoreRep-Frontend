@@ -11,12 +11,9 @@ import { UserdashboardComponent } from './components/userdashboard/userdashboard
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NavabarComponent } from './components/common/navabar/navabar.component';
-import { FooterComponent } from './components/common/footer/footer.component';
 import { TrainerdashboardComponent } from './components/trainerdashboard/trainerdashboard.component';
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './shared/header/header.component';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -29,7 +26,9 @@ import { SocialLinksComponent } from './shared/social-links/social-links.compone
 import { PhoneComponent } from './shared/phone/phone.component';
 import { EmailComponent } from './shared/email/email.component';
 import { ButtonComponent } from './shared/button/button.component';
-import { UserHeroComponent } from './components/user-hero/user-hero.component';
+import { FooterComponent } from './shared/footer/footer.component';
+
+
 
 
 @NgModule({
@@ -39,7 +38,6 @@ import { UserHeroComponent } from './components/user-hero/user-hero.component';
     LoginComponent,
     UserdashboardComponent,
     NavabarComponent,
-    FooterComponent,
     TrainerdashboardComponent,
     HeaderComponent,
     MenuComponent,
@@ -48,7 +46,7 @@ import { UserHeroComponent } from './components/user-hero/user-hero.component';
     PhoneComponent,
     EmailComponent,
     ButtonComponent,
-    UserHeroComponent,
+    FooterComponent,
     
   ],
   imports: [

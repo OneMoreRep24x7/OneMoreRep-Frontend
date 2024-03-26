@@ -5,14 +5,15 @@ import { LoginComponent } from './components/login/login.component';
 import { UserdashboardComponent } from './components/userdashboard/userdashboard.component';
 import { NavabarComponent } from './components/common/navabar/navabar.component';
 import { TrainerdashboardComponent } from './components/trainerdashboard/trainerdashboard.component';
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 const routes: Routes = [
   {path:'',component:HeaderComponent},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
   {path:'userdashboard',component:UserdashboardComponent},
-  {path:'trainer',component:TrainerdashboardComponent}
+  {path:'trainer',component:TrainerdashboardComponent},
+  
 ];
 
 @NgModule({

@@ -9,18 +9,17 @@
     /* Add custom styles here if needed */
   </style>
 </head>
-<body class="">
-  <app-header></app-header>
+<body >
+  <app-header  class="fixed top-0 w-full z-50"></app-header>
   
   <section class="py-48 px-12 overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1539794830467-1f1755804d13?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI0fHx3b3Jrb3V0JTIwZ2lybHxlbnwwfHwwfHx8MA%3D%3D'); background-size:contain; background-position: right; background-repeat: no-repeat;">
 
     <div class=" p-16 grid grid-cols-6 md:grid-cols-2">
       <div>
-        <p class="text-gray-200  font-extrabold text-7xl">Transform your body, transform your life.</p>
+        <p class="text-gray-200  font-extrabold text-7xl"><span class="text-orange-600">Transform </span> your body, transform your life.</p>
         <p class="mt-10 text-white font-thin">OneMoreRep is a comprehensive platform designed to empower users on their fitness journey. With a focus on personalization and community engagement, our app allows users to connect with fitness coaches for personalized guidance and support, while also providing a space to share their progress and transformations with others.</p>
         <div class="flex mt-8">
-          <button class="bg-orange-600 text-white py-2 px-6 rounded-md mr-4 hover:bg-orange-500">Get Started</button>
-          <button class="border bg-gray-700 border-gray-300 text-white py-2 px-6 rounded-md hover:bg-transparent hover:text-orange-500">Book Trainer</button>
+        <app-button class="z-10" name="Get Started" size="L" shade="D" animation="C"></app-button>
         </div>
       </div>
     </div>
@@ -62,11 +61,7 @@
     </div>
     
   </section>
-
- 
-
-<app-footer></app-footer>
-
+  <app-footer></app-footer>
   
   
 
