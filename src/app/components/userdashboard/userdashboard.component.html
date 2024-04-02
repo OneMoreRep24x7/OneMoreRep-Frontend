@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simple and Responsive Layout</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+
   <style>
     /* Add custom styles here if needed */
   </style>
@@ -29,9 +29,9 @@
   
     <div class="flex justify-center mt-10   flex-wrap gap-4">
       <!-- Trainer Cards -->
-      <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
+      <div class="w-full sm:w-1/2 border md:w-1/3 lg:w-1/4 xl:w-1/5">
         <div class="mt-2 mx-4 bg-black  shadow-lg rounded-lg overflow-hidden">
-          <img class="w-full h-32 object-cover" src="trainer1.jpg" alt="Trainer Image">
+          <img class="w-full h-full object-fill"  src="assets/images/Abhimanyu.png"alt="Trainer Image">
           <div class="p-4 flex flex-col items-center">
             <h3 class="text-lg text-white mb-2"><strong class="font-semibold">Trainer Name</strong></h3>
             <button class="mt-2 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">View Profile</button>
@@ -48,12 +48,13 @@
           </div>
         </div>
       </div>
-      <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
+      <div class="w-full sm:w-1/2 md:w-1/3 border lg:w-1/4 xl:w-1/5">
         <div class="mt-2 mx-4 bg-black  shadow-lg rounded-lg overflow-hidden">
-          <img class="w-full h-32 object-cover" src="trainer1.jpg" alt="Trainer Image">
+          <img class="w-full h-full object-fill"  src="assets/images/Abhimanyu.png" alt="Trainer Image">
           <div class="p-4 flex flex-col items-center">
             <h3 class="text-lg text-white mb-2"><strong class="font-semibold">Trainer Name</strong></h3>
             <button class="mt-2 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">View Profile</button>
+            
           </div>
         </div>
       </div>
@@ -62,7 +63,7 @@
     
   </section>
   <app-footer></app-footer>
-  
+
   
 
 

@@ -6,7 +6,7 @@
     Login
   </button> -->
 
-
-<router-outlet></router-outlet>
+<app-loading-spinner *ngIf="showLoading$|async"></app-loading-spinner>
+<router-outlet ></router-outlet>
 
 

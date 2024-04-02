@@ -1,4 +1,4 @@
-import { User } from "../../model/User.model";
+import { User } from "../../model/user.model";
 
 
 export interface AuthState{

@@ -4,6 +4,8 @@ import { Store, select } from '@ngrx/store';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../../model/user.model';
+import { RegisterRequest } from '../../model/auth.model';
 
 @Component({
   selector: 'app-register',
@@ -46,19 +48,53 @@ export class RegisterComponent implements OnInit {
 
   proceedregister() {
     if(this.registerForm.valid){
-      const data = this.registerForm.value;
+      const data: RegisterRequest = {
+        firstName: this.registerForm.value.firstName,
+        lastName: this.registerForm.value.lastName,
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password
+      };
+
+      this.service.test().subscribe((response)=>{
+        console.log(response)
+      })
+      
+
       this.service.register(data).subscribe((response)=>{
         console.log(response);
-       
+        
         
         if(response.statusCode == 200){
-          this.router.navigate(['login'])
+          const user : User = response.user;
+          const email = user.email;
+          this.router.navigate(['otp',email] )
           this.toster.success(response.message);
+
         }else if(response.statusCode == 409){
           this.toster.error(response.message);
         }
 
       });
     }
+  }
+
+  registerWithGoogle(){
+    this.service.getGoogleAuthUrl().subscribe(
+      (urlDto: any) => {
+        if (urlDto && urlDto.authURL) {
+          // Extract the URL from the UrlDto object
+          const url = urlDto.authURL;
+          // Redirect the user to the Google authentication URL
+          window.location.href = url;
+        } else {
+          console.error('Invalid response from server:', urlDto);
+          this.toster.error("Invalid response from server")
+        }
+      },
+      (error) => {
+         console.error('Error generating Google authentication URL:', error);
+         this.toster.error("Error generateing Google authentication Url")
+      }
+    );
   }
 }

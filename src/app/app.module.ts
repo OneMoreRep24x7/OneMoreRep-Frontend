@@ -11,7 +11,6 @@ import { UserdashboardComponent } from './components/userdashboard/userdashboard
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { NavabarComponent } from './components/common/navabar/navabar.component';
 import { TrainerdashboardComponent } from './components/trainerdashboard/trainerdashboard.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { CommonModule } from '@angular/common';
@@ -27,6 +26,18 @@ import { PhoneComponent } from './shared/phone/phone.component';
 import { EmailComponent } from './shared/email/email.component';
 import { ButtonComponent } from './shared/button/button.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { OtpComponent } from './components/otp/otp.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AdminMenuComponent } from './shared/admin-menu/admin-menu.component';
+import { TrainerRegisterComponent } from './components/trainer-register/trainer-register.component';
+import { commonReducer } from './store/common/common.reducer';
+import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component';
+import { GoogleLoginComponent } from './components/google-login/google-login.component';
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { TrainerprofileComponent } from './components/trainerprofile/trainerprofile.component';
+import { CarouselModule } from './shared/carousel/carousel.module';
+import { AdduserprofileComponent } from './components/adduserprofile/adduserprofile.component';
+
 
 
 
@@ -37,7 +48,6 @@ import { FooterComponent } from './shared/footer/footer.component';
     RegisterComponent,
     LoginComponent,
     UserdashboardComponent,
-    NavabarComponent,
     TrainerdashboardComponent,
     HeaderComponent,
     MenuComponent,
@@ -47,6 +57,15 @@ import { FooterComponent } from './shared/footer/footer.component';
     EmailComponent,
     ButtonComponent,
     FooterComponent,
+    OtpComponent,
+    LoadingSpinnerComponent,
+    AdminMenuComponent,
+    TrainerRegisterComponent,
+    AdmindashboardComponent,
+    GoogleLoginComponent,
+    UserprofileComponent,
+    TrainerprofileComponent,
+    AdduserprofileComponent,
     
   ],
   imports: [
@@ -58,10 +77,11 @@ import { FooterComponent } from './shared/footer/footer.component';
     CommonModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    StoreModule.forRoot({auth:authReducer}),
+    StoreModule.forRoot({auth:authReducer,common:commonReducer}),
     EffectsModule.forRoot([AuthEffects]),
     // StoreRouterConnectingModule.forRoot(),
     // StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    CarouselModule
   ],
   providers: [
     provideAnimationsAsync(), // Fix typo here

@@ -1,0 +1,195 @@
+
+<body>
+    <app-header class="fixed top-0 w-full z-50"></app-header>
+ 
+    <div class="container pt-48 flex justify-center items-center min-h-screen bg-gray-950" >
+        <form enctype="multipart/form-data"
+        (ngSubmit)="add()"
+        class="form bg-black rounded-lg shadow-md p-6 max-w-full w-full lg:w-7xl relative" 
+        [formGroup]="profileForm">
+    
+        <div class="flex justify-center mb-6">
+            <label for="profile-pic" class="relative cursor-pointer">
+                <img [src]="preview" alt="Profile Picture" class="rounded-full w-32 h-32 object-cover border-4 border-orange-500">
+                <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                    <span class="text-white text-lg">Change Picture</span>
+                </div>
+                <input type="file" id="profile-pic" name="profile-pic" accept="image/*" class="hidden"  (change)="onFileSelected($event)" required>
+            </label>
+        </div>
+        
+        
+        <div class="flex justify-center mb-6" >
+            <h3 class="text-3xl font-bold text-white text-center">
+                {{firstName}} {{ lastName }}
+            </h3>
+        </div>
+        
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="flex flex-col">
+              <label class="font-bold text-orange-500 mt-4 mb-4">Gender:</label>
+              <div class="flex items-center space-x-4">
+                <label class="inline-flex items-center">
+                  <input type="radio" formControlName="gender" value="male" class="form-radio text-orange-500 h-5 w-5">
+                  <span class="ml-2 text-orange-500">Male</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input type="radio" formControlName="gender" value="female" class="form-radio text-orange-500 h-5 w-5">
+                  <span class="ml-2 text-orange-500">Female</span>
+                </label>
+              </div>
+              <!-- Validation message -->
+              <div *ngIf="profileForm.get('gender').invalid && (profileForm.get('gender').dirty || profileForm.get('gender').touched)" class="text-red-500 mt-1">
+                <span *ngIf="profileForm.get('gender').errors?.required">Gender is required</span>
+              </div>
+            </div>
+        
+            <!-- Repeat for other input fields -->
+            <div class="flex flex-col">
+              <label for="phone" class="font-bold text-orange-500 mt-4 mb-2">Phone number:</label>
+              <input type="tel" id="phone" name="phone" formControlName="phone" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
+              <!-- Validation message -->
+              <div *ngIf="profileForm.get('phone').invalid && (profileForm.get('phone').dirty || profileForm.get('phone').touched)" class="text-red-500 mt-1">
+                <span *ngIf="profileForm.get('phone').errors?.required">Phone number is required</span>
+                <span *ngIf="profileForm.get('phone').errors?.pattern">Phone number must be 10 digits</span>
+              </div>
+            </div>
+        
+            <!-- Repeat for other input fields -->
+            <!-- Age -->
+            <div class="flex flex-col">
+              <label for="age" class="font-bold text-orange-500 mt-4 mb-2">Age:</label>
+              <input type="number" id="age" name="age" formControlName="age" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
+              <!-- Validation message -->
+              <div *ngIf="profileForm.get('age').invalid && (profileForm.get('age').dirty || profileForm.get('age').touched)" class="text-red-500 mt-1">
+                <span *ngIf="profileForm.get('age').errors?.required">Age is required</span>
+              </div>
+            </div>
+        
+            <!-- Repeat for other input fields -->
+            <!-- City -->
+            <div class="flex flex-col">
+              <label for="city" class="font-bold text-orange-500 mt-4 mb-2">City:</label>
+              <input type="text" id="city" name="city" formControlName="city" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
+              <!-- Validation message -->
+              <div *ngIf="profileForm.get('city').invalid && (profileForm.get('city').dirty || profileForm.get('city').touched)" class="text-red-500 mt-1">
+                <span *ngIf="profileForm.get('city').errors?.required">City is required</span>
+              </div>
+            </div>
+        
+            <!-- Repeat for other input fields -->
+            <!-- Daily Activity -->
+            <div class="flex flex-col">
+              <label class="font-bold text-orange-500 mt-4 mb-2">Daily Activity:</label>
+              <select id="activity" name="activity" formControlName="activity" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
+                <option value="" disabled selected>Select an option</option>
+                <option value="Little or no activity">Little or no activity</option>
+                <option value="Lightly Active">Lightly Active</option>
+                <option value="Moderately Active">Moderately Active</option>
+                <option value="Very Active">Very Active</option>
+              </select>
+              <!-- Validation message -->
+              <div *ngIf="profileForm.get('activity').invalid && (profileForm.get('activity').dirty || profileForm.get('activity').touched)" class="text-red-500 mt-1">
+                <span *ngIf="profileForm.get('activity').errors?.required">Activity level is required</span>
+              </div>
+            </div>
+        
+            <!-- Repeat for other input fields -->
+            <!-- Medical Conditions -->
+            <div class="flex flex-col">
+              <label class="font-bold text-orange-500 mt-4 mb-2">Medical Conditions:</label>
+              <select id="conditions" name="conditions" formControlName="conditions" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
+                <option value="" disabled selected>Select an option</option>
+                <option value="None">None</option>
+                <option value="Diabetes">Diabetes</option>
+                <option value="Pre-diabetes">Pre-diabetes</option>
+                <option value="Cholesterol">Cholesterol</option>
+                <option value="Hypertension">Hypertension</option>
+                <option value="PCOS">PCOS</option>
+                <option value="Thyroid">Thyroid</option>
+                <option value="Physical injury">Physical injury</option>
+              </select>
+              <!-- Validation message -->
+              <div *ngIf="profileForm.get('conditions').invalid && (profileForm.get('conditions').dirty || profileForm.get('conditions').touched)" class="text-red-500 mt-1">
+                <span *ngIf="profileForm.get('conditions').errors?.required">Medical condition is required</span>
+              </div>
+            </div>
+        
+            <!-- Repeat for other input fields -->
+            <!-- Emotional Health -->
+            <div class="flex flex-col">
+              <label class="font-bold text-orange-500 mt-4 mb-2">Emotional Health:</label>
+              <select id="emotion" name="emotion" formControlName="emotion" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
+                <option value="" disabled selected>Select an option</option>
+                <option value="None">None</option>
+                <option value="Sleep issues">Sleep issues</option>
+                <option value="Anger issues">Anger issues</option>
+                <option value="Loneliness">Loneliness</option>
+                <option value="Relationship stress">Relationship stress</option>
+                <option value="Depression">Depression</option>
+                <option value="Excessive stress/anxiety">Excessive stress/anxiety</option>
+              </select>
+              <!-- Validation message -->
+              <div *ngIf="profileForm.get('emotion').invalid && (profileForm.get('emotion').dirty || profileForm.get('emotion').touched)" class="text-red-500 mt-1">
+                <span *ngIf="profileForm.get('emotion').errors?.required">Emotional health is required</span>
+              </div>
+            </div>
+        
+            <!-- Repeat for other input fields -->
+            <!-- Height -->
+            <div class="flex flex-col">
+              <label for="height" class="font-bold text-orange-500 mt-4 mb-2">Height (cm):</label>
+              <input type="number" id="height" name="height" formControlName="height" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
+              <!-- Validation message -->
+              <div *ngIf="profileForm.get('height').invalid && (profileForm.get('height').dirty || profileForm.get('height').touched)" class="text-red-500 mt-1">
+                <span *ngIf="profileForm.get('height').errors?.required">Height is required</span>
+                <span *ngIf="profileForm.get('height').errors?.min || profileForm.get('height').errors?.max">Height must be between 50cm and 300cm</span>
+              </div>
+            </div>
+        
+            <!-- Repeat for other input fields -->
+            <!-- Weight -->
+            <div class="flex flex-col">
+              <label for="weight" class="font-bold text-orange-500 mt-4 mb-2">Current Weight (kg):</label>
+              <input type="number" id="weight" name="weight" formControlName="weight" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
+              <!-- Validation message -->
+              <div *ngIf="profileForm.get('weight').invalid && (profileForm.get('weight').dirty || profileForm.get('weight').touched)" class="text-red-500 mt-1">
+                <span *ngIf="profileForm.get('weight').errors?.required">Weight is required</span>
+                <span *ngIf="profileForm.get('weight').errors?.min || profileForm.get('weight').errors?.max">Weight must be between 10kg and 500kg</span>
+              </div>
+            </div>
+        
+            <!-- Repeat for other input fields -->
+            <!-- Target Weight -->
+            <div class="flex flex-col">
+              <label for="target-weight" class="font-bold text-orange-500 mt-4 mb-2">Target Weight (kg):</label>
+              <input type="number" id="target-weight" name="target-weight" formControlName="targetWeight" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
+              <!-- Validation message -->
+              <div *ngIf="profileForm.get('targetWeight').invalid && (profileForm.get('targetWeight').dirty || profileForm.get('targetWeight').touched)" class="text-red-500 mt-1">
+                <span *ngIf="profileForm.get('targetWeight').errors?.required">Target weight is required</span>
+                <span *ngIf="profileForm.get('targetWeight').errors?.min || profileForm.get('targetWeight').errors?.max">Target weight must be between 10kg and 500kg</span>
+              </div>
+            </div>
+          </div>
+    
+        <div class="flex justify-center gap-2 mt-6">
+            <app-button type="submit"  name="Save" shade="D" size="M"></app-button>
+          
+             <app-button (click)="onCancel()" name="Cancel" shade="W" size="M"></app-button>
+           
+
+        </div>
+    
+    </form>
+    
+    
+    </div>
+          
+   <app-footer></app-footer>
+   
+ 
+   </body>
+ 
+ 
+

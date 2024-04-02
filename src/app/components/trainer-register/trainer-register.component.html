@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, width=device-width">
+  
+  integrity="sha384-bbZdJqVd+9LF1kgVvqvjGGAr4+r7Qs4iQFct+3wEryDBxJqFFa9R9vEzgE+tJfdM" crossorigin="anonymous">
+</head>
+<body>
+    
+    <img src="assets/images/logo.png" alt="Logo" class="hidden md:block md:absolute md:top-[-41px] md:left-[36px] md:w-[150px] md:h-[200px] md:object-cover cursor-pointer z-[1]">
+    <!-- Add your logo here -->
+       
+      
+      
+      
+
+    <div class="w-full h-[1024px] relative bg-black overflow-hidden tracking-[normal] text-left text-[36px] text-sienna font-noto-sans bg-blend-darken center-on-small-medium">
+        <img class="hidden sm:block absolute top-0 left-0 w-[900px] h-[1013px] object-cover" alt="" src="assets/images/authlogin.jpeg">
+    
+        <div  class="absolute top-[calc(50% - 497px)] right-[39px] rounded-[20px] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.14)] shadow-[-8px 4px 5px rgba(0,0,0,0.24)]  mr-2  backdrop-filter backdrop-blur-[53px] box-border h-[790px] flex flex-col items-start justify-start pt-[70px] px-10   max-w-full z-[1] border-[1px] border-solid border-glass1-stroke-carey mt-10">
+        
+            <div class="self-stretch flex flex-col items-start justify-start ">
+                <div class="self-stretch flex flex-col items-start justify-start gap-[14px] cursor-pointer" id="upperSectionContainer">
+                    <div class="flex flex-col items-start justify-start">
+                        <h1 class="m-0  relative font-semibold  inline-block min-w-[122px] mq450:text-[22px] mq750:text-[29px] text-white">Trainer Signup</h1>
+                        <div class="relative text-base font-medium text-orange-500">Just some details to get you in.!</div>
+                    </div>
+                    <form (ngSubmit)="proceedregister()" class="m-0 self-stretch flex flex-col items-start justify-start gap-[25px]" [formGroup]="registerForm">
+                        <div class="self-stretch rounded-xl flex items-center py-3.5 px-4 border border-white">
+                            <input class="flex-1 outline-none bg-transparent text-white text-xl placeholder-gray-500"
+                                type="text"
+                                name="firstName"
+                                id="firstName"
+                                placeholder="Enter your First Name"
+                                formControlName="firstName">
+                        </div>
+                    
+                        <div class="self-stretch rounded-xl flex items-center py-3.5 px-4 border border-white">
+                            <input class="flex-1 outline-none bg-transparent text-white text-xl placeholder-gray-500"
+                                type="text"
+                                name="lastName"
+                                id="lastName"
+                                placeholder="Enter your last name"
+                                formControlName="lastName">
+                        </div>
+                    
+                        <div class="self-stretch rounded-xl flex items-center py-3.5 px-4 border border-white">
+                            <input class="flex-1 outline-none bg-transparent text-white text-xl placeholder-gray-500"
+                                type="email"
+                                name="email"
+                                id="email"
+                                placeholder="Enter your Email"
+                                formControlName="email">
+                        </div>
+                    
+                        <div class="self-stretch rounded-xl flex items-center py-3.5 px-4 border border-white">
+                            <input class="flex-1 outline-none bg-transparent text-white text-xl placeholder-gray-500"
+                                type="password"
+                                name="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                formControlName="password">
+                        </div>
+                    
+                        <div class="self-stretch rounded-xl flex items-center py-3.5 px-4 border border-white">
+                            <input class="flex-1 outline-none bg-transparent text-white text-xl placeholder-gray-500"
+                                type="password"
+                                name="confirmPassword"
+                                id="confirmPassword"
+                                placeholder="Confirm your password"
+                                formControlName="confirmPassword">
+                        </div>
+                    
+                        <button type="submit" class="cursor-pointer border-none p-0 bg-orange-700 rounded-lg self-stretch flex flex-col items-center justify-center gap-[12px]"
+                            >
+                            <div class="self-stretch rounded-xl background:linear-gradient(90.57deg,_#c0714b,_#e87e4c_53.13%,_#cc764d_98.5%) flex flex-row items-center justify-center py-3.5 px-5">
+                                <button class="relative text-xl font-semibold font-noto-sans text-white text-left inline-block min-w-[68px] mq450:text-base"
+                                    type="submit">Signup</button>
+                            </div>
+                        </button>
+                    </form>
+                    
+                </div>
+               
+                <div class="self-stretch flex flex-col items-start justify-start gap-[12px] text-base text-dimgray">
+                    <div class="self-stretch flex flex-row flex-wrap items-start justify-start gap-[20px]">
+                        <div class="flex-1 flex flex-col items-start justify-start pt-[11px] px-0 pb-0 box-border min-w-[110px]">
+                            <div class="self-stretch h-0.5 relative box-border border-t-[2px] border-solid border-dimgray"></div>
+                        </div>
+                        <div class="relative font-medium inline-block min-w-[20px]">Or</div>
+                        <div class="flex-1 flex flex-col items-start justify-start pt-[11px] px-0 pb-0 box-border min-w-[110px]">
+                            <div class="self-stretch h-0.5 relative box-border border-t-[2px] border-solid border-dimgray"></div>
+                        </div>
+                    </div>
+                    <!-- <div class="self-stretch flex flex-row items-start justify-center py-0 px-5">
+                        <a href="#" class="inline-block py-2 px-4 bg-gray-600 hover:bg-gray-800  text-white rounded-lg shadow-md transition-colors duration-300">
+                            <img class="h-6 w-6 inline-block mr-2" src="assets/images/google.png" alt="Google Icon" >
+                            SignUp with Google
+                        </a>
+                    </div> -->
+                </div>
+                <div class="self-stretch h-[60px] flex flex-col items-center justify-start gap-[5px] top-[0] z-[99] sticky text-base text-white ">
+                    <div class="w-[199px] h-[22px] relative font-medium inline-block">Already Registered? <a routerLink="/login">Login</a> </div>
+                    <div class="self-stretch flex-1 rounded-md [background:linear-gradient(180deg,_rgba(98,_98,_98,_0),_rgba(98,_98,_98,_0.07))] flex flex-row items-center justify-between py-1 px-1.5 gap-[20px]">
+                        <div class="self-stretch w-[147px] flex flex-row items-start justify-start">
+                            <div class="self-stretch flex-1 relative whitespace-nowrap">Terms & Conditions</div>
+                        </div>
+                        <div class="self-stretch w-[61px] flex flex-row items-start justify-start">
+                            <div class="self-stretch flex-1 relative">Support</div>
+                        </div>
+                        <div class="self-stretch w-[113px] flex flex-row items-start justify-start">
+                            <div class="self-stretch flex-1 relative whitespace-nowrap">Customer Care</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+        </div>
+    </div>
+    
+</body>
+</html>
+
+

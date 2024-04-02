@@ -3,16 +3,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserdashboardComponent } from './components/userdashboard/userdashboard.component';
-import { NavabarComponent } from './components/common/navabar/navabar.component';
 import { TrainerdashboardComponent } from './components/trainerdashboard/trainerdashboard.component';
-import { HeaderComponent } from './shared/header/header.component';
+import { OtpComponent } from './components/otp/otp.component';
+import { TrainerRegisterComponent } from './components/trainer-register/trainer-register.component';
+import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component';
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { TrainerprofileComponent } from './components/trainerprofile/trainerprofile.component';
+import { AdduserprofileComponent } from './components/adduserprofile/adduserprofile.component';
 
 const routes: Routes = [
-  {path:'',component:HeaderComponent},
+  {path:'',component:UserdashboardComponent},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
-  {path:'userdashboard',component:UserdashboardComponent},
   {path:'trainer',component:TrainerdashboardComponent},
+  {path:'otp/:email',component:OtpComponent},
+  {path:'trainer/register',component:TrainerRegisterComponent},
+  {path:'admin',component:AdmindashboardComponent},
+  {path:'user/profile',component:UserprofileComponent},
+  {path:'user/addProfile',component:AdduserprofileComponent},
+  {path:'trainer/profile',component:TrainerprofileComponent}
   
 ];
 
