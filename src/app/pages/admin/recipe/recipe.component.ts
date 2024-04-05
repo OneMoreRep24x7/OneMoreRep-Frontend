@@ -11,6 +11,7 @@ export class RecipeComponent implements OnInit{
   itemsPerPage = 5;
   currentPage = 1;
   foods: any[] = [];
+  searchText: string = '';
 
   constructor(
     private router: Router,
@@ -42,6 +43,16 @@ export class RecipeComponent implements OnInit{
 
   changePage(page: number) {
     this.currentPage = page;
+  }
+  search(): void {
+    if (this.searchText.trim() === '') {
+      this.getAllFoods();
+    } else {
+    
+      this.foods = this.foods.filter(food =>
+        food.name.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    }
   }
 
 }
