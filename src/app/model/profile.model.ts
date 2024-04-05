@@ -27,3 +27,11 @@ export interface ProfileResponse{
     targetWeight:number,
     imageName:string
 }
+
+export interface WorkoutModel{
+    workoutname:string,
+    description:string,
+    duration:number,
+    caloriesburned:number
+
+}

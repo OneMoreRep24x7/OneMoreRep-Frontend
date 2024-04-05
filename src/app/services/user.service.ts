@@ -10,6 +10,7 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class UserService {
+ 
 
 
   constructor(
@@ -17,7 +18,10 @@ export class UserService {
     private router:Router
   ) { }
 
-    
+  getUserDetails(userId:string):Observable<User> {
+    const url = `api/v1/user/getDetails?userId=${userId}`;
+   return this.http.get<User>(url)
+  }
 
   updateProfile(profileRequest:ProfileRequest,file:File): Observable<LoginResponse>{
     const formData: FormData = new FormData();

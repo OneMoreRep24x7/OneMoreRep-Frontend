@@ -1,0 +1,42 @@
+<body>
+    <app-header class="fixed top-0 w-full z-50"></app-header>
+    <section class="py-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
+        <div class="w-full max-w-3xl bg-black rounded-lg shadow-md overflow-hidden border border-orange-500">
+          <div class="relative h-64">
+            <img class="w-full h-full object-cover absolute inset-0 transition duration-300 ease-in-out hover:scale-110" [src]="food.imageUrl" alt="Food Image">
+            <div class="absolute inset-0 bg-gradient-to-b from-gray-100 opacity-10"></div>
+          </div>
+          <div class="flex flex-col p-8 gap-4">
+            <h2 class="text-orange-500 font-bold text-4xl">{{ food.name }}</h2>
+            <div class="flex items-center text-gray-500">
+            <span class="font-semibold mr-2 text-xl">Description:</span>
+              <span class="text-white">Nutrient-Rich Protein Source</span>
+            </div>
+            <div class="text-gray-500">
+              <span class="font-semibold mr-2 text-xl">Category:</span>
+              <span class="text-white">{{ food.category }}</span>
+            </div>
+            <div class="flex flex-col">
+                <label class="font-semibold text-xl text-gray-500 mb-1">Variants:</label>
+                <ul class="list-disc space-y-1 text-orange-500 pl-4">
+                  <li *ngFor="let variant of food.variants">
+                    <span class="font-semibold text-lg">{{ variant.quantity }} {{ variant.unit }}</span> - 
+                    Calories: {{ variant.calories }}, 
+                    Carbs: {{ variant.carbs }}, 
+                    Fat: {{ variant.fat }}, 
+                    Fiber: {{ variant.fiber }}, 
+                    Protein: {{ variant.protein }}
+                  </li>
+                </ul>
+              </div>
+            <div class="flex justify-end gap-2">
+              <app-button name="Edit Food" shade="D" ></app-button>
+              <app-button name="Edit Variant" shade="W" ></app-button>
+            </div>
+          </div>
+        </div>
+      </section>
+             
+    <app-footer></app-footer>
+</body>
+
