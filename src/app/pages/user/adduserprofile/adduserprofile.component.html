@@ -3,10 +3,10 @@
     <app-header class="fixed top-0 w-full z-50"></app-header>
  
     <div class="container pt-48 flex justify-center items-center min-h-screen bg-gray-950" >
-        <form enctype="multipart/form-data"
-        (ngSubmit)="add()"
-        class="form bg-black rounded-lg shadow-md p-6 max-w-full w-full lg:w-7xl relative" 
-        [formGroup]="profileForm">
+      <form enctype="multipart/form-data"
+      (ngSubmit)="isEditMode ? edit() : add()"
+      class="form bg-black rounded-lg shadow-md p-6 max-w-full w-full lg:w-7xl relative" 
+      [formGroup]="profileForm">
     
         <div class="flex justify-center mb-6">
             <label for="profile-pic" class="relative cursor-pointer">
@@ -174,8 +174,8 @@
           </div>
     
         <div class="flex justify-center gap-2 mt-6">
-            <app-button type="submit"  name="Save" shade="D" size="M"></app-button>
-          
+          <app-button *ngIf="!isEditMode" type="submit" name="Save" shade="D" size="M"></app-button>
+          <app-button *ngIf="isEditMode" type="submit" name="Update" shade="D" size="M"></app-button>
              <app-button (click)="onCancel()" name="Cancel" shade="W" size="M"></app-button>
            
 

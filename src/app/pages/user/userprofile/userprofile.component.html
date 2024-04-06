@@ -1,10 +1,20 @@
 
   <body>
    <app-header class="fixed top-0 w-full z-50"></app-header>
-   <section class="py-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
-    <div class="w-[800px] rounded-3xl overflow-hidden shadow-lg p-6 flex flex-col items-center gap-8 border border-orange-500 text-white font-urbanist">
+   <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
+    <div class="w-[800px] h-auto rounded-3xl overflow-hidden shadow-lg p-6 flex flex-col items-center gap-8 border border-orange-500 text-white font-urbanist">
       <div class="flex flex-col items-center gap-4">
-        <img class="h-40 w-40 md:h-52 md:w-52 rounded-full object-cover" loading="lazy" alt="Profile Picture" [src]="user.imageName" />
+        <ng-container *ngIf="!user.imageName">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-40 h-40">
+            <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+          </svg>
+          
+        </ng-container>
+        
+        <ng-container *ngIf="user.imageName">
+          <img class="h-40 w-40 md:h-52 md:w-52 rounded-full object-cover" loading="lazy" alt="Profile Picture" [src]="user.imageName" />
+        </ng-container>
+              
         <h1 class="text-4xl  md:text-5xl font-black">{{ user.firstName }} <span class="text-orange-500">{{ user.lastName }}</span></h1>
       </div>
   
@@ -23,6 +33,7 @@
           <div class="flex flex-col items-start gap-2 mt-4">
             <p class="text-lg font-semibold">Daily Activity:<span class="text-orange-500 ml-2">{{ user.dailyActivity }}</span></p>
             <p class="text-lg font-semibold">Medical Conditions:<span class="text-orange-500 ml-2">{{ user.medicalConditions }}</span></p>
+            <p class="text-lg font-semibold">Emotional Health:<span class="text-orange-500 ml-2">{{ user.emotionalHealth }}</span></p>
             <p class="text-lg font-semibold">Height:<span class="text-orange-500 ml-2">{{ user.height }} CM</span></p>
             <p class="text-lg font-semibold">Weight:<span class="text-orange-500 ml-2"> {{ user.weight }} KG</span></p>
           </div>
@@ -38,8 +49,12 @@
       </div>
   
       <div class="flex justify-center mt-2">
-        <app-button (click)="edit()" name="Edit Profile" size="M" shade="W"></app-button>
+        
+        <app-button *ngIf="user.dailyActivity !== null" (click)="edit()" name="Edit Profile" size="M" shade="W"></app-button>
+    
+        <app-button *ngIf="user.dailyActivity === null" (click)="add()" name="Add Profile" size="M" shade="W"></app-button>
       </div>
+      
     </div>
   </section>
   

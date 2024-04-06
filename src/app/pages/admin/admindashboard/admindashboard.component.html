@@ -8,20 +8,54 @@
   </head>
   <body>
    <app-header></app-header>
-   <section class="container py-48 mx-auto ">
-    <p class="text-6xl font-bold text-center text-white mb-4">Welcome <span class="bg-orange-700">Admin</span> </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-14 mt-6">
-      <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded shadow focus:outline-none">
-        add workout
-      </button>
-      <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow focus:outline-none">
-        add recipes
-      </button>
+   <section class="container mx-auto pt-48 px-4 md:px-0">
+    <div class="  flex justify-center lg:justify-start flex-wrap md:flex-nowrap gap-4">
+      <aside class="bg-gray-800 w-full lg:w-[20%] rounded-xl m justify-center text-white md:block p-4 col-span-3 flex flex-col lg:justify-between  h-auto">
+        <h2 class="text-2xl font-bold mb-4 text-center text-orange-500 border-b border-orange-500">Admin Panel</h2>
+        <ul class="flex flex-col space-y-2 px-4">
+            <li>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Dashboard</a>
+            </li>
+            <li>
+                <a routerLink="/admin/recipe" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Foods</a>
+            </li>
+            <li>
+              <a routerLink="/admin/recipeVariant" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Food Variants</a>
+           </li>
+           <li>
+            <a  routerLink="/admin/workout" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">workouts</a>
+           </li>
+            <li>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Posts</a>
+            </li>
+            <li>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Purchase</a>
+            </li>
+            <li>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Users</a>
+            </li>
+            <li>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Trainers</a>
+            </li>
+           
+        </ul>
+    </aside>
+     <router-outlet></router-outlet>
+  
+      <main class="flex-1 bg-black text-white p-4 rounded shadow col-span-12">  <p class="text-4xl font-bold text-center mb-8">Welcome <span class="bg-orange-700 px-2 text-white">Admin</span></p>
+        <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded shadow focus:outline-none">
+            Add Workout
+          </button>
+          <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow focus:outline-none">
+            Add Recipes
+          </button>
+          
+        </div> -->
+      </main>
     </div>
   </section>
 
-     
   <app-footer></app-footer>
   
 

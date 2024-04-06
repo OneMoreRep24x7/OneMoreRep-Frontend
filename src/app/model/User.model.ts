@@ -11,6 +11,7 @@ export interface User {
     city:string|null,
     dailyActivity:string|null,
     medicalConditions:string|null,
+    emotionalHealth:string|null,
     height:number|null,
     weight:number|null,
     targetWeight:number|null,

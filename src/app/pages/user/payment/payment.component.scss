@@ -1,0 +1,38 @@
+body {
+    height:fit-content;
+    margin: 0;
+    padding: 0;
+    background-color: black/* Set background color using hex code */
+      
+}
+
+@keyframes moveSection {
+    0% {
+        transform: translateX(-20px);
+    }
+    50% {
+        transform: translateX(20px);
+    }
+    100% {
+        transform: translateX(-20px);
+    }
+}
+
+.moving-section {
+    animation: moveSection 5s infinite alternate;
+}
+@keyframes tiltSection {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(20deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+.tilting-section {
+    animation: tiltSection 5s infinite alternate;
+}

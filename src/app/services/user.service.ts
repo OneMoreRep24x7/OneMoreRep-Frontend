@@ -28,7 +28,7 @@ export class UserService {
     formData.append('file', file); // Append the file
     formData.append('profileRequest', JSON.stringify(profileRequest));
    
-    return this.http.post<LoginResponse>("api/v1/user/update",formData).pipe(
+    return this.http.post<LoginResponse>("api/v1/user/add",formData).pipe(
       tap(response=>{
         const user = response?.user;
         console.log(response.user);

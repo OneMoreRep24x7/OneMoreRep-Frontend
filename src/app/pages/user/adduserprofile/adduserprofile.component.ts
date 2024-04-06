@@ -22,6 +22,7 @@ export class AdduserprofileComponent implements OnInit {
   userId : string | null;
   firstName:string | null;
   lastName:string | null;
+  isEditMode: boolean = false;
   
   profileForm: FormGroup;
   preview: string = 'https://imgs.search.brave.com/SDvjesyFfC_6qOio8MKVLC8YzWLdAgSHXgDV2UCF_AA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5naXRlbS5jb20v/cGltZ3MvbS8xNDYt/MTQ2ODg0M19wcm9m/aWxlLWljb24tb3Jh/bmdlLXBuZy10cmFu/c3BhcmVudC1wbmcu/cG5n';
@@ -38,25 +39,55 @@ export class AdduserprofileComponent implements OnInit {
   ngOnInit(): void {
     this.user$ = JSON.parse(sessionStorage.getItem('user'));
     this.userId = this.user$.id;
-    this.firstName = this.user$.firstName
-    this.lastName = this.user$.lastName;
-    console.log(this.firstName)
-    
-    this.profileForm = this.formBuilder.group({
-      gender: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      age: ['', Validators.required],
-      city: ['', Validators.required],
-      activity: ['', Validators.required],
-      conditions: ['', Validators.required],
-      emotion: ['', Validators.required],
-      height: ['', [Validators.required, Validators.min(50), Validators.max(300)]],
-      weight: ['', [Validators.required, Validators.min(10), Validators.max(500)]],
-      targetWeight: ['', [Validators.required, Validators.min(10), Validators.max(500)]]
+
+      this.profileForm = this.formBuilder.group({
+        gender: ['', Validators.required],
+        phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+        age: ['', Validators.required],
+        city: ['', Validators.required],
+        activity: ['', Validators.required],
+        conditions: ['', Validators.required],
+        emotion: ['', Validators.required],
+        height: ['', [Validators.required, Validators.min(50), Validators.max(300)]],
+        weight: ['', [Validators.required, Validators.min(10), Validators.max(500)]],
+        targetWeight: ['', [Validators.required, Validators.min(10), Validators.max(500)]]
+      });
+  
+    this.service.getUserDetails(this.userId).subscribe((response) => {
+      console.log(response); // Ensure that the response contains the expected user details
+      this.user$ = response;
+  
+      // Populate the form with user details if they exist
+      this.initializeForm();
+      
     });
-    
+   
     
   }
+  
+  initializeForm() {
+    if (this.user$ && this.user$.dailyActivity) {
+      this.profileForm = this.formBuilder.group({
+        gender: [this.user$.gender || '', Validators.required],
+        phone: [this.user$.phone || '', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+        age: [this.user$.age || '', Validators.required],
+        city: [this.user$.firstName || '', Validators.required],
+        activity: [this.user$.dailyActivity || '', Validators.required],
+        conditions: [this.user$.medicalConditions || '', Validators.required],
+        emotion: [this.user$.emotionalHealth || '', Validators.required],
+        height: [this.user$.height || '', [Validators.required, Validators.min(50), Validators.max(300)]],
+        weight: [this.user$.weight || '', [Validators.required, Validators.min(10), Validators.max(500)]],
+        targetWeight: [this.user$.targetWeight || '', [Validators.required, Validators.min(10), Validators.max(500)]]
+      });
+  
+      if (this.user$.imageName) {
+        this.preview = this.user$.imageName;
+      }
+      this.isEditMode = true; 
+    } 
+  }
+
+  
 
   add(){
     if (this.profileForm.invalid) {
@@ -84,6 +115,9 @@ export class AdduserprofileComponent implements OnInit {
       this.store.dispatch(updateRequest({data:data,file:this.image}))
       
     }
+  }
+  edit(){
+    console.log("edit function called")
   }
 
   markFormGroupTouched(formGroup: FormGroup) {

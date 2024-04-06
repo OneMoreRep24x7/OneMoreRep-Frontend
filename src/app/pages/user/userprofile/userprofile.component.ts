@@ -33,4 +33,9 @@ export class UserprofileComponent implements OnInit {
  edit(){
   this.router.navigateByUrl('/user/addProfile')
  }
+ add(){
+  this.router.navigateByUrl('/user/addProfile')
+ }
+
+
 }
