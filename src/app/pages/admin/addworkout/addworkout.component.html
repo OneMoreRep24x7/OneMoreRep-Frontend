@@ -15,6 +15,26 @@
               formControlName="workoutname">
           </div>
           <div class="flex flex-col w-full">
+            <label for="workoutcategory" class="font-semibold text-white mb-1">Workout Category:</label>
+            <select 
+              id="workoutcategory" 
+              name="workoutcategory" 
+              class="input-field rounded-md bg-orange-200 border border-gray-300 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
+              formControlName="workoutcategory">
+              <option value="">Select a category</option>
+              <option value="chest">Chest</option>
+              <option value="back">Back</option>
+              <option value="shoulders">Shoulders</option>
+              <option value="legs">Legs</option>
+              <option value="biceps">Biceps</option>
+              <option value="triceps">Triceps</option>
+              <option value="abs">Abs</option>
+              <option value="cardio">Cardio</option>
+              
+            </select>
+          </div>
+          
+          <div class="flex flex-col w-full">
             <label for="description" class="font-semibold text-white mb-1">Description:</label>
             <textarea 
               name="description" 

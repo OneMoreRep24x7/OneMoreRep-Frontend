@@ -30,6 +30,7 @@ import { SharedModule } from './shared/shared.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,11 +50,17 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    ToastrModule.forRoot({
+       
+      timeOut: 5000, // Example timeout
+      preventDuplicates: true,
+      progressBar: true
+    }), // ToastrModule added
     StoreModule.forRoot({auth:authReducer,common:commonReducer}),
     EffectsModule.forRoot([AuthEffects]),
     CarouselModule,
-    SharedModule
+    SharedModule,
+    
   ],
   providers: [
     provideAnimationsAsync(), // Fix typo here

@@ -1,0 +1,21 @@
+body {
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+.selected {
+    border: 2px solid rgb(253, 69, 3); /* Add a border to the selected button */
+    position: relative; /* Required for positioning the tick mark */
+}
+
+.selected::after {
+    content: "\2714"; /* Unicode for the tick mark */
+    position: absolute;
+    top: 8px; /* Adjust the position of the tick mark */
+    right: 8px; /* Adjust the position of the tick mark */
+    color: rgb(253, 69, 3); /* Color of the tick mark */
+    font-size: 20px; /* Adjust the size of the tick mark */
+    font-weight: bold; /* Adjust the weight of the tick mark */
+}

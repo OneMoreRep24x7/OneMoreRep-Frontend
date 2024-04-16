@@ -25,7 +25,17 @@
             </ng-template>
            
             <div class="mt-6">
-                <app-menu></app-menu>
+                <ng-container *ngIf="userRole === 'TRAINER'; else adminMenu">
+                    <app-trainer-menu></app-trainer-menu>
+               </ng-container>
+               <ng-template #adminMenu>
+                   <ng-container *ngIf="userRole === 'ADMIN'; else userMenu">
+                       <app-admin-menu></app-admin-menu>
+                   </ng-container>
+                   <ng-template #userMenu>
+                       <app-menu></app-menu>
+                   </ng-template>
+               </ng-template>
             </div>
             <div class="mt-6">
                 <app-social-links></app-social-links>
@@ -65,9 +75,10 @@
     
    <div class=" px-5 {{isMenuScrolled?'fixed top-0 w-full bg-black shadow-xl animate-slideInDown animate-faster ':'pt-5'}}">
     <div class=" flex items-center justify-between container {{isMenuScrolled?'border-b':'border bg-black'}}  border-orange-500  rounded-xl ">
-        <a href="">
-            <img src="assets/images/logo.png " class="w-[110px] h-[110px]" alt="">
+        <a [routerLink]="userRole === 'ADMIN' ? '/admin' : (userRole === 'TRAINER' ? '/trainer' : '/user')">
+            <img src="assets/images/logo.png" class="w-[110px] h-[110px]" alt="">
         </a>
+        
         <div class="text-white lg:hidden">
             <svg (click)="openSideBar()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -76,12 +87,18 @@
         </div>
         <div class="mt-6 hidden lg:block">
             <ng-container *ngIf="userRole === 'TRAINER'; else adminMenu">
-                <app-admin-menu ></app-admin-menu>
+                 <app-trainer-menu></app-trainer-menu>
             </ng-container>
             <ng-template #adminMenu>
-                <app-menu ></app-menu>
+                <ng-container *ngIf="userRole === 'ADMIN'; else userMenu">
+                    <app-admin-menu></app-admin-menu>
+                </ng-container>
+                <ng-template #userMenu>
+                    <app-menu></app-menu>
+                </ng-template>
             </ng-template>
         </div>
+        
         <div class="mt-6 hidden lg:block">
         <ng-container *ngIf="!isLoggedIn(); else authLinksTemplate">
             <div class="mt-3">

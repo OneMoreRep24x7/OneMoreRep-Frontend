@@ -1,8 +1,7 @@
-
-  <body>
-   <app-header class="fixed top-0 w-full z-50"></app-header>
-   <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
-    <div class="w-[800px] h-auto rounded-3xl overflow-hidden shadow-lg p-6 flex flex-col items-center gap-8 border border-orange-500 text-white font-urbanist">
+<body class="bg-gray-900">
+  <app-header class="fixed w-full top-0  z-50"></app-header>
+  <section class="pt-48 px-4 sm:px-6 md:px-8  lg:px-10 xl:px-12 flex justify-center">
+    <div class="max-w-4xl w-full lg:w-[40%] overflow-hidden shadow-lg p-6 flex flex-col items-center gap-8 text-white font-urbanist">
       <div class="flex flex-col items-center gap-4">
         <ng-container *ngIf="!user.imageName">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-40 h-40">
@@ -14,58 +13,56 @@
         <ng-container *ngIf="user.imageName">
           <img class="h-40 w-40 md:h-52 md:w-52 rounded-full object-cover" loading="lazy" alt="Profile Picture" [src]="user.imageName" />
         </ng-container>
-              
-        <h1 class="text-4xl  md:text-5xl font-black">{{ user.firstName }} <span class="text-orange-500">{{ user.lastName }}</span></h1>
-      </div>
-  
-      <div class="flex flex-wrap justify-center gap-4">
-        <div class="w-full md:w-1/2 bg-gradient-to-r from-orange-500 to-orange-700 rounded-lg text-center p-4">
-          <h2 class="text-xl font-bold text-white">Basic Information</h2>
-          <div class="flex flex-col items-start gap-2 mt-4">
-            <p class="text-lg font-semibold ">Gender: <span class="text-gray-900 ml-2">{{ user.gender }}</span></p>
-            <p class="text-lg font-semibold">Age: <span class="text-gray-900 ml-2">{{ user.age }}</span></p>
-            <p class="text-lg font-semibold">City: <span class="text-gray-900 ml-2"> {{ user.city }}</span></p>
-          </div>
+        <h1 class="text-4xl md:text-5xl font-black">{{ user.firstName }} <span class="text-orange-500 md:text-5xl">{{ user.lastName }}</span></h1>
+        <div class="flex">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+          </svg>
+          <span class="text-orange-500 ml-2"> {{ user.phone }}</span>
         </div>
-  
-        <div class="w-full md:w-1/2 bg-gray-800 rounded-lg text-center p-4">
-          <h2 class="text-xl font-bold text-orange-500">Health Status</h2>
-          <div class="flex flex-col items-start gap-2 mt-4">
-            <p class="text-lg font-semibold">Daily Activity:<span class="text-orange-500 ml-2">{{ user.dailyActivity }}</span></p>
-            <p class="text-lg font-semibold">Medical Conditions:<span class="text-orange-500 ml-2">{{ user.medicalConditions }}</span></p>
-            <p class="text-lg font-semibold">Emotional Health:<span class="text-orange-500 ml-2">{{ user.emotionalHealth }}</span></p>
-            <p class="text-lg font-semibold">Height:<span class="text-orange-500 ml-2">{{ user.height }} CM</span></p>
-            <p class="text-lg font-semibold">Weight:<span class="text-orange-500 ml-2"> {{ user.weight }} KG</span></p>
-          </div>
+        <div class="flex">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25" />
+          </svg>
+         <span class="text-white ml-2"> {{ user.email }}</span>
         </div>
-  
-        <div class="w-full md:w-1/2 bg-gradient-to-r from-orange-500 to-orange-700 rounded-lg text-center p-4">
-          <h2 class="text-xl font-bold text-white">Contact</h2>
-          <div class="flex flex-col items-start gap-2 mt-4">
-            <p class="text-lg font-semibold">Phone: <span class="text-gray-900 ml-2"> {{ user.phone }}</span></p>
-            <p class="text-lg font-semibold">Email:<span class="text-gray-900 ml-2"> {{ user.email }}</span></p>
-          </div>
-        </div>
-      </div>
-  
-      <div class="flex justify-center mt-2">
-        
-        <app-button *ngIf="user.dailyActivity !== null" (click)="edit()" name="Edit Profile" size="M" shade="W"></app-button>
-    
-        <app-button *ngIf="user.dailyActivity === null" (click)="add()" name="Add Profile" size="M" shade="W"></app-button>
-      </div>
+       
       
+      </div>
+      <div class="flex justify-center gap-4 ">
+        <app-button *ngIf="user.dailyActivity !== null" (click)="edit()" name="Edit Profile" size="M" shade="W"></app-button>
+        <app-button *ngIf="user.dailyActivity === null" (click)="add()" name="Add Profile" size="M" shade="W"></app-button>
+        <ng-container *ngIf="showConnectTrainerButton">
+          <app-button (click)="navigate()" name="Connect Trainer" shade="D" size="M"></app-button>
+        </ng-container>
+      </div>
+      <div class="grid  gap-4 w-full mt-8 rounded-2xl">
+        <div class="bg-gray-800 rounded-lg text-center p-4">
+          <h2 class="text-xl font-bold text-orange-500">Basic Information</h2>
+          <div class="flex flex-col  items-start gap-2 mt-4 ">
+            <p class="text-lg font-semibold ">Gender: <span class="text-orange-500 ml-2">{{ user.gender }}</span></p>
+            <p class="text-lg font-semibold">Age: <span class="text-orange-500 ml-2">{{ user.age }}</span></p>
+            <p class="text-lg font-semibold">City: <span class="text-orange-500 ml-2"> {{ user.city }}</span></p>
+          </div>
+        </div>
+
+        <div class=" bg-gradient-to-r from-orange-600 to-red-700 rounded-lg text-center p-4">
+          <h2 class="text-xl font-bold text-white">Health Status</h2>
+          <div class="flex flex-col items-start gap-2 mt-4">
+            <p class="text-lg font-semibold">Daily Activity:<span class="text-gray-900 ml-2">{{ user.dailyActivity }}</span></p>
+            <p class="text-lg font-semibold">Medical Conditions:<span class="text-gray-900  ml-2">{{ user.medicalConditions }}</span></p>
+            <p class="text-lg font-semibold">Emotional Health:<span class="text-gray-900 ml-2">{{ user.emotionalHealth }}</span></p>
+            <p class="text-lg font-semibold">Height:<span class="text-gray-900 ml-2">{{ user.height }} CM</span></p>
+            <p class="text-lg font-semibold">Weight:<span class="text-gray-900 ml-2"> {{ user.weight }} KG</span></p>
+          </div>
+        </div>
+      </div>
+
+      
+
+    
     </div>
   </section>
-  
-  
-  
-  
-  
 
-     
   <app-footer></app-footer>
-  
-
-  </body>
-
+</body>

@@ -8,6 +8,14 @@ import { TrainerRegisterComponent } from '../auth/trainer-register/trainer-regis
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarouselModule } from '../../shared/carousel/carousel.module';
+import { AddprofileComponent } from './addprofile/addprofile.component';
+import { CertificateModalComponent } from './certificate-modal/certificate-modal.component';
+import { ShowClientsComponent } from './show-clients/show-clients.component';
+import { ClientPlansComponent } from './client-plans/client-plans.component';
+import { ClientWorkoutComponent } from './client-workout/client-workout.component';
+import { CalendarModule } from 'primeng/calendar';
+import { ChartModule } from 'primeng/chart';
+import { AddDailyworkoutComponent } from './add-dailyworkout/add-dailyworkout.component';
 
 
 
@@ -16,6 +24,12 @@ import { CarouselModule } from '../../shared/carousel/carousel.module';
     TrainerprofileComponent, 
     TrainerdashboardComponent,
     TrainerRegisterComponent,
+    AddprofileComponent,
+    CertificateModalComponent,
+    ShowClientsComponent,
+    ClientPlansComponent,
+    ClientWorkoutComponent,
+    AddDailyworkoutComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +37,10 @@ import { CarouselModule } from '../../shared/carousel/carousel.module';
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    CarouselModule
+    CarouselModule,
+    CalendarModule,
+    ChartModule
+   
     
   ]
 })

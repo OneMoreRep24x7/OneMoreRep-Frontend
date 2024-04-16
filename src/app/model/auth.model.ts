@@ -33,3 +33,8 @@ export interface RegisterRequest {
 export interface GoogleAuthUrlResponse {
    authURL: string;
  }
+ export interface EditResponse{
+   user:User;
+   message:string;
+   statusCode:number
+ }

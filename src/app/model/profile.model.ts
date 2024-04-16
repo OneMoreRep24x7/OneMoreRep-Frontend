@@ -29,9 +29,11 @@ export interface ProfileResponse{
 }
 
 export interface WorkoutModel{
-    workoutname:string,
+    name:string,
     description:string,
-    duration:number,
-    caloriesburned:number
+    workoutCategory:string,
+    durationMinutes:number,
+    caloriesBurned:number,
+    
 
 }

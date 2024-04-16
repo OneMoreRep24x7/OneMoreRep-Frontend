@@ -37,6 +37,7 @@ export class AdduserprofileComponent implements OnInit {
 
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);  
     this.user$ = JSON.parse(sessionStorage.getItem('user'));
     this.userId = this.user$.id;
 
@@ -71,7 +72,7 @@ export class AdduserprofileComponent implements OnInit {
         gender: [this.user$.gender || '', Validators.required],
         phone: [this.user$.phone || '', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
         age: [this.user$.age || '', Validators.required],
-        city: [this.user$.firstName || '', Validators.required],
+        city: [this.user$.city || '', Validators.required],
         activity: [this.user$.dailyActivity || '', Validators.required],
         conditions: [this.user$.medicalConditions || '', Validators.required],
         emotion: [this.user$.emotionalHealth || '', Validators.required],
@@ -82,6 +83,7 @@ export class AdduserprofileComponent implements OnInit {
   
       if (this.user$.imageName) {
         this.preview = this.user$.imageName;
+       
       }
       this.isEditMode = true; 
     } 
@@ -117,14 +119,40 @@ export class AdduserprofileComponent implements OnInit {
     }
   }
   edit(){
-    console.log("edit function called")
+    if(this.profileForm.valid){
+      const data : ProfileRequest = {
+        id:this.userId,
+        gender : this.profileForm.value.gender,
+        age : this.profileForm.value.age,
+        dailyActivity : this.profileForm.value.activity,
+        emotionalHealth : this.profileForm.value.emotion,
+        weight : this.profileForm.value.weight,
+        phone : this.profileForm.value.phone,
+        city : this.profileForm.value.city,
+        medicalConditions : this.profileForm.value.conditions,
+        height : this.profileForm.value.height,
+        targetWeight : this.profileForm.value.targetWeight, 
+      }
+      console.log(data,">>>>>>>");
+      console.log(this.image,">>>>>");
+      this.service.editUserProfile(data).subscribe(
+        (response)=>{
+          if(response.statusCode === 200){
+            this.toster.success(response.message)
+            window.location.reload();
+          }else{
+            this.toster.error(response.message)
+          }
+        }
+      )
+    }
   }
 
   markFormGroupTouched(formGroup: FormGroup) {
     let firstInvalidControl: AbstractControl | null = null;
   
     Object.values(formGroup.controls).forEach(control => {
-      // Mark control as touched only if it's invalid and it's the first invalid control found
+      
       if (control.invalid && !firstInvalidControl) {
         firstInvalidControl = control;
         control.markAsTouched();

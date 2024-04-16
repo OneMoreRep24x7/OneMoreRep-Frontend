@@ -1,0 +1,84 @@
+<body>
+    <app-header class="fixed top-0 w-full z-50"></app-header>
+    <!-- app.component.html -->
+    <section class="container pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 min-h-[600px] flex flex-col md:flex-row">
+        <!-- User Details -->
+        <div class="bg-black shadow-lg rounded-lg p-6 border border-orange-500 text-white mb-6 md:mr-6 md:mb-0">
+          <div class="flex items-center mb-4">
+            <img class="w-20 h-20 rounded-full mr-4 object-cover" loading="lazy" alt="Profile Picture" [src]="user.imageName" />
+            <div>
+              <h1 class="text-xl font-bold text-white">{{ user.firstName }} <span class="text-orange-500">{{ user.lastName }}</span></h1>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-4">
+            <div class="border-b border-orange-500 pb-4">
+              <h2 class="text-lg font-bold text-orange-500 mb-2">Basic Information</h2>
+              <ul class="list-disc pl-4 text-gray-500">
+                <li>Gender: {{ user.gender }}</li>
+                <li>Age: {{ user.age }}</li>
+                <li>City: {{ user.city }}</li>
+              </ul>
+            </div>
+            <div>
+              <h2 class="text-lg font-bold text-orange-500 mb-2">Health Status</h2>
+              <ul class="list-disc pl-4 text-gray-500">
+                <li>Daily Activity: {{ user.dailyActivity }}</li>
+                <li>Medical Conditions: {{ user.medicalConditions }}</li>
+                <li>Emotional Health: {{ user.emotionalHealth }}</li>
+                <li>Height: {{ user.height }} CM</li>
+                <li>Weight: {{ user.weight }} KG</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Table and Cards Container -->
+        <div class="flex flex-col flex-1">
+          <!-- Table -->
+          <div class="bg-black shadow-lg rounded-lg p-6 border border-orange-500 text-gray-800 mb-6">
+            <!-- Your table code here -->
+           
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <h1 class="text-2xl text-center font-bold text-orange-500 mb-2" >Tracking Overview</h1>
+                <p-chart type="line" [data]="data" [options]="options"></p-chart>
+            </div>
+            
+
+          </div>
+      
+          <!-- Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Card 1: Calorie Tracking -->
+            <div class="bg-gradient-to-tr from-orange-500 to-orange-600 rounded-lg shadow-lg text-white card">
+              <div class="p-6 text-center">
+                <img src="assets/images/food-tracking.webp" class="w-24 h-24 mx-auto mb-6 rounded-full" alt="Food Tracking Image">
+                <h5 class="text-xl font-bold mb-2">Add <span class="text-yellow-200">Diet Plan</span></h5>
+              </div>
+              <div (click)="addDiet() " class="cursor-pointer flex justify-center items-center p-4 bg-gradient-to-b from-orange-600 to-orange-700 rounded-b-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-200">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+              </div>
+            </div>
+      
+            <!-- Card 2: Workout Tracking -->
+            <div class="bg-gradient-to-tr from-purple-500 to-purple-600 rounded-lg shadow-lg text-white card">
+              <div class="p-6 text-center">
+                <img src="assets/images/workout.png" class="w-24 h-24 mx-auto mb-6 rounded-full" alt="Workout Image">
+                <h5 class="text-xl font-bold mb-2">Add <span class="text-yellow-200">Workout Plan</span></h5>
+              </div>
+              <div (click)="addWorkout()" class="flex justify-center cursor-pointer items-center p-4 bg-gradient-to-b from-purple-600 to-purple-700 rounded-b-lg">
+                <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-200">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      
+      
+      
+     <app-footer></app-footer>
+</body>

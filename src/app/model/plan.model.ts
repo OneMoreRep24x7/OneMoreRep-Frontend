@@ -64,6 +64,17 @@ export interface Food {
     message:string,
     statusCode:number
   }
+  export interface TransactionDetails{
+    paymentId:string;
+    currency:string;
+    amount:number;
+    key:string;
+  }
+  export interface PaymentResponse{
+    payment:TransactionDetails,
+    message:string,
+    statusCode:number
+  }
 
 
 

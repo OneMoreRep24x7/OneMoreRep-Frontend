@@ -1,3 +1,5 @@
+import { Trainer } from "./trainer.model"
+
 export interface User {
     id:string,
     firstName:string,
@@ -16,8 +18,10 @@ export interface User {
     weight:number|null,
     targetWeight:number|null,
     imageName:string|null,
-    isPremium:boolean|null,
-    trailVaild:string |null
+    premium:boolean|null,
+    trialValid:string |null,
+    trainerValid:string|null,
+    trainer: Trainer | null; 
 
 }
 

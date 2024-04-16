@@ -1,0 +1,97 @@
+.sidenav{
+    background-color: rgb(54, 51, 51);
+    transition: all .5s ease;
+    position: absolute;
+    z-index: 1;
+    top: auto;
+    width: 6rem;
+    height: auto;
+    box-shadow: 0.063rem 0 1.25rem 0 rgb(18, 16, 16);
+}
+
+.log-container{
+    display: flex;
+    align-items: center;
+    padding: 0.938rem 0.938rem 0 0.938rem;
+    width: 100%;
+    .logo{
+        background: #d03800;
+        text-align: center;
+        width: 3rem;
+        min-width: 3rem;
+        border-radius: 0.313rem;
+        padding: 0.313rem;
+        font-size: 24px;
+        font-weight: 900;
+        cursor: pointer;
+        border:none;
+    }
+
+    .logo-text{
+        margin-left: 1.5rem;
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;;
+    }
+    .btn-close{
+        margin-left: auto;
+        cursor: pointer;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: transparent;
+        border: none;
+        .fa-times{
+            color: #fff;
+            font-size: 24px;
+        }
+    }
+}
+.sidenav-collapsed{
+    width: 16.5625rem;
+}
+.sidenav{
+    list-style: none;
+    padding: 0.938rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: calc(100vh - 10.65rem);
+    cursor: pointer;
+    .sidenav-nav-item{
+        width:100%;
+        margin-bottom: 0.625rem;
+        margin-top: 1rem;
+        .sidenav-nav-link{
+            display: flex;
+            margin-left: 22px;
+            width: auto ;
+            align-items: center;
+            height: 3rem;
+            color: #f3f3f3;
+            border-radius: 0.625rem;
+            text-decoration: none;
+            transition: all .3s ease;
+
+            .sidenav-link-icon{
+                font-size: 24px;
+                width: 2rem;
+                min-width: 2rem;
+                margin:0;
+                text-align: center;
+            }
+            .sidenav-link-text{
+                margin-left: 1rem;
+                width: 160px;
+            }
+        }
+    }
+    .sidenav-nav-item:hover{
+        .sidenav-nav-link{
+            background-color:#d03800;
+            color: #000;
+        }
+    }
+    
+}

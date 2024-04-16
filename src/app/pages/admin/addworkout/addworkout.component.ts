@@ -27,7 +27,8 @@ export class AddworkoutComponent implements OnInit{
       workoutname:['',Validators.required],
       description:['',Validators.required],
       duration:['',Validators.required],
-      caloriesburned:['',Validators.required]
+      caloriesburned:['',Validators.required],
+      workoutcategory:['',Validators.required]
     })
 
     
@@ -53,10 +54,11 @@ export class AddworkoutComponent implements OnInit{
     console.log("Form Submitted!")
     if (this.workoutForm.valid) {
       const data: WorkoutModel = {
-          workoutname: this.workoutForm.value.workoutname,
+           name: this.workoutForm.value.workoutname,
           description: this.workoutForm.value.description,
-          duration: this.workoutForm.value.duration,
-          caloriesburned: this.workoutForm.value.caloriesburned
+          durationMinutes: this.workoutForm.value.duration,
+          caloriesBurned: this.workoutForm.value.caloriesburned,
+          workoutCategory:this.workoutForm.value.workoutcategory
       
       }
       console.log(data,">>>>>>>");
@@ -67,6 +69,9 @@ export class AddworkoutComponent implements OnInit{
           console.log(response,">>>>>");
           if(response.statusCode === 200){
             this.toster.success(response.message);
+            this.workoutForm.reset();
+            window.scrollTo(0, 0); 
+            window.location.reload();
           }else{
             this.toster.error(response.message)
           }

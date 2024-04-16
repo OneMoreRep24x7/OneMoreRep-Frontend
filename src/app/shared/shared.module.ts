@@ -14,6 +14,9 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { ModalComponent } from './modal/modal.component';
+import { TrainerMenuComponent } from './trainer-menu/trainer-menu.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 
 @NgModule({
@@ -30,6 +33,9 @@ import { CarouselComponent } from './carousel/carousel.component';
     PaginationComponent,
     LoadingSpinnerComponent,
     AdminMenuComponent,
+    ModalComponent,
+    TrainerMenuComponent,
+    SidenavComponent,
    
   ],
   imports: [
@@ -46,6 +52,8 @@ import { CarouselComponent } from './carousel/carousel.component';
     PaginationComponent,
     LoadingSpinnerComponent,
    AdminMenuComponent,
+   ModalComponent,
+   SidenavComponent
   ]
 })
 export class SharedModule { }

@@ -8,6 +8,15 @@ import { UserdashboardComponent } from './userdashboard/userdashboard.component'
 import { SharedModule } from '../../shared/shared.module';
 import { PaymentComponent } from './payment/payment.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ViewtrainerComponent } from './viewtrainer/viewtrainer.component';
+import { CarouselModule } from '../../shared/carousel/carousel.module';
+import { ShowplansComponent } from './showplans/showplans.component';
+import { PaymentsuccessComponent } from './paymentsuccess/paymentsuccess.component';
+import { ShowtrainersComponent } from './showtrainers/showtrainers.component';
+import { TrainerPaymentComponent } from './trainer-payment/trainer-payment.component';
+import { ConnectTrainerComponent } from './connect-trainer/connect-trainer.component';
+import { TrackingComponent } from './tracking/tracking.component';
+
 
 
 
@@ -16,7 +25,14 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdduserprofileComponent,
     UserprofileComponent,
     PaymentComponent,
-    UserdashboardComponent
+    UserdashboardComponent,
+    ViewtrainerComponent,
+    ShowplansComponent,
+    PaymentsuccessComponent,
+    ShowtrainersComponent,
+    TrainerPaymentComponent,
+    ConnectTrainerComponent,
+    TrackingComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +40,8 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
+    CarouselModule,
+    
   ]
 })
 export class UserModule { }

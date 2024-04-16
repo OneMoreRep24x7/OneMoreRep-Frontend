@@ -1,0 +1,106 @@
+<body>
+
+  <app-header class="fixed top-0 w-full z-50"></app-header>
+
+  <section class="trainer-profile pt-48 lg:flex-row flex-col flex justify-center items-center min-h-screen bg-black text-white">
+    <figure class="profile-picture lg:mr-12">
+      <img class="rounded-full object-cover lazyload" loading="lazy" alt="Trainer Image" [src]="trainer?.imageName" />
+    </figure>
+
+    <article class="trainer-details flex justify-center items-center">
+      <div class="flex flex-col items-center">
+        <h2 class="lg:text-6xl text-4xl font-semibold text-shadow-md mb-4">
+          {{ trainer.firstName }}
+          <span class="text-orange-500">{{ trainer.lastName }}</span>
+        </h2>
+        <p class="text-xl text-gray-400 mb-4">{{ trainer.qualifications }}</p>
+        <div class="flex justify-between gap-8">
+          <div *ngIf="trainer.clients > 0" class="slots flex flex-col items-center mb-4">
+            <p class="text-4xl text-orange-500 font-bold">{{ trainer.clients }}</p>
+            <p class="text-gray-400 text-xl">Clients</p>
+          </div>
+        <div class="slots flex flex-col items-center mb-4">
+          <p class="text-4xl text-orange-500 font-bold">{{ trainer.slots }}</p>
+          <p class="text-gray-400 text-xl">Slots</p>
+        </div>
+        
+      </div>
+        <div class="carousel-container w-64 lg:w-[400px] rounded-lg overflow-hidden mb-10">
+          <app-carousel [images]="images"></app-carousel>
+        </div>
+        <ng-container *ngIf="showBuyTrainerButton">
+          <app-button name="Connect Trainer" shade="D" size="M"></app-button>
+        </ng-container>
+        
+        <ng-container *ngIf="!showBuyTrainerButton">
+          <app-button (click)="check()" name="Buy Trainer" shade="D"></app-button>
+        </ng-container>
+        
+      </div>
+    </article>
+    <!-- Main modal -->
+  <div id="select-modal" *ngIf="popUp" tabindex="-1" aria-hidden="true" class="fixed inset-0 overflow-y-auto overflow-x-hidden flex justify-center items-center z-50">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-black rounded-lg shadow">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-lg font-semibold text-orange-500">
+            Subscription Options
+          </h3>
+          <button (click)="closeModal()" type="button"  class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="select-modal">
+            <svg  class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="p-4 md:p-5">
+          <p class="text-gray-500 dark:text-gray-400 mb-4">Select your subscription plan:</p>
+          <ul class="space-y-4 mb-4">
+            <li>
+              <input type="radio" id="plan-1" name="plan" value="plan-1" class="hidden peer" [(ngModel)]="selectedOption"   required />
+              <label for="plan-1" class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-orange-500 peer-checked:border-orange-600 peer-checked:text-blue-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                <div class="block">
+                  <div class="w-full text-lg font-semibold">Buy for 1 month</div>
+                  <div class="w-full text-gray-500 dark:text-gray-400">Rate: ₹1000</div>
+                </div>
+              </label>
+            </li>
+            <li>
+              <input type="radio" id="plan-2" name="plan" value="plan-2" class="hidden peer" [(ngModel)]="selectedOption" >
+              <label for="plan-2" class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-orange-500 peer-checked:border-orange-600 peer-checked:text-blue-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                <div class="block">
+                  <div class="w-full text-lg font-semibold">Buy for 6 months</div>
+                  <div class="w-full text-gray-500 dark:text-gray-400">Rate: ₹8000</div>
+                </div>
+              </label>
+            </li>
+            <li>
+              <input type="radio" id="plan-3" name="plan" value="plan-3" class="hidden peer " [(ngModel)]="selectedOption" >
+              <label for="plan-3" class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-orange-500 peer-checked:border-orange-600 peer-checked:text-blue-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                <div class="block">
+                  <div class="w-full text-lg font-semibold">Buy for 12 months</div>
+                  <div class="w-full text-gray-500 dark:text-gray-400">Rate: ₹12000</div>
+                </div>
+              </label>
+            </li>
+          </ul>
+          <button (click)=" onNextStep() " class="text-white inline-flex w-full justify-center bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+            Next step
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <app-modal 
+  [message]="message"
+  (close)="closePopup()" 
+  [show]="showModal"></app-modal>
+
+  <app-footer></app-footer>
+
+</body>

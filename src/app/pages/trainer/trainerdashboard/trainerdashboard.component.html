@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    
-  </head>
   <body>
-   <app-header></app-header>
-   <section class="container py-48 mx-auto ">
+    <app-header class="fixed top-0 w-full z-50"></app-header>
+   <section class="container pt-48 mx-auto h-screen ">
+    <app-sidenav 
+        [navData]="navbarData" 
+        [logoText]="logoText"
+        [logoIcon]="logoIcon"
+        ></app-sidenav> 
     <p class="text-6xl font-bold text-center text-white mb-4">Welcome <span class="bg-orange-700">Trainer</span> </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-14 mt-6">
-      <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded shadow focus:outline-none">
-        Get Clients
-      </button>
-      <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow focus:outline-none">
-        Get Schedules
-      </button>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-14 mt-6 h-[300px]">
+    
     </div>
     <router-outlet></router-outlet>
   </section>
@@ -27,4 +20,4 @@
   
 
   </body>
-</html>
+

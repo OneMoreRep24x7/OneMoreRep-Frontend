@@ -2,16 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProfileRequest } from '../model/profile.model';
 import { Observable, tap } from 'rxjs';
-import { LoginResponse } from '../model/auth.model';
+import { EditResponse, LoginResponse } from '../model/auth.model';
 import { Route, Router } from '@angular/router';
 import { User } from '../model/user.model';
+import { Trainer, TrainerProfileRequest, TrainerProfileResponse } from '../model/trainer.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
- 
-
+  
 
   constructor(
     private http : HttpClient,
@@ -39,4 +39,13 @@ export class UserService {
       })
     )
   }
+  editUserProfile(data: ProfileRequest):Observable<EditResponse>{
+    return this.http.post<EditResponse>("api/v1/user/editUser",data)
+  }
+  getUserTrainer(userId: string):Observable<Trainer> {
+    const url = `api/v1/user/getUserTrainer?userId=${userId}`
+    return this.http.get<Trainer>(url);
+  }
+ 
+ 
 }
