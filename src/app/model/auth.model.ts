@@ -38,3 +38,7 @@ export interface GoogleAuthUrlResponse {
    message:string;
    statusCode:number
  }
+ export interface CommonResponse{
+   message:string,
+   statusCode:number
+ }

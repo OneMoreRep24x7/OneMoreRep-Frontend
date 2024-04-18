@@ -7,6 +7,8 @@ import { AddprofileComponent } from './addprofile/addprofile.component';
 import { ShowClientsComponent } from './show-clients/show-clients.component';
 import { ClientPlansComponent } from './client-plans/client-plans.component';
 import { ClientWorkoutComponent } from './client-workout/client-workout.component';
+import { AddDailyworkoutComponent } from './add-dailyworkout/add-dailyworkout.component';
+import { ShowWorkoutsComponent } from './show-workouts/show-workouts.component';
 
 
 const routes: Routes = [
@@ -16,7 +18,9 @@ const routes: Routes = [
   {path:'addProfile',component:AddprofileComponent},
   {path:'showClients',component:ShowClientsComponent},
   {path:'clientPlans',component:ClientPlansComponent},
-  {path:'clientWorkout',component:ClientWorkoutComponent}
+  {path:'clientWorkout',component:ClientWorkoutComponent},
+  {path:'addDailyWorkout',component:AddDailyworkoutComponent},
+  {path:'showDailyWorkouts',component:ShowWorkoutsComponent}
 ];
 
 @NgModule({

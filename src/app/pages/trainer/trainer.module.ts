@@ -16,6 +16,8 @@ import { ClientWorkoutComponent } from './client-workout/client-workout.componen
 import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
 import { AddDailyworkoutComponent } from './add-dailyworkout/add-dailyworkout.component';
+import { DialogModule } from 'primeng/dialog';
+import { ShowWorkoutsComponent } from './show-workouts/show-workouts.component';
 
 
 
@@ -30,6 +32,7 @@ import { AddDailyworkoutComponent } from './add-dailyworkout/add-dailyworkout.co
     ClientPlansComponent,
     ClientWorkoutComponent,
     AddDailyworkoutComponent,
+    ShowWorkoutsComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import { AddDailyworkoutComponent } from './add-dailyworkout/add-dailyworkout.co
     FormsModule,
     CarouselModule,
     CalendarModule,
-    ChartModule
+    ChartModule,
+    DialogModule 
    
     
   ]

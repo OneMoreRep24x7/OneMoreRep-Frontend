@@ -25,6 +25,11 @@ export class TrainerdashboardComponent {
       routerLink: "/trainer/showClients",
       icon: 'fas fa-users',
       label: 'Clients'
-  },
+   },
+   {
+    routerLink:"/trainer/showDailyWorkouts",
+    icon:'fas fa-dumbbell',
+    label: 'Workout Patterns'
+   }
   ];
 }

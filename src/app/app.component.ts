@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getLoading } from './store/common/common.selector';
-import { initFlowbite } from 'flowbite';
+
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.showLoading$ = this.store.select(getLoading)
-    initFlowbite();
+    
   }
 }

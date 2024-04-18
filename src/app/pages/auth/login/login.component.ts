@@ -9,6 +9,7 @@ import { loginRequest } from '../../../store/auth/auth.action';
 import { Observable, switchMap, timer } from 'rxjs';
 import { User } from '../../../model/user.model';
 import { selectError, selectUser } from '../../../store/auth/auth.selectors';
+import { CommunicationService } from '../../../services/communication.service';
 
 @Component({
   selector: 'app-login',
@@ -25,12 +26,14 @@ export class LoginComponent implements OnInit {
   constructor(private service:AuthService,
     private formBuilder:FormBuilder,
     private router:Router,
-    private store:Store<AuthState>){
+    private store:Store<AuthState>,
+    private communicationService:CommunicationService){
 
     }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);  
+    this.communicationService.connect()
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password:this.formBuilder.control('',Validators.required)

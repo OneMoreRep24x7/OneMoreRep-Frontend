@@ -6,6 +6,7 @@ import { User } from '../../../model/user.model';
 import { UserService } from '../../../services/user.service';
 import { PlanService } from '../../../services/plan.service';
 import { ToastrService } from 'ngx-toastr';
+import { CommunicationService } from '../../../services/communication.service';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class ViewtrainerComponent {
     private service:TrainerService,
     private userService:UserService,
     private planService:PlanService,
-    private toaster:ToastrService
+    private toaster:ToastrService,
+    private communicationService:CommunicationService
     ) { }
 
     ngOnInit(): void {
@@ -64,6 +66,7 @@ export class ViewtrainerComponent {
           
         }
       )
+      this.communicationService.connect()
     }
   
     check(): void {

@@ -53,6 +53,7 @@ export interface Food {
   export interface Workout{
      id:number,
      name:string,
+     workoutCategory:string
      description:string,
      videoUrl:string,
      durationMinues:number,
@@ -74,6 +75,13 @@ export interface Food {
     payment:TransactionDetails,
     message:string,
     statusCode:number
+  }
+
+  export interface DailyWorkout{
+    ownerId:string,
+    day:string,
+    workoutType:string,
+    workouts:Workout[]
   }
 
 

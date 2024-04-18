@@ -1,1 +1,92 @@
-<p>add-dailyworkout works!</p>
+<body>
+  <app-header class="fixed top-0 w-full z-50"></app-header>
+  <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
+    <div class="w-fit lg:w-[50%] bg-black border border-orange-500 rounded-lg shadow-md overflow-hidden flex flex-col justify-between p-8">
+        <h2 class="text-2xl font-semibold text-orange-500 text-center mb-4">Add Daily Workout</h2>
+        <form class="flex flex-col gap-4" enctype="multipart/form-data" [formGroup]="workoutForm">
+          <div class="flex flex-col w-full">
+            <label for="day" class="font-semibold text-white mb-1">Day:</label>
+            <select 
+                name="day" 
+                id="day" 
+                class="input-field rounded-md bg-orange-200 border border-gray-300 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
+                formControlName="day">
+                <option value="" disabled selected>Select a day</option>
+                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+            </select>
+            <div *ngIf="workoutForm.get('day').invalid && (workoutForm.get('day').dirty || workoutForm.get('day').touched)" class="text-red-500 text-sm mt-1">
+                Day is required.
+            </div>
+            </div>
+            <div class="flex flex-col w-full">
+                <label for="workoutType" class="font-semibold text-white mb-1">Workout Type:</label>
+                <input 
+                    type="text"
+                    name="workoutType" 
+                    id="workoutType" 
+                    placeholder="Enter workout type" 
+                    class="input-field rounded-md bg-orange-200 border border-gray-300 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
+                    formControlName="workoutType">
+                <div *ngIf="workoutForm.get('workoutType').invalid && (workoutForm.get('workoutType').dirty || workoutForm.get('workoutType').touched)" class="text-red-500 text-sm mt-1">
+                    Workout type is required.
+                </div>
+            </div>
+             
+            <button (click)="showDialog()" type="button" class="btn-add-workout rounded-md py-2 px-4 text-white font-semibold bg-orange-500 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:ring-opacity-50">
+              Add Workout
+            </button>
+            <div *ngIf="visible" id="crud-modal" tabindex="-1" aria-hidden="true" class="fixed inset-0 overflow-y-auto overflow-x-hidden flex justify-center items-center z-50">
+              <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-gray-900 rounded-lg shadow">
+                  <div class="flex items-center justify-center p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white text-center">
+                      Add Workouts
+                    </h3>
+                  </div>
+                  <div class="p-4 md:p-5">
+                    <div class="flex flex-col w-full">
+                      <label for="workouts" class="font-semibold text-gray-900 dark:text-white mb-1">Add Workouts:</label>
+                      <ul class="text-gray-900 dark:text-white list-disc pl-4">
+                        <li *ngFor="let workout of selectedWorkouts; let i = index">
+                          <div class="flex m-2">
+                            {{ workout.name }}
+                            <button (click)="removeWorkoutFromPlan(i)" class="text-red-500 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 ml-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                              </svg>
+                              
+                            </button>
+                          </div>
+                         
+                        </li>
+                      </ul>
+                      <div *ngIf="selectedWorkouts.length === maxSelectableWorkouts" class="text-red-500 text-lg m-2 ">
+                        Maximum {{ maxSelectableWorkouts }} workouts allowed !
+                      </div>
+                      
+                      <input type="text" placeholder="Search workouts" formControlName="searchQuery" (input)="searchWorkouts(workoutForm.get('searchQuery').value)">
+
+                      <ul class="text-gray-900 mt-3 dark:text-white list-none">
+                        <li *ngFor="let workout of searchResults">
+                          <button *ngIf="canAddWorkout(workout)" (click)="addWorkoutToPlan(workout)" class="text-white bg-orange-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">{{workout.name}}</button>
+                          
+                        </li>
+                        
+                      </ul>
+                    </div>
+                    <div class="flex justify-center mt-4 gap-2">
+                      <button (click)="closeModal()" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-orange-600">Close</button>
+                      <button (click)="addWorkout()" type="button" class="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-orange-600">Save Workouts</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+           
+        </form>
+    </div>
+</section>
+
+  <app-footer></app-footer>
+</body>

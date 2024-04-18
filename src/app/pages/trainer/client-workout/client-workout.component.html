@@ -1,8 +1,8 @@
 <body>
     <app-header class="fixed top-0 w-full z-50"></app-header>
     <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center min-h-screen">
-        <div class="max-w-7xl w-full flex flex-col items-center justify-start gap-3">
-            <h2 class="text-3xl md:text-5xl text-white font-semibold uppercase tracking-wide">
+        <div class="max-w-7xl w-full flex flex-col items-center justify-center gap-3">
+            <h2 class="text-xl  md:text-5xl text-white font-semibold uppercase tracking-wide">
                 Workout <span class="text-orange-500">Plans</span>
             </h2>
             <p class="text-lg md:text-xl text-gray-600">
@@ -16,8 +16,8 @@
 
 
           <div class="flex justify-center gap-2">
-            <app-button name="Add Daily Workout" shade="D"></app-button>
-            <app-button name="Add Workout Plan"></app-button>
+            <app-button (click)="dailyWorkout()" name="Add Daily Workout" shade="D"></app-button>
+            <app-button  (click)="workoutPlan()" name="Add Workout Plan"></app-button>
           </div>
 
   

@@ -62,8 +62,8 @@ ngOnInit() {
 }
 
  addWorkout(){
-  console.log("Hello...................");
-  this.router.navigateByUrl("/trainer/clientWorkout")
+ 
+  this.router.navigate(['/trainer/clientWorkout'], { queryParams: { id: this.clientId } });
   
  }
  addDiet(){

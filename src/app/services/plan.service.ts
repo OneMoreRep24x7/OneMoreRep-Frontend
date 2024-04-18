@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Food, FoodModel, FoodRes, PaymentResponse, TransactionDetails, VariantModel, VariantRes, WorkoutRes } from '../model/plan.model';
+import { DailyWorkout, Food, FoodModel, FoodRes, PaymentResponse, TransactionDetails, VariantModel, VariantRes, WorkoutRes } from '../model/plan.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { WorkoutModel } from '../model/profile.model';
 import { Router } from '@angular/router';
+import { CommonResponse } from '../model/auth.model';
 
 
 
@@ -13,8 +14,6 @@ declare var Razorpay:any;
   providedIn: 'root'
 })
 export class PlanService {
-  
- 
 
   constructor(
     private http:HttpClient,
@@ -64,10 +63,20 @@ export class PlanService {
     const url = `api/v1/plans/getRecipeById?foodId=${foodId}`;
    return this.http.get<Food>(url);
   }
+  addDailyWorkout(data:DailyWorkout):Observable<CommonResponse>{
+    return this.http.post<CommonResponse>("api/v1/plans/addDailyWorkout",data);
+   }
+
+   getDailyWorkouts(trainerId:string):Observable<any[]>{
+    const url = `api/v1/plans/getDailyWorkouts?ownerId=${trainerId}`;
+    return this.http.get<any[]>(url)
+  }
+  
   
   createTransaction(amount: number): Observable<TransactionDetails> {
     return this.http.get<TransactionDetails>(`api/v1/plans/createTransaction?amount=${amount}`);
   }
+
   OpenTransactionModal(response:any,userId:string,amount:number){
     var options ={
       order_id: response.orderId,
@@ -186,5 +195,8 @@ export class PlanService {
     });
     
   }
+
+  
+  
   
 }
