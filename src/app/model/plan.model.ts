@@ -121,4 +121,22 @@ export interface Food {
 
 
     }
+
+    export interface WorkoutPlanResponse{
+      todayWorkout:DailyWorkout,
+      workoutPlan:any,
+      message:string,
+      statusCode:number
+    }
+    export interface WorkoutPlanRequest{
+      date:string,
+      userId:string,
+      trainerId:string
+    }
+    export interface WorkoutPlan{
+      planName:string,
+      planExpire:string,
+      repeat:number,
+      startDate:string
+    }
    

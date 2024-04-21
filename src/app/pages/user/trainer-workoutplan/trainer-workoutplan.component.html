@@ -1,61 +1,114 @@
-<body >
+<body class="bg-gradient-to-b from-gray-900 to-black text-white">
+    <!-- Header -->
     <app-header class="fixed top-0 w-full z-50"></app-header>
- 
-    <section class="flex flex-col items-center justify-center min-h-screen pt-48 sm:px-6 md:px-8 lg:px-10 xl:px-12">
-        <!-- Title and Description -->
-        <div class="text-center mb-8">
-            <h2 class="text-2xl md:text-5xl text-white font-semibold uppercase tracking-wide">
-                Workout <span class="text-orange-500">Plans</span>
-            </h2>
-            <p class="text-lg text-gray-500">
-                Workout plans added by your trainer
-            </p>
-        </div>
-    
-        <!-- Main Content with Video and Workout Plan -->
-        <div class="flex flex-col lg:flex-row w-full max-w-7xl gap-6">
-            <!-- Left Section (75% width on larger screens, full width on smaller screens) -->
-            <div class="w-full lg:w-3/4 bg-gray-800 p-6 rounded-lg shadow-lg overflow-y-auto">
-                <!-- Video Placeholder -->
-                <div class="h-48 md:h-72 bg-gray-600 flex items-center justify-center text-gray-300 rounded-lg">
-                    Workout Video Placeholder
-                </div>
-    
-                <!-- Workouts -->
-                <div class="mt-6">
-                    <h2 class="text-2xl font-semibold text-orange-500">Today's Workouts</h2>
-                    <ul class="list-disc list-inside mt-4">
-                        <li>Push-ups - 3 sets of 10</li>
-                        <li>Squats - 3 sets of 15</li>
-                        <li>Plank - 3 sets of 30 seconds</li>
-                    </ul>
-                </div>
+  
+    <!-- Main Content -->
+    <section class="flex flex-col items-center justify-center min-h-[550px] pt-48 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+      <!-- Title and Description -->
+      <div *ngIf="isTrainerValid()"  class="text-center mb-8">
+        <h2 class="text-2xl md:text-5xl font-semibold uppercase tracking-wide">
+          Workout <span class="text-orange-500">Plans</span>
+        </h2>
+        <p class="text-lg text-gray-500">Workout plans added by your trainer</p>
+      </div>
+  
+      <!-- Main Content -->
+      <div *ngIf="isTrainerValid()" class="flex flex-col lg:flex-row w-full max-w-7xl gap-6">
+        <!-- Video Placeholder and Today's Workouts -->
+        <div class="w-full lg:w-3/4 rounded-lg shadow-lg overflow-y-auto px-8 py-8">
+            <!-- Video Placeholder -->
+            <div class="h-48 md:h-72 rounded-lg flex items-center justify-center bg-black border border-orange-500">
+                <!-- Check if there's a selected video URL -->
+                <ng-container *ngIf="selectedVideoUrl">
+                  <!-- Video with object-fit to contain within the container -->
+                  <video
+                  [src]="selectedVideoUrl"
+                  width="50%"
+                  height="50%"
+                  controls
+                  class="rounded-lg"
+                  style="max-width: 100%; max-height: 100%;"
+                >
+                  Your browser does not support the video tag.
+                </video>
+                </ng-container>
+              
+                <!-- Placeholder for when there's no video -->
+                <ng-container *ngIf="!selectedVideoUrl">
+                  <div class="flex flex-col items-center text-gray-500">
+                    <i class="fas fa-play text-3xl"></i>
+                    <span class="ml-2">Select a workout to view the video !</span>
+                  </div>
+                </ng-container>
             </div>
-    
-            <!-- Right Section (25% width on larger screens, full width on smaller screens) -->
-            <div class="w-full lg:w-1/4 bg-gray-900 p-6 rounded-lg shadow-lg overflow-y-auto">
-                <h2 class="text-2xl font-semibold text-orange-500 border-b">Available Plan</h2>
-                <div class="mt-6">
-                    <p-calendar 
-                    class="max-w-full" 
-                    [(ngModel)]="date" 
-                    [inline]="true" 
-                    [showWeek]="true" 
-                    (ngModelChange)="onDateChange()">
-                  </p-calendar>
-                    <p class="text-white">Selected Date: {{ date }}</p>
-                    <!-- <h3 class="text-lg font-medium">Week 1</h3>
-                    <p>Monday: Cardio</p>
-                    <p>Tuesday: Strength</p>
-                    <p>Wednesday: Rest</p>
-                    <p>Thursday: HIIT</p>
-                    <p>Friday: Yoga</p>
-                    <p>Saturday: Strength</p>
-                    <p>Sunday: Rest</p> -->
-                </div>
+              
+          
+            <!-- Today's Workouts -->
+            <div class="mt-8 bg-gradient-to-b from-gray-600 to-gray-900 rounded-lg px-6 py-4">
+              <h2 class="text-3xl font-semibold text-orange-500 border-b mb-4">Today's Workouts</h2>
+              <ul>
+                <li
+                  *ngFor="let workout of dailyWorkout?.workouts"
+                  class="flex justify-between items-center py-2 pl-4 pr-2 mb-2 bg-gray-700 hover:bg-gray-600 rounded-lg cursor-pointer"
+                  (click)="playWorkoutVideo(workout.videoUrl)"
+                >
+                  <span class="flex items-center gap-2">
+                    <span class="w-3 h-3 bg-orange-500 rounded-full"></span>
+                    {{ workout.name }} - {{ workout.description }}
+                  </span>
+                  <i class="fas fa-angle-right text-gray-400 hover:text-orange-500"></i>
+                </li>
+              </ul>
             </div>
+          </div>
+          
+  
+        <!-- Your Existing Plan -->
+        <div class="w-full lg:w-1/4 bg-gradient-to-b from-orange-500 to-gray-900 rounded-lg shadow-lg overflow-y-auto px-8 py-8">
+          <h2 class="text-2xl font-semibold text-white border-b mb-4">Your Existing Plan <i class="fas fa-calendar text-orange-400 ml-2"></i></h2>
+          
+          <!-- Calendar and Rest Day Info -->
+          <div class="mt-6">
+            <p-calendar
+              class="max-w-full"
+              [(ngModel)]="date"
+              [inline]="true"
+              [showWeek]="true"
+              (onSelect)="onDateSelect($event)"
+            ></p-calendar>
+  
+            <!-- Rest Day -->
+            <div *ngIf="isRestDay()" class="mt-6 text-green-500">
+              <h3>Today is a rest day</h3>
+              <p class="text-gray-500">No workouts are scheduled. Enjoy your rest!</p>
+            </div>
+  
+            <!-- Workout Plan Details -->
+            <div *ngIf="!isRestDay() && workoutPlan" class="mt-6 text-white">
+              <h3 class="text-xl font-bold text-orange-500 border-b ">{{ workoutPlan.planName }}</h3>
+              <div class="grid text-lg gap-4 mt-3">
+                <p><span class="font-semibold text-green-700">Started at:</span> {{ workoutPlan.startDate }}</p>
+                <p><span class="font-semibold text-red-600">Ends at:</span> {{ workoutPlan.planExpire }}</p>
+              </div>
+              <blockquote class="mt-4 text-gray-400">
+                "Stay consistent in your journey. Your effort today will define your success tomorrow."
+              </blockquote>
+            </div>
+          </div>
         </div>
+      </div>
+      <ng-container *ngIf="!isTrainerValid()">
+        <div class=" w-full lg:w-3/4 bg-yellow-600 rounded-lg shadow-lg overflow-y-auto px-8 py-8">
+          <div class="flex flex-col  items-center text-white">
+            <i class="fas fa-exclamation-triangle text-3xl"></i>
+            <h2 class="text-2xl font-semibold mt-4">Access Denied !</h2>
+            <p class="mt-2">You can't access the workout plan because your trainer validity has expired or you haven't purchased any trainers.</p>
+          </div>
+        </div>
+      </ng-container>
     </section>
+  
+    <!-- Footer -->
     <app-footer></app-footer>
-
-</body>
+  </body>
+  

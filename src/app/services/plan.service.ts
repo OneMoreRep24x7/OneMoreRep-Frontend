@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DailyWorkout, Food, FoodModel, FoodRes, FoodTrackingResponse, PaymentResponse, TrackingRequest, TransactionDetails, VariantModel, VariantRes, WorkoutPlanParams, WorkoutRes, WorkoutTrackingResponse } from '../model/plan.model';
+import { DailyWorkout, Food, FoodModel, FoodRes, FoodTrackingResponse, PaymentResponse, TrackingRequest, TransactionDetails, VariantModel, VariantRes, WorkoutPlanParams, WorkoutPlanRequest, WorkoutPlanResponse, WorkoutRes, WorkoutTrackingResponse } from '../model/plan.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { WorkoutModel } from '../model/profile.model';
@@ -14,6 +14,7 @@ declare var Razorpay:any;
   providedIn: 'root'
 })
 export class PlanService {
+ 
   constructor(
     private http:HttpClient,
     private router:Router
@@ -96,7 +97,9 @@ export class PlanService {
     return this.http.post<FoodTrackingResponse>("api/v1/plans/updateFoodTracking",data);
   }
  
-
+  getDailyWorkoutByDate(data: WorkoutPlanRequest):Observable<WorkoutPlanResponse> {
+    return this.http.post<WorkoutPlanResponse>("api/v1/plans/getWorkoutPlan",data);
+  }
 
  
   

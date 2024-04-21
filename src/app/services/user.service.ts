@@ -70,7 +70,8 @@ export class UserService {
   }
 
   getTrainerByUserId(userId: string):Observable<TrainerProfileResponse> {
-    throw new Error('Method not implemented.');
+    const url = `api/v1/user/getTrainerById?userId=${userId}`;
+    return this.http.get<TrainerProfileResponse>(url);
   }
  
 }

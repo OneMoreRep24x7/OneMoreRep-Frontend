@@ -35,6 +35,7 @@ import { CalendarModule } from 'primeng/calendar';
 
 
 
+
 @NgModule({
   declarations: [
     AdduserprofileComponent,
@@ -82,7 +83,8 @@ import { CalendarModule } from 'primeng/calendar';
       "subtitleColor": "#483500",
       "showInnerStroke": false,
       "responsive": false}),
-      CalendarModule
+      CalendarModule,
+      
     
   ]
 })
