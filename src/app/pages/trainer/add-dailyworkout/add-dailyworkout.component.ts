@@ -78,6 +78,7 @@ export class AddDailyworkoutComponent implements OnInit {
       (this.workoutForm.get('workouts') as FormArray).push(new FormGroup({ workoutId: new FormControl(workout.id) }));
     }
   }
+  
 
   removeWorkoutFromPlan(index: number): void {
     this.selectedWorkouts.splice(index, 1);

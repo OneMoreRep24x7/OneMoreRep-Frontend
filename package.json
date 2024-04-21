@@ -28,6 +28,7 @@
     "@stomp/rx-stomp": "^2.0.0",
     "animated-tailwindcss": "^3.3.0",
     "chart.js": "^4.4.2",
+    "ng-circle-progress": "^1.7.1",
     "ngx-toastr": "^18.0.0",
     "primeng": "^17.13.0",
     "razorpay": "^2.9.2",

@@ -1,0 +1,61 @@
+<body >
+    <app-header class="fixed top-0 w-full z-50"></app-header>
+ 
+    <section class="flex flex-col items-center justify-center min-h-screen pt-48 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        <!-- Title and Description -->
+        <div class="text-center mb-8">
+            <h2 class="text-2xl md:text-5xl text-white font-semibold uppercase tracking-wide">
+                Workout <span class="text-orange-500">Plans</span>
+            </h2>
+            <p class="text-lg text-gray-500">
+                Workout plans added by your trainer
+            </p>
+        </div>
+    
+        <!-- Main Content with Video and Workout Plan -->
+        <div class="flex flex-col lg:flex-row w-full max-w-7xl gap-6">
+            <!-- Left Section (75% width on larger screens, full width on smaller screens) -->
+            <div class="w-full lg:w-3/4 bg-gray-800 p-6 rounded-lg shadow-lg overflow-y-auto">
+                <!-- Video Placeholder -->
+                <div class="h-48 md:h-72 bg-gray-600 flex items-center justify-center text-gray-300 rounded-lg">
+                    Workout Video Placeholder
+                </div>
+    
+                <!-- Workouts -->
+                <div class="mt-6">
+                    <h2 class="text-2xl font-semibold text-orange-500">Today's Workouts</h2>
+                    <ul class="list-disc list-inside mt-4">
+                        <li>Push-ups - 3 sets of 10</li>
+                        <li>Squats - 3 sets of 15</li>
+                        <li>Plank - 3 sets of 30 seconds</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Right Section (25% width on larger screens, full width on smaller screens) -->
+            <div class="w-full lg:w-1/4 bg-gray-900 p-6 rounded-lg shadow-lg overflow-y-auto">
+                <h2 class="text-2xl font-semibold text-orange-500 border-b">Available Plan</h2>
+                <div class="mt-6">
+                    <p-calendar 
+                    class="max-w-full" 
+                    [(ngModel)]="date" 
+                    [inline]="true" 
+                    [showWeek]="true" 
+                    (ngModelChange)="onDateChange()">
+                  </p-calendar>
+                    <p class="text-white">Selected Date: {{ date }}</p>
+                    <!-- <h3 class="text-lg font-medium">Week 1</h3>
+                    <p>Monday: Cardio</p>
+                    <p>Tuesday: Strength</p>
+                    <p>Wednesday: Rest</p>
+                    <p>Thursday: HIIT</p>
+                    <p>Friday: Yoga</p>
+                    <p>Saturday: Strength</p>
+                    <p>Sunday: Rest</p> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <app-footer></app-footer>
+
+</body>

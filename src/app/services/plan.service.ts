@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DailyWorkout, Food, FoodModel, FoodRes, PaymentResponse, TransactionDetails, VariantModel, VariantRes, WorkoutRes } from '../model/plan.model';
+import { DailyWorkout, Food, FoodModel, FoodRes, FoodTrackingResponse, PaymentResponse, TrackingRequest, TransactionDetails, VariantModel, VariantRes, WorkoutPlanParams, WorkoutRes, WorkoutTrackingResponse } from '../model/plan.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { WorkoutModel } from '../model/profile.model';
@@ -14,7 +14,6 @@ declare var Razorpay:any;
   providedIn: 'root'
 })
 export class PlanService {
-
   constructor(
     private http:HttpClient,
     private router:Router
@@ -71,7 +70,35 @@ export class PlanService {
     const url = `api/v1/plans/getDailyWorkouts?ownerId=${trainerId}`;
     return this.http.get<any[]>(url)
   }
+
+  addWorkoutPlans(data: WorkoutPlanParams):Observable<CommonResponse> {
+    return this.http.post<CommonResponse>("api/v1/plans/addWorkoutPlan",data);
+  }
+  getWorkoutPlans(trainerId: string):Observable<any[]> {
+    const url = `api/v1/plans/getTrainerWorkoutPlan?trainerId=${trainerId}`;
+    return this.http.get<any[]>(url)
+  }
   
+  setPrimaryGoal(data: TrackingRequest):Observable<CommonResponse> {
+    return this.http.post<CommonResponse>("api/v1/tracking/setPrimaryGoal",data)
+  }
+  updateWorkoutTracking(data: { userId: string; workout: any; }):Observable<WorkoutTrackingResponse> {
+   return this.http.post<WorkoutTrackingResponse>("api/v1/plans/updateWorkoutTracking",data);
+  }
+  getTrackingDeatils(userId: string):Observable<WorkoutTrackingResponse>{
+    const url = `api/v1/plans/getLatestWorkoutTracking?userId=${userId}`;
+    return this.http.get<WorkoutTrackingResponse>(url);
+  }
+  removeWorkoutFromTracking(data: { userId: string; workout: any; }):Observable<CommonResponse>{
+   return this.http.post<CommonResponse>("api/v1/plans/removeWorkoutFromTracking",data);
+  }
+  updateFoodTracking(data: { userId: string; variantId: any; }):Observable<FoodTrackingResponse> {
+    return this.http.post<FoodTrackingResponse>("api/v1/plans/updateFoodTracking",data);
+  }
+ 
+
+
+ 
   
   createTransaction(amount: number): Observable<TransactionDetails> {
     return this.http.get<TransactionDetails>(`api/v1/plans/createTransaction?amount=${amount}`);

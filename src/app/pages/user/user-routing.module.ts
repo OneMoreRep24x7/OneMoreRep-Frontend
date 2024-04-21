@@ -11,6 +11,13 @@ import { ShowtrainersComponent } from './showtrainers/showtrainers.component';
 import { TrainerPaymentComponent } from './trainer-payment/trainer-payment.component';
 import { ConnectTrainerComponent } from './connect-trainer/connect-trainer.component';
 import { TrackingComponent } from './tracking/tracking.component';
+import { TrackingDetailsComponent } from './tracking-details/tracking-details.component';
+import { CaloriesEatenComponent } from './calories-eaten/calories-eaten.component';
+import { CaloriesBurnedComponent } from './calories-burned/calories-burned.component';
+import { WaterIntakeComponent } from './water-intake/water-intake.component';
+import { WeightTrackingComponent } from './weight-tracking/weight-tracking.component';
+import { FoodDetailsComponent } from './food-details/food-details.component';
+import { TrainerWorkoutplanComponent } from './trainer-workoutplan/trainer-workoutplan.component';
 
 
 const routes: Routes = [
@@ -24,7 +31,14 @@ const routes: Routes = [
   {path:'showTrainers',component:ShowtrainersComponent},
   {path:'trainerPayment',component:TrainerPaymentComponent},
   {path:'trainerConnect',component:ConnectTrainerComponent},
-  {path:'tracking',component:TrackingComponent}
+  {path:'tracking',component:TrackingComponent},
+  {path:'trackingDeatils',component:TrackingDetailsComponent},
+  {path:'caloriesEaten',component:CaloriesEatenComponent},
+  {path:'caloriesBurned',component:CaloriesBurnedComponent},
+  {path:'waterIntake',component:WaterIntakeComponent},
+  {path:'weightTracking',component:WeightTrackingComponent},
+  {path:'foodDetails/:id',component:FoodDetailsComponent},
+  {path:'workoutPlans',component:TrainerWorkoutplanComponent}
 ];
 
 @NgModule({

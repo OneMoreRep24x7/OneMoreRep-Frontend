@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlanService } from '../../../services/plan.service';
 import { Trainer } from '../../../model/trainer.model';
+import { User } from '../../../model/user.model';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-client-workout',
@@ -12,14 +14,20 @@ import { Trainer } from '../../../model/trainer.model';
 export class ClientWorkoutComponent implements OnInit {
   date: Date = new Date(); 
   userId:string | null;
+  user:User|null;
   dailWorkouts:any[]|null;
   trainer:Trainer|null;
   trainerId:string|null;
+  workoutPlans:any[]|null;
+  itemsPerPage = 2;
+  currentPage = 1;
+  searchText = '';
 
   constructor(
    private router:Router,
    private route:ActivatedRoute,
-   private planService:PlanService){}
+   private planService:PlanService,
+   private userService:UserService){}
 
   ngOnInit(): void {
     window.scrollTo(0, 0); 
@@ -36,8 +44,48 @@ export class ClientWorkoutComponent implements OnInit {
       
     }
    )
+   this.getAllWorkoutPlans()
+   this.getUserDetails()
+  }
+
+  getAllWorkoutPlans(){
+    this.planService.getWorkoutPlans(this.trainerId).subscribe(
+      (response)=>{
+        console.log(response,"workoutplans>>>>>>>>>>>>>>");
+        this.workoutPlans = response
+        
+      }
+     )
+  }
+  getUserDetails(){
+    this.userService.getUserDetails(this.userId).subscribe(
+      (response)=>{
+        this.user = response;
+        console.log(this.user);
+        
+      }
+    )
   }
  
+  get paginatedData() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.workoutPlans.slice(start, end);
+  }
+
+  changePage(page: number) {
+    this.currentPage = page;
+  }
+  search(): void {
+    if (this.searchText.trim() === '') {
+      this.getAllWorkoutPlans();
+    } else {
+    
+      this.workoutPlans = this.workoutPlans.filter(workout =>
+        workout.name.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    }
+  }
 
  
 
@@ -48,8 +96,8 @@ export class ClientWorkoutComponent implements OnInit {
   dailyWorkout(){
     
   }
-  workoutPlan(){
-
+  addWorkout(){
+    this.router.navigate(['/trainer/addClientPlans'], { queryParams: { id: this.userId} });
   }
   
 }

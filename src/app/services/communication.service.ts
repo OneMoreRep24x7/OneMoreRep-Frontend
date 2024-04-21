@@ -19,13 +19,11 @@ export class CommunicationService {
     }
   }
 connect() {
-    const socket = new SockJS('http://localhost:8083/' + 'ws');
+    const socket = new SockJS('http://localhost:8083/ws');
     this.stompClient = Stomp.over(socket);
     const _this = this;
     this.stompClient.connect(
-      {
-        // headers: this.authService.createAuthorizationHeader()
-      }
+      {}
       , function (frame) {
         console.log('Connected Hi: ' + frame);
         _this.stompClient.subscribe('/topic/messages', function (hello) {
@@ -37,7 +35,7 @@ connect() {
   }
 sendPrivateMessage(newmessage) {
     this.stompClient.send(
-      '/topic/sendMessage',   //doubt in topic check later
+      '/app/sendMessage',  
       {},
       newmessage
     );

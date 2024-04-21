@@ -84,6 +84,41 @@ export interface Food {
     workouts:Workout[]
   }
 
+  export interface WorkoutPlanParams{
+    userId:string,
+    trainerId:string,
+    dailyWorkouts:DailyWorkout[],
+    startDate:Date,
+    planName:string,
+    repeat:number
+  }
 
+  export interface TrackingRequest{
+    userId:string,
+    primaryGoal:string,
+    targetWeight:number
 
+  }
+
+  export interface WorkoutTrackingResponse{
+    details:TrackedDetails,
+    message:string,
+    statusCode:number
+  }
   
+    export interface TrackedDetails{
+      userId:number,
+      workouts:Workout[],
+      recipeVariants:any[]
+      trackingDate:Date
+    }
+
+    export interface FoodTrackingResponse{
+      foodName:string,
+      details:TrackedDetails,
+      message:string,
+      statusCode:number
+
+
+    }
+   

@@ -13,7 +13,7 @@ export class ShowWorkoutsComponent implements OnInit{
   currentPage = 1;
   trainer:Trainer | null;
   trainerId:string|null;
-  dailWorkouts:any[]|null;
+  dailyWorkouts:any[]|null;
   searchText: string = '';
 
   constructor(
@@ -33,7 +33,7 @@ export class ShowWorkoutsComponent implements OnInit{
    getAllWorkouts(){
     this.planService.getDailyWorkouts(this.trainerId).subscribe(
       (response)=>{
-        this.dailWorkouts = response
+        this.dailyWorkouts = response
         console.log(response,">>>>>");
         
       }
@@ -43,7 +43,7 @@ export class ShowWorkoutsComponent implements OnInit{
    get paginatedData() {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
-    return this.dailWorkouts.slice(start, end);
+    return this.dailyWorkouts.slice(start, end);
   }
 
   changePage(page: number) {
@@ -54,14 +54,15 @@ export class ShowWorkoutsComponent implements OnInit{
       this.getAllWorkouts();
     } else {
     
-      this.dailWorkouts = this.dailWorkouts.filter(food =>
-        food.name.toLowerCase().includes(this.searchText.toLowerCase())
+      this.dailyWorkouts = this.dailyWorkouts.filter(workout =>
+        workout.name.toLowerCase().includes(this.searchText.toLowerCase())
       );
     }
   }
 
   addWorkout(){
     this.router.navigateByUrl('/trainer/addDailyWorkout');
+    
   }
 
 }

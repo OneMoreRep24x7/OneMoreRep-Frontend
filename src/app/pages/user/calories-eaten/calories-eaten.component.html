@@ -1,0 +1,115 @@
+<body class="bg-gray-900">
+
+    <app-header class="fixed w-full top-0 z-50"></app-header>
+
+    <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex flex-col items-center min-h-screen">
+        <div class="max-w-7xl w-full flex flex-col items-center justify-center gap-3">
+            <h2 class="text-2xl text-center md:text-5xl text-white font-semibold uppercase tracking-wide">
+                Track <span class="text-orange-500">Calories </span>
+            </h2>
+            <p class="text-lg md:text-lg text-gray-500 text-center">
+                Track your daily calories!
+            </p>
+        </div>
+        <div class="container mt-4">
+           
+            <div class="flex justify-center items-center">
+                <div class="w-[500px] flex flex-col items-center justify-center gap-4 bg-gray-900 rounded-lg p-8 shadow-lg">
+                    <circle-progress
+                        [percent]="calculateProgressPercentage(caloriesConsumed,totalCaloriesNeeded)"
+                        [title]="caloriesConsumed != null ? caloriesConsumed.toString() : 'N/A'"
+                        [subtitle]="totalCaloriesNeeded!= null ? totalCaloriesNeeded.toString() : 'N/A'"
+                        [radius]="100"
+                        [outerStrokeWidth]="calculateOuterStrokeWidth(caloriesConsumed, totalCaloriesNeeded)"
+                        [innerStrokeWidth]="calculateInnerStrokeWidth(caloriesConsumed, totalCaloriesNeeded)"
+                        [outerStrokeColor]="'#fff'"
+                        [innerStrokeColor]="'#fff'"
+                        [animation]="true"
+                        [animationDuration]="300"
+                        [titleFontSize]="60"
+                    ></circle-progress>
+
+                    
+                    <div class="w-full text-center mt-3">
+                        <img src="assets/images/food-tracking.webp" class="w-24 h-24 mx-auto mb-6 rounded-full" alt="Food Tracking Image">
+                        <h5 class="mb-2 text-3xl font-bold text-white">Eat up to {{totalCaloriesNeeded}} Calories</h5>
+                        <p class="mb-5 text-base text-gray-300">Stay motivated and make progress towards your goals.</p>
+                        <svg (click)="showDialog()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-orange-500 mx-auto  cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </div>
+                    <ul class="text-gray-900 mt-1 dark:text-white list-none">
+                        <p class="text-xl text-orange-500 text-center border-b mb-2">Tracked Foods</p>
+                        <li *ngFor="let food of trackedFoods">
+                            <div class="flex justify-between items-center"> <!-- Flex container -->
+                              <span>{{ food.name }}</span> <!-- Workout name on the left -->
+                              
+                              <button  (click)="removeFoodFromTracking(food)"
+                                      class="text-red-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                <!-- Add SVG icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                  </svg>
+                              </button>
+                            </div>
+                          </li>
+                      
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="visible" id="crud-modal" tabindex="-1" aria-hidden="true" class="fixed inset-0 overflow-y-auto overflow-x-hidden flex justify-center items-center z-50">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+              <div class="relative bg-gray-900 rounded-lg shadow">
+                <div class="flex items-center justify-center p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white text-center">
+                    Add Foods
+                  </h3>
+                </div>
+                <div class="p-4 md:p-5">
+                  <div class="flex flex-col w-full">
+                    <label for="workouts" class="font-semibold text-gray-900 dark:text-white mb-1">Add Foods to Tracking:</label>
+                    <form [formGroup]="foodForm">
+                        <input class="w-full rounded-lg" type="text" placeholder="Search workouts" formControlName="searchQuery" (input)="searchFoods(foodForm.get('searchQuery').value)">
+                    </form>
+                    <ul class="text-gray-900 mt-4 dark:text-white list-none">
+                        <li *ngFor="let food of searchResults">
+                          <div class="flex flex-col justify-start items-start">
+                            <span 
+                             [routerLink]="['/user/foodDetails', food.id]"
+                            class="font-semibold text-lg text-orange-500 cursor-pointer">{{ food.name }}</span> 
+                            <div *ngFor="let variant of food.variants" class="w-full">
+                              <div class="flex justify-between items-center "> 
+                                <div class="flex items-center ">
+                                  <p class="text-gray-500">{{variant.quantity}} {{variant.unit}}</p>
+                                </div>
+                                <div class="flex items-center "> 
+                                  <p class="text-gray-500">{{variant.calories}} cal</p>
+                                  <button
+                                    *ngIf="canAddFood(food)"
+                                    (click)="addFoodToTracking(food)"
+                                    class="text-orange-500 font-medium rounded-lg text-sm px-3 py-1.5 text-center mr-2 mb-2"
+                                  >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      
+                  </div>
+                  <div class="flex justify-center mt-4 gap-2">
+                    <button (click)="closeModal()" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-orange-600">Close</button>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </section>
+    <app-footer></app-footer>
+</body>

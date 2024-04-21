@@ -12,7 +12,7 @@
                     <h5 class="text-xl font-bold mb-2">Eat up to 2000 <span class="text-yellow-200">Calories</span></h5>
                     <p class="text-sm">Hurry up, you have 2000 calories left.</p>
                 </div>
-                <div class="flex justify-center items-center p-4 bg-gradient-to-b from-orange-600 to-orange-700 rounded-b-lg">
+                <div (click)="trackCaloriesEaten()" class="cursor-pointer flex justify-center items-center p-4 bg-gradient-to-b from-orange-600 to-orange-700 rounded-b-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-200">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
@@ -26,7 +26,7 @@
                     <h5 class="text-xl font-bold mb-2">Track Your <span class="text-yellow-200">Workout</span></h5>
                     <p class="text-sm">Burning your calories helps you get fitter and healthier.</p>
                 </div>
-                <div class="flex justify-center items-center p-4 bg-gradient-to-b from-purple-600 to-purple-700 rounded-b-lg">
+                <div (click)="trackCaloriesBurned()" class=" cursor-pointer flex justify-center items-center p-4 bg-gradient-to-b from-purple-600 to-purple-700 rounded-b-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-200">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
@@ -40,7 +40,7 @@
                     <h5 class="text-xl font-bold mb-2">Drink 10 glasses of <span class="text-yellow-200">Water</span></h5>
                     <p class="text-sm">Stay hydrated!</p>
                 </div>
-                <div class="flex justify-center items-center p-4 bg-gradient-to-b from-blue-600 to-blue-700 rounded-b-lg">
+                <div (click)="trackWaterIntake()" class=" cursor-pointer flex justify-center items-center p-4 bg-gradient-to-b from-blue-600 to-blue-700 rounded-b-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-200">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
@@ -54,7 +54,7 @@
                     <h5 class="text-xl font-bold mb-2">Track Your <span class="text-yellow-200">Weight</span></h5>
                     <p class="text-sm">Monitoring your weight helps you stay on track with your fitness goals.</p>
                 </div>
-                <div class="flex justify-center items-center p-4 bg-gradient-to-b from-green-600 to-green-700 rounded-b-lg">
+                <div (click)="trackWeight()" class=" cursor-pointer flex justify-center items-center p-4 bg-gradient-to-b from-green-600 to-green-700 rounded-b-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-200">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>

@@ -22,6 +22,31 @@ export interface User {
     trialValid:string |null,
     trainerValid:string|null,
     trainer: Trainer | null; 
+    bmi:number|null;
+    
 
+}
+
+export interface TragetWeightResponse{
+    startRange:number|null,
+    endRange:number|null
+}
+
+export interface TrackingDetails{
+    userId:string|null;
+    primaryGoal:string|null;
+    targetWeight:number|null;
+    caloriesNeeded:number|null;
+    workoutBurn:number|null;
+    caloriesBurned:number|null;
+    waterIntake:number|null;
+    caloriesEaten:number|null;
+    waterConsumed:number|null;
+}
+
+export interface TrackingDetailsResponse{
+    details:TrackingDetails|null;
+    message:string|null;
+    statusCode:number|null;
 }
 

@@ -1,0 +1,73 @@
+<body>
+    <app-header class="fixed w-full top-0 z-50"></app-header>
+  
+    <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex flex-col items-center justify-center min-h-screen">
+      <div class="max-w-7xl w-full flex flex-col items-center justify-center gap-3">
+        <h2 class="text-2xl text-center md:text-5xl text-white font-semibold uppercase tracking-wide">
+          Track <span class="text-blue-500">Water </span>
+        </h2>
+        <p class="text-lg md:text-lg text-gray-500 text-center">
+          Track your daily water intake
+        </p>
+      </div>
+      <div class="container mt-4">
+        <div class="flex justify-center items-center">
+          <div class="w-[500px] flex flex-col items-center justify-center gap-4 bg-gray-900 rounded-lg p-8 shadow-lg">
+            <circle-progress
+              [units]="'Glass'"
+              [percent]="calculateProgressPercentage(consumedGlassOfWater, totalGlassOfWater)"
+              [title]="consumedGlassOfWater != null ? consumedGlassOfWater.toString() : 'N/A'"
+              [subtitle]="totalGlassOfWater != null ? totalGlassOfWater.toString() : 'N/A'"
+              [radius]="100"
+              [outerStrokeWidth]="calculateOuterStrokeWidth(consumedGlassOfWater, totalGlassOfWater)"
+              [innerStrokeWidth]="calculateInnerStrokeWidth(consumedGlassOfWater, totalGlassOfWater)"
+              [outerStrokeColor]="'#fff'"
+              [innerStrokeColor]="'#fff'"
+              [animation]="true"
+              [animationDuration]="300"
+              [titleFontSize]="60"
+              [backgroundColor]="'#2196F3'"
+              [titleColor]="'#000000'"
+              [subtitleColor]="'#000000'"
+              [unitsColor]="'#000000'"
+            ></circle-progress>
+            <div class="w-full text-center m-3">
+              <div class="flex justify-between">
+                <svg (click)="addWater()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto mb-6 cursor-pointer text-blue-500">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <img src="assets/images/water-tracking.png" class="w-24 h-24 mx-auto mb-6 rounded-full" alt="Water Intake Image">
+                <svg (click)="removeWater()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto mb-6 cursor-pointer text-blue-500">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+              </div>
+              <h5 class="mb-1 text-3xl font-bold text-white">{{consumedGlassOfWater}} Glass consumed </h5>
+              <p class="text-gray-500">(1 Glass = 250 ml)</p>
+              <p class="mb-5 text-base text-gray-300">Stay motivated and make progress towards your goals.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+   <!-- Congratulations Popup -->
+<div *ngIf="showCongratulations" class="modal fixed fade show flex items-center justify-center " style="display: block; background-color: rgba(0, 0, 0, 0.5);" id="myModal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="card bg-gradient-to-br from-purple-700 to-pink-500 rounded-lg">
+       
+        <div class="card-body text-center p-4">
+          <img src="https://img.icons8.com/bubbles/200/000000/trophy.png" alt="trophy icon" class="mb-4">
+          <h4 class="text-xl font-bold text-white mb-2">CONGRATULATIONS!</h4>
+          <p class="text-base mb-4 text-white">You have successfully achieved your goal.</p>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Congratulations Popup -->
+  
+  
+    </section>
+  
+    <app-footer></app-footer>
+  </body>
+  

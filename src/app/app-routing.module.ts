@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
-import { TrainerdashboardComponent } from './pages/trainer/trainerdashboard/trainerdashboard.component';
 import { OtpComponent } from './pages/auth/otp/otp.component';
-import { TrainerRegisterComponent } from './pages/auth/trainer-register/trainer-register.component';
-import { TrainerprofileComponent } from './pages/trainer/trainerprofile/trainerprofile.component';
+
 
 
 

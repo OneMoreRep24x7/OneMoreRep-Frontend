@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
       this.isMenuScrolled = false;
     }
 
-    console.log(this.isMenuScrolled)
+   
 
   }
 

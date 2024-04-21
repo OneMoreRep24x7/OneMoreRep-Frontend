@@ -9,6 +9,7 @@ import { ClientPlansComponent } from './client-plans/client-plans.component';
 import { ClientWorkoutComponent } from './client-workout/client-workout.component';
 import { AddDailyworkoutComponent } from './add-dailyworkout/add-dailyworkout.component';
 import { ShowWorkoutsComponent } from './show-workouts/show-workouts.component';
+import { AddPlansComponent } from './add-plans/add-plans.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path:'clientPlans',component:ClientPlansComponent},
   {path:'clientWorkout',component:ClientWorkoutComponent},
   {path:'addDailyWorkout',component:AddDailyworkoutComponent},
-  {path:'showDailyWorkouts',component:ShowWorkoutsComponent}
+  {path:'showDailyWorkouts',component:ShowWorkoutsComponent},
+  {path:'addClientPlans',component:AddPlansComponent}
 ];
 
 @NgModule({

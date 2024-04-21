@@ -2,10 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Trainer } from '../../../model/trainer.model';
 import { TrainerService } from '../../../services/trainer.service';
-import { User } from '../../../model/user.model';
+import { TrackingDetails, User } from '../../../model/user.model';
 import { UserService } from '../../../services/user.service';
-import { IndividualConfig, ToastrService } from 'ngx-toastr';
-import { GlobalConfig } from 'rxjs';
+import {  ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,6 +17,7 @@ export class UserdashboardComponent implements OnInit{
   proTrainers:Trainer[] | null;
   user:User|null;
   userId:string|null;
+  trackingDetails:TrackingDetails |null;
   
 
 
@@ -46,9 +46,18 @@ export class UserdashboardComponent implements OnInit{
         this.user = response
       }
     )
-
+      this.getTrackingDetails();
    
   }
+  getTrackingDetails(){
+    this.userService.getTrackingDetails(this.userId).subscribe(
+      (respone)=>{
+        if(respone.statusCode === 200){
+          this.trackingDetails = respone.details;
+        }
+      }
+    )
+   }
  
 
   getMessage(){
@@ -80,5 +89,16 @@ export class UserdashboardComponent implements OnInit{
         this.toster.warning(`You are in a free trial and your free trial ends in ${differenceInDays} days.`);
       }
   }
+  addTrackingDetails() {
+    if(this.user.weight && !this.trackingDetails ) {
+        this.router.navigateByUrl("/user/trackingDeatils");
+    }else if (this.user.height  && this.trackingDetails) {
+        this.router.navigateByUrl("/user/tracking");
+    }else {
+        // Navigate to "/user/addProfile" if user.height is null and trackingDetails is null
+        this.router.navigateByUrl("/user/addProfile");
+    }
+}
+
 
 }
