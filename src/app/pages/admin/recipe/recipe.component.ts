@@ -45,14 +45,15 @@ export class RecipeComponent implements OnInit{
     this.currentPage = page;
   }
   search(): void {
-    if (this.searchText.trim() === '') {
-      this.getAllFoods();
+    const searchQuery = this.searchText.trim();
+    if (searchQuery === '') {
+      this.getAllFoods(); // If the search text is empty, retrieve all foods
     } else {
-    
       this.foods = this.foods.filter(food =>
-        food.name.toLowerCase().includes(this.searchText.toLowerCase())
+        food.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
   }
+  
 
 }

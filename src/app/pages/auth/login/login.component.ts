@@ -27,13 +27,13 @@ export class LoginComponent implements OnInit {
     private formBuilder:FormBuilder,
     private router:Router,
     private store:Store<AuthState>,
-    private communicationService:CommunicationService){
+    ){
 
     }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);  
-    this.communicationService.connect()
+   
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password:this.formBuilder.control('',Validators.required)

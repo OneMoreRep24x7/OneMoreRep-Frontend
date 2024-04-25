@@ -19,6 +19,7 @@ import { AddDailyworkoutComponent } from './add-dailyworkout/add-dailyworkout.co
 import { DialogModule } from 'primeng/dialog';
 import { ShowWorkoutsComponent } from './show-workouts/show-workouts.component';
 import { AddPlansComponent } from './add-plans/add-plans.component';
+import { ConnectComponent } from './connect/connect.component';
 
 
 
@@ -35,6 +36,7 @@ import { AddPlansComponent } from './add-plans/add-plans.component';
     AddDailyworkoutComponent,
     ShowWorkoutsComponent,
     AddPlansComponent,
+    ConnectComponent,
   ],
   imports: [
     CommonModule,

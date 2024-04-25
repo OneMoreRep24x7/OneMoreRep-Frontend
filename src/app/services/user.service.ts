@@ -12,6 +12,7 @@ import { Trainer, TrainerProfileRequest, TrainerProfileResponse } from '../model
 })
 export class UserService {
  
+ 
   constructor(
     private http : HttpClient,
     private router:Router
@@ -73,5 +74,17 @@ export class UserService {
     const url = `api/v1/user/getTrainerById?userId=${userId}`;
     return this.http.get<TrainerProfileResponse>(url);
   }
+  getAllUsers():Observable<User[]> {
+   return this.http.get<User[]>("api/v1/user/getAllUsers");
+  }
+  unblockTrainer(userId: string):Observable<CommonResponse> {
+    const url = `api/v1/user/unBlockUser?userId=${userId}`;
+    return this.http.get<CommonResponse>(url)
+  }
+  blockUser(userId: string):Observable<CommonResponse> {
+    const url = `api/v1/user/blockUser?userId=${userId}`;
+    return this.http.get<CommonResponse>(url)
+  }
+ 
  
 }

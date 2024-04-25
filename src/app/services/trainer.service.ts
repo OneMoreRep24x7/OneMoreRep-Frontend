@@ -3,14 +3,16 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Certificate, Trainer, TrainerProfileRequest, TrainerProfileResponse } from '../model/trainer.model';
+import { CommonResponse } from '../model/auth.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrainerService {
-
+ 
 
   private baseUrl = 'api/v1/trainer'; 
+  
 
   constructor(private http: HttpClient) { }
 
@@ -51,5 +53,15 @@ export class TrainerService {
   editTrainerProfile(data: TrainerProfileRequest):Observable<TrainerProfileResponse> {
     return this.http.post<TrainerProfileResponse>(`${this.baseUrl}/editTrainerProfile`,data);
   }
+  unblockTrainer(trainerId: string):Observable<CommonResponse> {
+    const url = `${this.baseUrl}/unBlockTrainer?trainerId=${trainerId}`;
+    return this.http.get<CommonResponse>(url);
+  }
+  blockTrainer(trainerId: string):Observable<CommonResponse>{
+    const url = `${this.baseUrl}/blockTrainer?trainerId=${trainerId}`;
+    return this.http.get<CommonResponse>(url);
+
+  }
+
   
 }

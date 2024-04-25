@@ -4,12 +4,19 @@
   <div class="w-full lg:w-[1200px] flex flex-col items-start justify-start">
     <div class="w-full rounded-lg shadow-md bg-black overflow-hidden">
       <div class="flex flex-col px-6 py-4 border-b border-orange-500">
-        <h1 class="text-4xl text-center font-semibold text-orange-500">Food</h1>
+        <div class="max-w-7xl w-full flex flex-col items-center justify-center gap-3">
+            <h2 class="text-2xl text-center md:text-5xl text-white font-semibold uppercase tracking-wide">
+                Users <span class="text-orange-500">Management</span>
+            </h2>
+            <p class="text-lg md:text-lg text-gray-500 text-center">
+                Manage all Users availble
+            </p>
+        </div>
         <div class="flex items-center justify-center lg:justify-start mt-4">
           <!-- Search Input Field -->
           <input
             type="text"
-            placeholder="Search Food"
+            placeholder="Search Users"
             class="border border-orange-500 px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-orange-500"
             [(ngModel)]="searchText"
           >
@@ -24,9 +31,7 @@
           </button>
         </div>
              
-        <div class="flex justify-center lg:justify-end mt-4">
-          <app-button (click)="addFood()" class="m-2 " name="Add Food" shade="D"></app-button>
-        </div>
+        
       </div>
       <div class="flex flex-col px-6 py-4">
         <div class="overflow-x-auto">
@@ -34,26 +39,41 @@
             <thead class="text-left bg-gradient-to-r from-orange-500 to-orange-700">
               <tr>
                 <th class="px-4 py-3 text-white text-left">Name</th>
-                <th class="px-4 py-3 text-white text-left">Category</th>
-                <th class="px-4 py-3 text-white text-left">Description</th>
-                <th class="px-4 py-3 text-white text-left">Actions</th>
+                <th class="px-4 py-3 text-white text-left">Email</th>
+                
+                <th class="px-4 py-3 text-white text-left">Acess</th>
               </tr>
             </thead>
             <tbody class="bg-gray-700 divide-y divide-gray-200">
-              <tr *ngFor="let food of  paginatedData" class="text-white">
-                <td class="px-4 py-2 whitespace-nowrap">{{ food.name }}</td>
-                <td class="px-4 py-2 whitespace-nowrap">{{ food.category }}</td>
-                <td class="px-4 py-2 whitespace-nowrap">{{ food.description }}</td>
+              <tr *ngFor="let user of  paginatedData" class="text-white">
+                <td class="px-4 py-2 whitespace-nowrap font-bold">{{ user.firstName }} <span class="text-orange-500" >{{user.lastName}}</span> </td>
+                <td class="px-4 py-2 whitespace-nowrap">{{ user.email}}</td>
+                
                 
                 <td class="px-4 py-2 whitespace-nowrap">
-                  <button [routerLink]="['/admin/viewFood', food.id]" class="py-1 px-2 rounded-md bg-orange-500 text-gray-700 font-semibold hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">Details</button>
+                    <button
+                    *ngIf="user.active"
+                    (click)="blockTrainer(user.id)"
+                    class="py-1 px-2 rounded-md bg-red-500 text-white font-semibold hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-300"
+                  >
+                    Block
+                  </button>
+          
+                  <!-- Unblock Button (conditionally displayed) -->
+                  <button
+                    *ngIf="!user.active"
+                    (click)="unblockTrainer(user.id)"
+                    class="py-1 px-2 rounded-md bg-green-500 text-white font-semibold hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300"
+                  >
+                    Unblock
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
         <app-pagination
-        [totalItems]="foods.length"
+        [totalItems]="users.length"
         [itemsPerPage]="itemsPerPage" 
         [currentPage]="currentPage" 
         (pageChanged)="changePage($event)"
@@ -69,3 +89,4 @@
       
     <app-footer></app-footer>
     </body>
+

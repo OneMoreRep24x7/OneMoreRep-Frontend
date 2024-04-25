@@ -45,21 +45,25 @@
           
             <!-- Today's Workouts -->
             <div class="mt-8 bg-gradient-to-b from-gray-600 to-gray-900 rounded-lg px-6 py-4">
-              <h2 class="text-3xl font-semibold text-orange-500 border-b mb-4">Today's Workouts</h2>
-              <ul>
-                <li
-                  *ngFor="let workout of dailyWorkout?.workouts"
-                  class="flex justify-between items-center py-2 pl-4 pr-2 mb-2 bg-gray-700 hover:bg-gray-600 rounded-lg cursor-pointer"
-                  (click)="playWorkoutVideo(workout.videoUrl)"
-                >
-                  <span class="flex items-center gap-2">
-                    <span class="w-3 h-3 bg-orange-500 rounded-full"></span>
-                    {{ workout.name }} - {{ workout.description }}
-                  </span>
-                  <i class="fas fa-angle-right text-gray-400 hover:text-orange-500"></i>
-                </li>
-              </ul>
-            </div>
+                <h2 class="text-3xl font-semibold text-orange-500 border-b mb-4">Today's Workouts</h2>
+                <div *ngIf="dailyWorkout" class="text-xl font-semibold text-orange-600 border-b border-gray-500 pb-2 mb-4">
+                    {{ dailyWorkout?.workoutType }}
+                  </div>
+                <ul>
+                  <li
+                    *ngFor="let workout of dailyWorkout?.workouts"
+                    class="flex justify-between items-center py-2 pl-4 pr-2 mb-2 bg-gray-700 hover:bg-gray-600 rounded-lg cursor-pointer"
+                    (click)="playWorkoutVideo(workout.videoUrl)"
+                  >
+                    <span class="flex items-center gap-2">
+                      <span class="w-3 h-3 bg-orange-500 rounded-full"></span>
+                      {{ workout.name }} - {{ workout.description }}
+                    </span>
+                    <i class="fas fa-angle-right text-gray-400 hover:text-orange-500"></i>
+                  </li>
+                </ul>
+              </div>
+              
           </div>
           
   

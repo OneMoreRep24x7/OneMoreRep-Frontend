@@ -49,6 +49,12 @@
             </tbody>
           </table>
         </div>
+        <app-pagination
+        [totalItems]="workouts.length"
+        [itemsPerPage]="itemsPerPage" 
+        [currentPage]="currentPage" 
+        (pageChanged)="changePage($event)"
+      ></app-pagination>
       </div>
     </div>
   </section>

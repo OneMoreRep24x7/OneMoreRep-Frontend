@@ -30,6 +30,12 @@ export class TrainerdashboardComponent {
     routerLink:"/trainer/showDailyWorkouts",
     icon:'fas fa-dumbbell',
     label: 'Workout Patterns'
+   },
+   {
+    routerLink:"/trainer/connectClients",
+    icon:'fas fa-comments',
+    lable:'Chats'
    }
+
   ];
 }

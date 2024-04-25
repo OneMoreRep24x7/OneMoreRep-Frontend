@@ -8,7 +8,7 @@ import { PlanService } from '../../../services/plan.service';
   styleUrl: './workout.component.scss'
 })
 export class WorkoutComponent {
-  itemsPerPage = 5;
+  itemsPerPage = 2;
   currentPage = 1;
   workouts: any[] = [];
   searchText: string = '';

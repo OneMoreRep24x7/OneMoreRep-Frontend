@@ -13,6 +13,8 @@ import { ViewfoodComponent } from './viewfood/viewfood.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { UsersComponent } from './users/users.component';
+import { TrainersComponent } from './trainers/trainers.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
     AddrecipeComponent,
     AddvariantComponent,
     ViewfoodComponent,
-    AdmindashboardComponent
+    AdmindashboardComponent,
+    UsersComponent,
+    TrainersComponent
   ],
   imports: [
     CommonModule,

@@ -9,6 +9,8 @@ import { AddrecipeComponent } from './addFood/addrecipe.component';
 import { AddvariantComponent } from './addvariant/addvariant.component';
 import { ViewfoodComponent } from './viewfood/viewfood.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { UsersComponent } from './users/users.component';
+import { TrainersComponent } from './trainers/trainers.component';
 
 const routes: Routes = [
 {path:'',component:AdmindashboardComponent},
@@ -20,6 +22,8 @@ const routes: Routes = [
 {path:'addRecipe',component:AddrecipeComponent},
 {path:'addFoodVariant',component:AddvariantComponent},
 {path:'viewFood/:id',component:ViewfoodComponent},
+{path:'users',component:UsersComponent},
+{path:'trainers',component:TrainersComponent}
     
 
 ];

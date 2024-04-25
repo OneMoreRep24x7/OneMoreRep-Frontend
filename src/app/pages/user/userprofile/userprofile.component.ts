@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../model/user.model';
 import { Trainer } from '../../../model/trainer.model';
-import { PlanService } from '../../../services/plan.service';
-import { TrainerService } from '../../../services/trainer.service';
+import { ChatService } from '../../../services/chat.service';
+import { ChatUserRegisterRequest } from '../../../model/chat.modle';
 
 @Component({
   selector: 'app-userprofile',
@@ -23,8 +23,7 @@ export class UserprofileComponent implements OnInit {
   constructor(
     private router:Router,
     private service:UserService,
-    private trainerService:TrainerService,
-    private planService:PlanService
+    private chatService:ChatService
     ){}
 
 
@@ -39,10 +38,12 @@ export class UserprofileComponent implements OnInit {
     })  
    
     this.service.getUserTrainer(this.userId).subscribe(
-      (response)=>{
-        
+      (response)=>{ 
         this.trainer=response;
-        console.log(this.trainer,">>>>>>>>>>>");
+        this.trianerId=this.trainer.id;
+        console.log(this.trianerId,">>>>>>>>>>>");
+        console.log(this.userId,".>>>>>>"); 
+        
       }
     )
   
@@ -57,6 +58,24 @@ export class UserprofileComponent implements OnInit {
       }
     }
   }
+  registerChatUsers(){
+    const data:ChatUserRegisterRequest={
+      userId:this.userId,
+      trainerId:this.trianerId,
+      userFistName:this.user.firstName,
+      userLastName:this.user.lastName,
+      trainerFirstName:this.trainer.firstName,
+      trainerLastName:this.trainer.lastName
+    }
+    
+    
+    this.chatService.registerUser(data).subscribe(
+      (response)=>{
+        console.log(response,">>>>>>>>");
+        
+      }
+    )
+  }
 
 
  edit(){
@@ -66,6 +85,7 @@ export class UserprofileComponent implements OnInit {
   this.router.navigateByUrl('/user/addProfile')
  }
  navigate(){
+   this.registerChatUsers()
    this.router.navigateByUrl("/user/trainerConnect")
  }
 

@@ -32,7 +32,7 @@ export class ViewtrainerComponent {
     private userService:UserService,
     private planService:PlanService,
     private toaster:ToastrService,
-    private communicationService:CommunicationService
+
     ) { }
 
     ngOnInit(): void {
@@ -66,7 +66,7 @@ export class ViewtrainerComponent {
           
         }
       )
-      this.communicationService.connect()
+     
     }
   
     check(): void {

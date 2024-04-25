@@ -1,60 +1,71 @@
 <body>
-    <app-header class="fixed top-0 w-full z-50"></app-header>
-    <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
-        <!-- Main Content Section -->
-        <div class="flex flex-row justify-between w-full max-w-6xl">
-            <!-- Trainer Sidebar -->
-            <div class="w-1/4 bg-gray-900 p-4 rounded-lg mr-4">
-                <!-- Trainer Profile Picture -->
-                <div class="flex items-center mb-4">
-                    <img class="w-12 h-12 rounded-full" src="/path/to/trainer/profile/picture.png" alt="Trainer Profile Picture">
-                    <div class="ml-3">
-                        <p class="text-lg font-semibold text-white">Trainer Name</p>
-                        <p class="text-sm text-gray-600">Available Now!</p>
-                    </div>
-                </div>
-              
-            </div>
+  <app-header class="fixed top-0 w-full z-50"></app-header>
 
-            <!-- Chat Content -->
-            <div class="flex-1 bg-gray-900 p-4 rounded-lg">
-               
-                <div class="chat-window bg-black rounded-lg shadow-lg ">
-                    <div class="flex items-center p-4">
-                      <div class="relative">
-                        <img class="w-8 h-8 rounded-full object-cover" src="/public/image@2x.png" alt="Avatar">
-                        <span class="absolute top-0 right-0 w-2 h-2 bg-green-500 rounded-full"></span> </div>
-                      <div class="ml-2">
-                        <div class="font-semibold text-gray-400">Martina Wolna</div>
-                        <div class="text-sm text-gray-600 flex items-center">
-                          <span class="mr-1">1 FEB</span>
-                          <svg class="w-4 h-4 fill-current text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M8.464 11.88l7.8-7.8L18 8.41V17a1 1 0 0 1-1 1h-2.586l-7.8-7.8zM13.5 1.5a1.5 1.5 0 0 1 2.122 0l7.8 7.8a1.5 1.5 0 0 1 0 2.122l-7.8 7.8a1.5 1.5 0 0 1-2.122-2.122L15.378 11.6a.5.5 0 1 1-.756-.756L13.5 1.5z"/>
-                          </svg> <div class="hidden text-sm text-white rounded-lg p-2 absolute top-0 right-0 mt-2">12:00 PM</div> </div>
-                      </div>
-                    </div>
-                    <div class="chat-history p-4">
-                      <div class="sender flex items-end mb-4">
-                        <div class="rounded-lg bg-gradient-to-r from-orange-500 to-orange-300 p-3 mr-2">
-                          <p class="text-sm text-gray-800">Hello From Today onward I will be your trainer..</p>
-                        </div>
-                      </div>
-                      <div class="receiver flex items-end">
-                        <div class="rounded-lg bg-gradient-to-r from-white to-orange-100 p-3 ml-auto">
-                          <p class="text-sm text-gray-800">Update my diets and workout plans so that I can start</p>
-                          <div class="text-sm text-gray-600 mt-1">from now!</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="chat-input flex items-center p-4">
-                      <input type="text" class="w-full py-2 px-3 mr-2 bg-gray-200 rounded-lg focus:outline-none" placeholder="Type your message...">
-                      <button class="bg-orange-500 text-white py-2 px-4 rounded-lg">Send</button>
-                    </div>
-                  </div>
-                  
-                 
-            </div>
+  <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
+    <div class="flex flex-row justify-between w-full max-w-6xl">
+      <!-- Trainer Sidebar -->
+      <div class="w-1/4 bg-gray-900 p-4 rounded-lg mr-4">
+        <div class="flex items-center mb-4">
+          <img class="w-[80px] h-[80px] rounded-full" [src]="trainer?.imageName" alt="Trainer Profile Picture">
+          <div class="ml-3">
+            <p class="text-xl font-semibold text-white">
+              {{ trainer?.firstName }} <span class="text-orange-500">{{ trainer?.lastName }}</span>
+            </p>
+            <p class="text-sm text-gray-600">Available Now!</p>
+          </div>
         </div>
-    </section>
-    <app-footer></app-footer>
+      </div>
+
+      <!-- Chat Content -->
+      <div class="flex-1 bg-gray-900 p-4 rounded-lg">
+        <div class="chat-window bg-black rounded-lg shadow-lg">
+          <!-- Chat Header -->
+          <div class="flex items-center p-4">
+            <div class="relative">
+              <img class="w-[80px] h-[80px] rounded-full object-cover" [src]="user?.imageName" alt="Avatar">
+            </div>
+            <div class="ml-4">
+              <div class="font-semibold text-white text-xl">
+                {{ user?.firstName }} <span class="text-orange-500">{{ user?.lastName }}</span>
+              </div>
+              <div class="text-sm text-gray-600 flex items-center">
+                <span class="mr-1">{{ currentDate | date: 'MMM d, y' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat History -->
+          <div class="chat-history p-4 overflow-y-auto" style="max-height: 60vh;">
+            <div *ngFor="let message of chatMessages">
+              <div class="flex items-end" [ngClass]="{'justify-end': message.sender === user?.id, 'justify-start': message.sender !== user?.id}">
+                <div 
+                  [ngClass]="{
+                    'bg-gradient-to-r from-orange-500 to-orange-300': message.sender === user?.id,
+                    'bg-gradient-to-r from-white to-orange-100': message.sender !== user?.id
+                  }" 
+                  class="p-3 rounded-lg"
+                >
+                  <p class="text-sm text-gray-800">{{ message.content }}</p>
+                  <p class="text-xs text-gray-500 text-right">{{ message.timestamp | date: 'shortTime' }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Input -->
+          <div class="chat-input flex items-center p-4">
+            <input 
+              type="text" 
+              [(ngModel)]="messageContent" 
+              class="w-full py-2 px-3 mr-2 bg-gray-200 rounded-lg focus:outline-none" 
+              placeholder="Type your message..."
+            >
+            <button class="bg-orange-500 text-white py-2 px-4 rounded-lg" (click)="sendMessage()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
 </body>

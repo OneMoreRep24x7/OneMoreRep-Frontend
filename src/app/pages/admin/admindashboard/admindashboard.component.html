@@ -1,52 +1,32 @@
-
-  <body>
-   <app-header></app-header>
-   <section class="container mx-auto pt-48 px-4 md:px-0">
-    <div class="  flex justify-center lg:justify-start flex-wrap md:flex-nowrap gap-4">
-      <aside class="bg-gray-800 w-full lg:w-[20%] rounded-xl m justify-center text-white md:block p-4 col-span-3 flex flex-col lg:justify-between  h-[500px]">
-        <h2 class="text-2xl font-bold mb-4 text-center text-orange-500 border-b border-orange-500">Admin Panel</h2>
-        <ul class="flex flex-col space-y-2 px-4">
-           
-            <li>
-                <a routerLink="/admin/recipe" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Foods</a>
-            </li>
-            <li>
-              <a routerLink="/admin/recipeVariant" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Food Variants</a>
-           </li>
-           <li>
-            <a  routerLink="/admin/workout" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">workouts</a>
-           </li>
-            
-            <li>
-                <a href="#" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Payments</a>
-            </li>
-            <li>
-                <a href="#" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Users</a>
-            </li>
-            <li>
-                <a href="#" class="block py-2 px-4 hover:bg-gray-700 hover:text-gray-300 rounded transition duration-300">Trainers</a>
-            </li>
-           
-        </ul>
-    </aside>
-     <router-outlet></router-outlet>
+<body >
+  <app-header class="fixed top-0 w-full z-50"></app-header>
+  <section class="container mx-auto md:pt-48 pt-40  md:px-8 lg:px-10">
+    <div class="flex flex-wrap lg:flex-nowrap justify-center  "> <div class="w-full lg:w-1/4">
+        <app-sidenav
+            [navData]="navbarData"
+            [logoText]="logoText"
+            [logoIcon]="logoIcon"
+          ></app-sidenav>
+        
+      </div>
   
-      <main class="flex-1 bg-black text-white p-4 rounded shadow col-span-12">  <p class="text-4xl font-bold text-center mb-8">Welcome <span class="bg-orange-700 px-2 text-white">Admin</span></p>
-        <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded shadow focus:outline-none">
-            Add Workout
-          </button>
-          <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow focus:outline-none">
-            Add Recipes
-          </button>
-          
-        </div> -->
-      </main>
+      <div class="pl-8 w-full lg:w-3/4">
+        <div class="rounded-lg shadow-lg p-8 min-h-screen "> <div class="text-center mb-8">
+            <p class="text-xl lg:text-4xl font-bold text-white">
+              Welcome <span class="bg-orange-600 text-white px-3 py-2 rounded">Admin</span>
+            </p>
+          </div>
+  
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+  
     </div>
   </section>
-
-  <app-footer></app-footer>
+  
+  
+  
   
 
-  </body>
-
+  <app-footer></app-footer>
+</body>
