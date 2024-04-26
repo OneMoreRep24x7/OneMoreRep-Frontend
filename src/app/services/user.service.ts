@@ -63,8 +63,9 @@ export class UserService {
   updateWaterIntake(data: { userId: string; waterConsumed: number; }):Observable<TrackingDetailsResponse> {
    return this.http.post<TrackingDetailsResponse>("api/v1/tracking/updateWaterConsumed",data);
   }
-  updateWorkoutTracking(caloriesData: { userId: string; caloriesBurned: any; }):Observable<TrackingDetailsResponse> {
-    return this.http.post<TrackingDetailsResponse>("api/v1/tracking/updateCaloriesBurned",caloriesData);
+  updateWorkoutTracking(userId:string):Observable<TrackingDetailsResponse> {
+    const url = `api/v1/user/getCaloriesBurned?userId=${userId}`
+    return this.http.get<TrackingDetailsResponse>(url);
   }
   updateFoodTracking(caloriesData: { userId: string; caloriesEaten: any; }):Observable<TrackingDetailsResponse> {
     return this.http.post<TrackingDetailsResponse>("api/v1/tracking/updateCaloriesEaten",caloriesData)

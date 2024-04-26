@@ -2,56 +2,43 @@
   <app-header class="fixed top-0 w-full z-50"></app-header>
 
   <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
-    <div class="flex flex-row justify-between w-full max-w-6xl">
-      <!-- Trainer Sidebar -->
-      <div class="w-1/4 bg-gray-900 p-4 rounded-lg mr-4">
-        <div class="flex items-center mb-4">
-          <img class="w-[80px] h-[80px] rounded-full" [src]="trainer?.imageName" alt="Trainer Profile Picture">
-          <div class="ml-3">
-            <p class="text-xl font-semibold text-white">
-              {{ trainer?.firstName }} <span class="text-orange-500">{{ trainer?.lastName }}</span>
-            </p>
-            <p class="text-sm text-gray-600">Available Now!</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Chat Content -->
-      <div class="flex-1 bg-gray-900 p-4 rounded-lg">
+    
+      <div class="w-full sm:w-3/4 bg-gray-900 p-4 rounded-lg">
         <div class="chat-window bg-black rounded-lg shadow-lg">
           <!-- Chat Header -->
           <div class="flex items-center p-4">
             <div class="relative">
-              <img class="w-[80px] h-[80px] rounded-full object-cover" [src]="user?.imageName" alt="Avatar">
+              <img class="w-[80px] h-[80px] rounded-full object-cover" [src]="trainer?.imageName" alt="Avatar">
             </div>
             <div class="ml-4">
               <div class="font-semibold text-white text-xl">
-                {{ user?.firstName }} <span class="text-orange-500">{{ user?.lastName }}</span>
+                {{ trainer?.firstName }} <span class="text-orange-500">{{ trainer?.lastName }}</span>
               </div>
               <div class="text-sm text-gray-600 flex items-center">
                 <span class="mr-1">{{ currentDate | date: 'MMM d, y' }}</span>
               </div>
             </div>
           </div>
-
+  
           <!-- Chat History -->
-          <div class="chat-history p-4 overflow-y-auto" style="max-height: 60vh;">
+          <div class="chat-history p-4 overflow-y-auto min-h-[300px]" style="max-height: 60vh;">
             <div *ngFor="let message of chatMessages">
-              <div class="flex items-end" [ngClass]="{'justify-end': message.sender === user?.id, 'justify-start': message.sender !== user?.id}">
+              <div class="flex" [ngClass]="{'justify-end': message.sender === user?.id, 'justify-start': message.sender !== user?.id}">
                 <div 
                   [ngClass]="{
-                    'bg-gradient-to-r from-orange-500 to-orange-300': message.sender === user?.id,
-                    'bg-gradient-to-r from-white to-orange-100': message.sender !== user?.id
+                    'bg-gradient-to-r from-orange-500 to-orange-300 text-white': message.sender === user?.id,
+                    'bg-white text-gray-800 border border-orange-200': message.sender !== user?.id
                   }" 
-                  class="p-3 rounded-lg"
+                  class="p-3 rounded-lg max-w-md m-2"
                 >
-                  <p class="text-sm text-gray-800">{{ message.content }}</p>
-                  <p class="text-xs text-gray-500 text-right">{{ message.timestamp | date: 'shortTime' }}</p>
+                  <p class="text-sm">{{ message.content }}</p>
+                  <p class="text-xs text-right">{{ message.timestamp | date: 'shortTime' }}</p>
                 </div>
               </div>
             </div>
           </div>
-
+          
+  
           <!-- Chat Input -->
           <div class="chat-input flex items-center p-4">
             <input 
@@ -64,8 +51,9 @@
           </div>
         </div>
       </div>
-    </div>
+   
   </section>
+  
 
   <app-footer></app-footer>
 </body>

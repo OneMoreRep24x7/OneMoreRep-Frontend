@@ -1,98 +1,71 @@
 <body>
-    <app-header class="fixed top-0 w-full z-50"></app-header>
-    <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
-        <div class="flex h-screen overflow-hidden gap-4">
-            <!-- Sidebar with trainer details and chat room list -->
-            <aside class="w-1/4 bg-gray-900 p-6 rounded-lg">
-              <!-- Trainer Info -->
-              <div class="flex items-center mb-6">
-                <img 
-                  class="w-16 h-16 rounded-full" 
-                  [src]="trainer?.imageName" 
-                  alt="Trainer Profile Picture"
-                >
-                <div class="ml-4">
-                  <h2 class="text-xl font-semibold text-white">
-                    {{ trainer?.firstName }} {{ trainer?.lastName }}
-                  </h2>
-                  <p class="text-sm text-gray-400">Trainer</p>
-                </div>
-              </div>
-          
-              <!-- Chat Room List -->
-              <h3 class="text-lg font-semibold text-white mb-4">Chat Rooms</h3>
-              <ul>
-                <li 
-                  *ngFor="let chatRoom of chatRooms" 
-                  class="py-2 px-4 bg-gray-800 hover:bg-gray-700 rounded-lg cursor-pointer"
-                  (click)="selectChatRoom(chatRoom)"
-                  [ngClass]="{ 'bg-gray-700': selectedChatRoom?.id === chatRoom.id }"
-                >
-                  Chat with {{ chatRoom.userName }}
-                </li>
-              </ul>
-            </aside>
-          
-            <!-- Chat Window -->
-            <div class="flex-1 bg-gray-900 p-6 rounded-lg  flex flex-col">
-              <!-- Chat Header -->
-              <div class="flex items-center mb-4">
-                <img 
-                  *ngIf="selectedChatRoom"
-                  class="w-16 h-16 rounded-full" 
-                  [src]="selectedChatRoom.userProfilePicture"
-                  alt="User Profile Picture"
-                >
-                <div class="ml-4">
-                  <h2 class="text-xl font-semibold text-white">
-                    Chat with {{ selectedChatRoom?.userName }}
-                  </h2>
-                  <p class="text-sm text-gray-400">Connected</p>
-                </div>
-              </div>
-          
-              <!-- Chat History -->
-              <div class="flex-1 overflow-y-auto bg-gray-800 p-4 rounded-lg">
-                <div *ngFor="let message of chatMessages">
-                  <div 
-                    class="flex my-2"
-                    [ngClass]="{ 'justify-end': message.sender === trainer?.id, 'justify-start': message.sender !== trainer?.id }"
-                  >
-                    <div 
-                      class="p-3 rounded-lg"
-                      [ngClass]="{
-                        'bg-orange-500 text-white': message.sender === trainer?.id,
-                        'bg-gray-300 text-black': message.sender !== trainer?.id
-                      }"
-                    >
-                      <p class="text-sm">{{ message.content }}</p>
-                      <p class="text-xs">{{ message.timestamp | date: 'shortTime' }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          
-              <!-- Chat Input -->
-              <div class="flex mt-4">
-                <input 
-                  type="text" 
-                  [(ngModel)]="messageContent" 
-                  class="flex-1 py-2 px-4 rounded-lg bg-gray-700 text-white"
-                  placeholder="Type your message..."
-                  (keydown.enter)="sendMessage()"
-                >
-                <button 
-                  class="ml-2 px-4 py-2 bg-orange-500 text-white rounded-lg" 
-                  (click)="sendMessage()"
-                >
-                  Send
-                </button>
+  <app-header class="fixed top-0 w-full z-50"></app-header>
+  <section class="pt-48 flex justify-center">
+    <div class="flex flex-col md:flex-row w-full max-w-7xl bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+      <!-- Sidebar with chat room list -->
+      <aside class="w-full md:w-1/4 bg-gray-800 p-6">
+        <h3 class="text-lg font-semibold text-white border-b border-orange-500 mb-4">Clients</h3>
+        <ul class="overflow-y-auto h-96">
+          <li
+            *ngFor="let chatRoom of chatRooms"
+            class="py-2 px-4 bg-gray-700 hover:bg-gray-600 rounded-lg cursor-pointer mb-2"
+            (click)="selectChatRoom(chatRoom)"
+            [ngClass]="{ 'bg-orange-600': selectedChatRoom?.id === chatRoom.id }"
+          >
+            {{ chatRoom.chatRoomName }}
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Chat Window -->
+      <div class="w-full md:w-3/4 bg-gray-900 p-6 flex flex-col">
+        <!-- Chat Header -->
+        <div  class="flex items-center border-b pb-4 mb-4">
+          <div class="ml-4">
+            <h2 class="text-xl font-semibold text-orange-500">{{ selectedChatRoom?.chatRoomName }}</h2>
+            <p *ngIf="selectedChatRoom" class="text-sm text-green-500">Connected</p>
+          </div>
+        </div>
+
+        <!-- Chat History -->
+        <div class="chat-history p-4 overflow-y-auto min-h-[300px]" style="max-height: 60vh;">
+          <div *ngFor="let message of chatMessages" class="my-2">
+            <div class="flex"
+              [ngClass]="{ 'justify-end': message.sender === trainer?.id, 'justify-start': message.sender !== trainer?.id }"
+            >
+              <div
+                class="p-3 rounded-lg"
+                [ngClass]="{
+                  'bg-gradient-to-r from-orange-500 to-orange-300 text-white': message.sender === trainer?.id,
+                  'bg-white text-gray-800 border border-orange-200': message.sender !== trainer?.id
+                }"
+              >
+                <p class="text-sm">{{ message.content }}</p>
+                <p class="text-xs">{{ message.timestamp | date: 'shortTime' }}</p>
               </div>
             </div>
           </div>
-          
-          
-    </section>
-    <app-footer></app-footer>
+        </div>
+
+        <!-- Chat Input -->
+        <div *ngIf="selectedChatRoom" class="flex mt-4">
+          <input 
+          type="text" 
+          [(ngModel)]="messageContent" 
+          class="w-full py-2 px-3 mr-2 bg-gray-200 rounded-lg focus:outline-none" 
+          placeholder="Type your message..."
+        >
+          <button
+            class="ml-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+            (click)="sendMessage()"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <app-footer></app-footer>
 </body>
+
 

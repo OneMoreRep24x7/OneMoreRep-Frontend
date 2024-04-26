@@ -56,10 +56,7 @@ onVariantSelect(event: any) {
       userId:this.userId,
       variantId:this.selectedVariant.id
     };
-    const caloriesData={
-      userId:this.userId,
-      caloriesEaten:this.selectedVariant.calories
-    }
+
   
     this.planService.updateFoodTracking(data).subscribe(
       (response)=>{
@@ -72,12 +69,7 @@ onVariantSelect(event: any) {
         this.toaster.error(error);
       }
     )
-    this.userService.updateFoodTracking(caloriesData).subscribe(
-      (response)=>{
-        console.log(response,">>>>>>>>>>Respnse From UserService");
-        
-      }
-    )
+   
     
   }
   

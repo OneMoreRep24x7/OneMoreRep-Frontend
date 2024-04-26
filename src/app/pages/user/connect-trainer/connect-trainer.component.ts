@@ -12,6 +12,7 @@ import { ChatService } from '../../../services/chat.service';
 })
 export class ConnectTrainerComponent implements OnInit {
   user: User | null = null;
+  userId:string|null;
   trainer: Trainer | null = null;
   chatMessages: { sender: string; content: string; timestamp: string }[] = [];
   messageContent: string = '';
@@ -23,19 +24,21 @@ export class ConnectTrainerComponent implements OnInit {
     private chatService: ChatService
   ) {}
 
-  ngOnInit(): void {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
-    const userId = this.user?.id ?? '';
 
-    if (userId) {
-      this.userService.getUserTrainer(userId).subscribe((trainer) => {
+  ngOnInit(): void {
+    window.scrollTo(0,0)
+    this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.userId = this.user?.id ?? '';
+
+    if (this.userId) {
+      this.userService.getUserTrainer(this.userId).subscribe((trainer) => {
         this.trainer = trainer;
 
         if (this.trainer) {
           const trainerId = this.trainer.id;
-          const chatRoomId = `${userId}_${trainerId}`;
+          const chatRoomId = `${this.userId}_${trainerId}`;
 
-          this.chatService.getMessagesBetweenUsers(userId, trainerId).subscribe((messages) => {
+          this.chatService.getMessagesBetweenUsers(this.userId, trainerId).subscribe((messages) => {
             console.log(messages,"Message>>>>>>")
             this.chatMessages = messages.map((msg) => ({
               sender: msg.senderId,
@@ -53,11 +56,14 @@ export class ConnectTrainerComponent implements OnInit {
           this.communicationService.message$.subscribe((msg) => {
             console.log(msg,"Message>>>>>>>form queu")
             const receivedMessage = JSON.parse(msg);
-            this.chatMessages.push({
-              sender: receivedMessage.senderId,
-              content: receivedMessage.content,
-              timestamp: receivedMessage.timestamp,
-            });
+            if(receivedMessage.senderId !== this.userId){
+              this.chatMessages.push({
+                sender: receivedMessage.senderId,
+                content: receivedMessage.content,
+                timestamp: receivedMessage.timestamp,
+              });
+            }
+            
           });
         }
       });
@@ -66,20 +72,25 @@ export class ConnectTrainerComponent implements OnInit {
 
   sendMessage(): void {
     if (this.messageContent.trim() && this.trainer && this.user) {
+       
       const content = this.messageContent.trim();
       const senderId = this.user.id;
       const recipientId = this.trainer.id;
       const chatRoomId = `${senderId}_${recipientId}`;
+      
 
-      this.communicationService.sendPrivateMessage(senderId, recipientId, chatRoomId, content);
+      this.communicationService.sendPrivateMessage(senderId, recipientId, chatRoomId,content);
 
       this.chatMessages.push({
         sender: senderId,
         content,
         timestamp: new Date().toISOString(),
       });
+     
 
       this.messageContent = ''; // Clear the input after sending
+
     }
   }
+ 
 }

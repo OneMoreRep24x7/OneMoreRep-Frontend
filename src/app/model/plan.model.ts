@@ -139,4 +139,16 @@ export interface Food {
       repeat:number,
       startDate:string
     }
-   
+   export interface FoodTrackingResponses{
+    id:string,
+    unit:string,
+    quantity:number,
+    calories:number,
+    protein:number,
+    fat:number,
+    carbs:number,
+    fiber:number,
+    recipeName:string
+    count:number
+
+   }

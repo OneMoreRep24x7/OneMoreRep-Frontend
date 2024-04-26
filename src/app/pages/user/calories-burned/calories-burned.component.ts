@@ -126,74 +126,35 @@ export class CaloriesBurnedComponent implements OnInit{
   addWorkoutToTracking(workout: any): void {
     if (this.canAddWorkout(workout)) {
       this.selectedWorkouts.push(workout);
-      const calories = workout.caloriesBurned;
-      console.log(calories,">>>>>>>>>")
       const data ={
         userId:this.userId,
         workout:workout
-      }
-      const caloriesData ={
-        userId:this.userId,
-        caloriesBurned:calories
-      }
-      
+      } 
       this.planService.updateWorkoutTracking(data).subscribe(
         (response)=>{
           this.trackedWorkouts = response.details.workouts;
           console.log(this.trackedWorkouts,"trackedWorkouts>>>>>>>>>>>>>>");
-          
+          this.getTrackingDetails();  
+          this.closeModal()
         }
       )
-      this.userService.updateWorkoutTracking(caloriesData).subscribe(
-        (response)=>{
-          if(response.statusCode === 200){
-            this.caloriesBurned = response.details.caloriesBurned;
-            this.selectedWorkouts = []
-            this.closeModal()
-            this.toaster.success(response.message);
-          }
-          
-        },(error)=>{
-          this.toaster.error(error);
-        }
-      )
-    
     }
   }
-  removeWorkoutFromTracking(workout:any){
-    console.log("Remove button pressed >>>>>>>>>>>");
-    const calories = -Math.abs(workout.caloriesBurned);
-    
+  removeWorkoutFromTracking(workout:any){    
     const data = {
       userId:this.userId,
       workout:workout
 
-    }
-    const caloriesData ={
-      userId:this.userId,
-      caloriesBurned:calories
-    }
-    console.log(data,">>>>>>>>>>>",caloriesData);
-    
+    } 
     this.planService.removeWorkoutFromTracking(data).subscribe(
       (response)=>{
         if(response.statusCode === 200){
          this.getTrackedWorkoutsandRecipe()
+         this.getTrackingDetails()
         }
       }
     )
-    this.userService.updateWorkoutTracking(caloriesData).subscribe(
-      (response)=>{
-        if(response.statusCode === 200){
-          this.caloriesBurned = response.details.caloriesBurned;
-          this.toaster.success(response.message);
-        }
-        
-      },(error)=>{
-        this.toaster.error(error);
-      }
-    )
-    
+     
   }
   
 

@@ -57,7 +57,7 @@ export class CommunicationService {
     }
   }
 
-  sendPrivateMessage(senderId: string, recipientId: string, chatRoomId: string, content: string): void {
+  sendPrivateMessage(senderId: string, recipientId: string, chatRoomId: string,content: string): void {
     if (this.stompClient && this.stompClient.connected) {
       const message = {
         senderId,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DailyWorkout, Food, FoodModel, FoodRes, FoodTrackingResponse, PaymentResponse, TrackingRequest, TransactionDetails, VariantModel, VariantRes, WorkoutPlanParams, WorkoutPlanRequest, WorkoutPlanResponse, WorkoutRes, WorkoutTrackingResponse } from '../model/plan.model';
+import { DailyWorkout, Food, FoodModel, FoodRes, FoodTrackingResponse, FoodTrackingResponses, PaymentResponse, TrackingRequest, TransactionDetails, VariantModel, VariantRes, WorkoutPlanParams, WorkoutPlanRequest, WorkoutPlanResponse, WorkoutRes, WorkoutTrackingResponse } from '../model/plan.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { WorkoutModel } from '../model/profile.model';
@@ -14,6 +14,7 @@ declare var Razorpay:any;
   providedIn: 'root'
 })
 export class PlanService {
+ 
  
   constructor(
     private http:HttpClient,
@@ -96,9 +97,17 @@ export class PlanService {
   updateFoodTracking(data: { userId: string; variantId: any; }):Observable<FoodTrackingResponse> {
     return this.http.post<FoodTrackingResponse>("api/v1/plans/updateFoodTracking",data);
   }
+  removeFoodFromTracking(data: {  userId: string; variantId: any; }):Observable<CommonResponse> {
+   return this.http.post<CommonResponse>("api/v1/plans/removeFoodFromTracking",data)
+  }
+ 
  
   getDailyWorkoutByDate(data: WorkoutPlanRequest):Observable<WorkoutPlanResponse> {
     return this.http.post<WorkoutPlanResponse>("api/v1/plans/getWorkoutPlan",data);
+  }
+  getTrackedFood(userId: string):Observable<FoodTrackingResponses[]>{
+    const url = `api/v1/plans/getLatestFoodTracking?userId=${userId}`;
+    return this.http.get<FoodTrackingResponses[]>(url);
   }
 
  

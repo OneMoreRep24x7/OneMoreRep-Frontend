@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TrackingDetails, User } from '../../../model/user.model';
-import { Food } from '../../../model/plan.model';
+import { Food, FoodTrackingResponse, FoodTrackingResponses } from '../../../model/plan.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { PlanService } from '../../../services/plan.service';
@@ -22,9 +22,10 @@ export class CaloriesEatenComponent implements OnInit{
   selectedFoods:any[] = []
   visible:boolean;
   searchQuery:string= ''
-  trackedFoods:Food[] = []
+  trackedFoods:FoodTrackingResponses[] = []
   foodForm:FormGroup;
   searchResults:Food[] =[]
+  groupedFoods: FoodTrackingResponses[] = [];
 
 
   constructor(
@@ -44,7 +45,9 @@ export class CaloriesEatenComponent implements OnInit{
       searchQuery:['']
     })
     this.getAllFoods()
-    this.getTrackedWorkoutsandRecipe()
+    this.getTrackedFood()
+    
+  
   }
   getAllFoods() {
     this.planService.getFoods().subscribe(
@@ -54,16 +57,39 @@ export class CaloriesEatenComponent implements OnInit{
       }
     );
   }
-  getTrackedWorkoutsandRecipe(){
-    this.planService.getTrackingDeatils(this.userId).subscribe(
+  getTrackedFood(){
+    this.planService.getTrackedFood(this.userId).subscribe(
       (response)=>{
-        this.selectedFoods = response.details.recipeVariants;
-        console.log(this.selectedFoods,"++++++++++++++++++++++++");
+        this.trackedFoods = response;
+        console.log(this.trackedFoods,".>>>>>>>Tracked foods ");
+        this.groupTrackedFoodsWithCount()
         
       }
     )
-
   }
+  groupTrackedFoodsWithCount() {
+    const foodMap = new Map<string, { id: string; count: number }>();
+
+    this.trackedFoods.forEach(food => {
+      if (foodMap.has(food.recipeName)) {
+        const existing = foodMap.get(food.recipeName);
+        existing!.count += 1;
+      } else {
+        foodMap.set(food.recipeName, { id: food.id, count: 1 });
+      }
+    });
+
+    this.groupedFoods = Array.from(foodMap.entries()).map(([recipeName, details]) => {
+      const original = this.trackedFoods.find(food => food.recipeName === recipeName);
+      return {
+        ...original,
+        count: details.count,
+      };
+    });
+    console.log(this.groupedFoods,"Grouped food");
+    
+  }
+
 
   getTrackingDetails() {
     this.userService.getTrackingDetails(this.userId).subscribe(
@@ -71,12 +97,19 @@ export class CaloriesEatenComponent implements OnInit{
         this.trackingDetails = response.details;
         this.totalCaloriesNeeded = this.trackingDetails.caloriesNeeded;
         this.caloriesConsumed = this.trackingDetails.caloriesEaten;
-        
-
       }
     )
+  }
+
+  increaseQuanity(){
+    console.log("Add quantity pressed...");
     
   }
+  removeQuantity(){
+    console.log("Remove quantity pressed....");
+    
+  }
+
     // Method to calculate progress percentage, outer stroke width, and inner stroke width
     calculateProgressPercentage(caloriesConsumed: number | null, totalCaloriesNeeded: number | null): number {
       if (caloriesConsumed === null || totalCaloriesNeeded === null || totalCaloriesNeeded === 0) {
@@ -112,13 +145,47 @@ export class CaloriesEatenComponent implements OnInit{
       }
       return true; // Can add the workout
     }
-    addFoodToTracking(food:any){
-     console.log(food,">>>>>>>>>>>.adding food");
+    addFoodToTracking(varinatId:number){
+     console.log(varinatId,".>>>>>>>>>>>>>>");
+     const data = {
+      userId:this.userId,
+      variantId:varinatId
+      }
+
+  
+    this.planService.updateFoodTracking(data).subscribe(
+      (response)=>{
+        console.log(response,">>>>Response From Plan Service");
+        if(response.statusCode === 200){
+          this.getTrackingDetails()
+          this.closeModal()
+          this.getTrackedFood()
+        }
+        
+      },(error)=>{
+        this.toaster.error(error);
+      }
+    )
+   
+    
      
     }
-    removeFoodFromTracking(food:any){
-      console.log(food,">>>>>>>>>>>removing food")
-
+    removeFoodFromTracking(varinatId:number){
+      const data ={
+        userId:this.userId,
+        variantId:varinatId,
+        
+      }
+      console.log("removeFromTracking",data);
+      this.planService.removeFoodFromTracking(data).subscribe(
+        (response)=>{
+          console.log(response.message);
+          this.getTrackingDetails()
+          this.getTrackedFood()
+          
+        }
+      )
+      
     }
   
     searchFoods(keyword: string): void {

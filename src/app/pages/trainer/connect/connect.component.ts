@@ -26,6 +26,7 @@ export class ConnectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.trainer = JSON.parse(sessionStorage.getItem('user'));
     this.trainerId = this.trainer.id;
 
@@ -37,8 +38,10 @@ export class ConnectComponent implements OnInit {
     // Subscribe to WebSocket messages
     this.communicationService.message$.subscribe((msg) => {
       const receivedMessage = JSON.parse(msg);
-      if (this.selectedChatRoom && receivedMessage.chatRoomId === this.selectedChatRoom.id) {
+      if (this.selectedChatRoom && receivedMessage.chatRoomId === this.selectedChatRoom.id && receivedMessage.senderId !== this.trainerId ) {
         this.chatMessages.push(receivedMessage);
+        console.log(receivedMessage,"RecivedMessage>>>>>>");
+        
       }
     });
   }
@@ -47,11 +50,14 @@ export class ConnectComponent implements OnInit {
     if (this.selectedChatRoom) {
       this.communicationService.disconnect();
     }
-
+    console.log(chatRoom,"ChtRomm");
+    
     this.selectedChatRoom = chatRoom;
+    
+    
 
     // Connect to the selected chat room
-    this.communicationService.connect(`${this.trainerId}_${chatRoom.userId}`);
+    this.communicationService.connect(`${chatRoom.participants[0]}_${this.trainerId}`);
 
     // Load previous messages
     this.chatService.getMessagesBetweenUsers(chatRoom.participants[0], this.trainerId).subscribe((messages) => {
@@ -61,6 +67,7 @@ export class ConnectComponent implements OnInit {
         content: msg.content,
         timestamp: msg.timestamp,
       }));
+      
     });
   }
 
