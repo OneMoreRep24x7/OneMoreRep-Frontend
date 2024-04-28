@@ -19,6 +19,7 @@ import { WeightTrackingComponent } from './weight-tracking/weight-tracking.compo
 import { FoodDetailsComponent } from './food-details/food-details.component';
 import { TrainerWorkoutplanComponent } from './trainer-workoutplan/trainer-workoutplan.component';
 import { TrainerDietplanComponent } from './trainer-dietplan/trainer-dietplan.component';
+import { VideoCallComponent } from './video-call/video-call.component';
 
 
 const routes: Routes = [
@@ -40,7 +41,8 @@ const routes: Routes = [
   {path:'weightTracking',component:WeightTrackingComponent},
   {path:'foodDetails/:id',component:FoodDetailsComponent},
   {path:'workoutPlans',component:TrainerWorkoutplanComponent},
-  {path:'dietPlans',component:TrainerDietplanComponent}
+  {path:'dietPlans',component:TrainerDietplanComponent},
+  {path:'videoCall',component:VideoCallComponent}
 ];
 
 @NgModule({

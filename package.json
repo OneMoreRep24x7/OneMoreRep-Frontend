@@ -26,6 +26,7 @@
     "@ngrx/store-devtools": "^17.1.1",
     "@stomp/ng2-stompjs": "^8.0.0",
     "@stomp/rx-stomp": "^2.0.0",
+    "@zegocloud/zego-uikit-prebuilt": "^2.0.1",
     "animated-tailwindcss": "^3.3.0",
     "chart.js": "^4.4.2",
     "ng-circle-progress": "^1.7.1",

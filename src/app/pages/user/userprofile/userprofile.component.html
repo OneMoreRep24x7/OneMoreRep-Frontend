@@ -29,14 +29,22 @@
        
       
       </div>
-      <div class="flex justify-center gap-4 ">
-        <app-button *ngIf="user.dailyActivity !== null" (click)="edit()" name="Edit Profile" size="M" shade="W"></app-button>
-        <app-button *ngIf="user.dailyActivity === null" (click)="add()" name="Add Profile" size="M" shade="W"></app-button>
+    
+     
         <ng-container *ngIf="showConnectTrainerButton">
-          <app-button (click)="navigate()" name="Connect Trainer" shade="D" size="M"></app-button>
+           <div class="flex gap-5 justify-center">
+            <svg (click)="navigate()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-16 h-16 text-orange-500 hover:text-orange-700 cursor-pointer">
+              <path fill-rule="evenodd" d="M1 8c0-3.43 3.262-6 7-6s7 2.57 7 6-3.262 6-7 6c-.423 0-.838-.032-1.241-.094-.9.574-1.941.948-3.06 1.06a.75.75 0 0 1-.713-1.14c.232-.378.395-.804.469-1.26C1.979 11.486 1 9.86 1 8Z" clip-rule="evenodd" />
+            </svg>
+            <svg (click)="navigateVideoCall()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-16 h-16 text-orange-500 hover:text-orange-700 cursor-pointer" >
+              <path d="M3 4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H3ZM15 4.75a.75.75 0 0 0-1.28-.53l-2 2a.75.75 0 0 0-.22.53v2.5c0 .199.079.39.22.53l2 2a.75.75 0 0 0 1.28-.53v-6.5Z" />
+            </svg>
+           </div>
+        
+                    
         </ng-container>
-      </div>
-      <div class="grid  gap-4 w-full mt-8 rounded-2xl">
+     
+      <div class="grid  gap-4 w-full mt-4 rounded-2xl">
         <div class="bg-gray-800 rounded-lg text-center p-4">
           <h2 class="text-xl font-bold text-orange-500">Basic Information</h2>
           <div class="flex flex-col  items-start gap-2 mt-4 ">
@@ -55,6 +63,10 @@
             <p class="text-lg font-semibold">Height:<span class="text-gray-900 ml-2">{{ user.height }} CM</span></p>
             <p class="text-lg font-semibold">Weight:<span class="text-gray-900 ml-2"> {{ user.weight }} KG</span></p>
           </div>
+        </div>
+        <div class="flex  justify-center gap-4 ">
+        <app-button *ngIf="user.dailyActivity !== null" (click)="edit()" name="Edit Profile" size="M" shade="W"></app-button>
+        <app-button *ngIf="user.dailyActivity === null" (click)="add()" name="Add Profile" size="M" shade="W"></app-button>
         </div>
       </div>
 

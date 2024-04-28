@@ -21,6 +21,7 @@ import { commonReducer } from './store/common/common.reducer';
 import { GoogleLoginComponent } from './pages/auth/google-login/google-login.component';
 import { CarouselModule } from './shared/carousel/carousel.module';
 import { SharedModule } from './shared/shared.module';
+import { RoomComponent } from './pages/auth/room/room.component';
 
 
 
@@ -37,7 +38,8 @@ import { SharedModule } from './shared/shared.module';
     RegisterComponent,
     LoginComponent,
     OtpComponent,
-    GoogleLoginComponent,  
+    GoogleLoginComponent,
+    RoomComponent,  
    
    
   

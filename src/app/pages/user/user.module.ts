@@ -28,6 +28,7 @@ import { FoodDetailsComponent } from './food-details/food-details.component';
 import { TrainerWorkoutplanComponent } from './trainer-workoutplan/trainer-workoutplan.component';
 import { CalendarModule } from 'primeng/calendar';
 import { TrainerDietplanComponent } from './trainer-dietplan/trainer-dietplan.component';
+import { VideoCallComponent } from './video-call/video-call.component';
 
 
 
@@ -58,6 +59,7 @@ import { TrainerDietplanComponent } from './trainer-dietplan/trainer-dietplan.co
     FoodDetailsComponent,
     TrainerWorkoutplanComponent,
     TrainerDietplanComponent,
+    VideoCallComponent,
 
     
   ],

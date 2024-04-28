@@ -88,5 +88,8 @@ export class UserprofileComponent implements OnInit {
    this.registerChatUsers()
    this.router.navigateByUrl("/user/trainerConnect")
  }
+ navigateVideoCall(){
+  this.router.navigateByUrl("/user/videoCall")
+ }
 
 }

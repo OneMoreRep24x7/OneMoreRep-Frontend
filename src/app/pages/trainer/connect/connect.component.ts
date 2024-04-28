@@ -1,36 +1,38 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from '../../../services/communication.service';
-import { TrainerService } from '../../../services/trainer.service';
 import { ChatService } from '../../../services/chat.service';
 import { Trainer } from '../../../model/trainer.model';
 
-
+interface ChatMessage {
+  sender: string;
+  content: string;
+  timestamp: string;
+}
 
 @Component({
   selector: 'app-connect',
   templateUrl: './connect.component.html',
-  styleUrls: ['./connect.component.scss']
+  styleUrls: ['./connect.component.scss'],
 })
 export class ConnectComponent implements OnInit {
   trainer: Trainer;
-  trainerId = '';
+  trainerId: string;
   chatRooms: any[] = [];
   selectedChatRoom: any = null;
-  chatMessages: any[] = [];
+  chatMessages: ChatMessage[] = [];
   messageContent = '';
 
   constructor(
     private communicationService: CommunicationService,
-    private trainerService: TrainerService,
     private chatService: ChatService
   ) {}
 
   ngOnInit(): void {
-    window.scrollTo(0,0)
+    // Get trainer information
     this.trainer = JSON.parse(sessionStorage.getItem('user'));
     this.trainerId = this.trainer.id;
 
-    // Fetch existing chat rooms
+    // Fetch chat rooms for the trainer
     this.chatService.getChatRoomsForTrainer(this.trainerId).subscribe((rooms) => {
       this.chatRooms = rooms;
     });
@@ -38,37 +40,37 @@ export class ConnectComponent implements OnInit {
     // Subscribe to WebSocket messages
     this.communicationService.message$.subscribe((msg) => {
       const receivedMessage = JSON.parse(msg);
-      if (this.selectedChatRoom && receivedMessage.chatRoomId === this.selectedChatRoom.id && receivedMessage.senderId !== this.trainerId ) {
+      if (this.selectedChatRoom && receivedMessage.chatRoomId === this.selectedChatRoom.id) {
         this.chatMessages.push(receivedMessage);
-        console.log(receivedMessage,"RecivedMessage>>>>>>");
-        
       }
     });
   }
 
   selectChatRoom(chatRoom: any): void {
-    if (this.selectedChatRoom) {
-      this.communicationService.disconnect();
-    }
-    console.log(chatRoom,"ChtRomm");
-    
     this.selectedChatRoom = chatRoom;
-    
-    
-
-    // Connect to the selected chat room
-    this.communicationService.connect(`${chatRoom.participants[0]}_${this.trainerId}`);
 
     // Load previous messages
-    this.chatService.getMessagesBetweenUsers(chatRoom.participants[0], this.trainerId).subscribe((messages) => {
-      console.log(messages,">>>>>>>>>Tranier")
+    this.chatService.getMessagesBetweenUsers(
+      chatRoom.participants[0],
+      this.trainerId
+    ).subscribe((messages) => {
       this.chatMessages = messages.map((msg) => ({
         sender: msg.senderId,
         content: msg.content,
         timestamp: msg.timestamp,
       }));
-      
     });
+  }
+
+  containsUrl(text: string): boolean {
+    const urlPattern = /(https?:\/\/[^\s]+)/g; // Regular expression to detect URLs
+    return urlPattern.test(text);
+  }
+
+  extractUrl(text: string): string | null {
+    const urlPattern = /(https?:\/\/[^\s]+)/g;
+    const matches = text.match(urlPattern);
+    return matches ? matches[0] : null;
   }
 
   sendMessage(): void {
@@ -76,17 +78,23 @@ export class ConnectComponent implements OnInit {
       const content = this.messageContent.trim();
       const senderId = this.trainerId;
       const recipientId = this.selectedChatRoom.participants[0];
-      const chatRoomId = `${senderId}_${recipientId}`;
 
-      this.communicationService.sendPrivateMessage(senderId, recipientId, chatRoomId, content);
+      // Send the message
+      this.communicationService.sendPrivateMessage(
+        senderId,
+        recipientId,
+        `${senderId}_${recipientId}`,
+        content
+      );
 
+      // Add to local message history
       this.chatMessages.push({
         sender: senderId,
         content,
         timestamp: new Date().toISOString(),
       });
 
-      this.messageContent = '';
+      this.messageContent = ''; // Reset the message content
     }
   }
-}  
+}
