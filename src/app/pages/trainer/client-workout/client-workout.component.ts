@@ -15,13 +15,12 @@ export class ClientWorkoutComponent implements OnInit {
   date: Date = new Date(); 
   userId:string | null;
   user:User|null;
-  dailWorkouts:any[]|null;
   trainer:Trainer|null;
   trainerId:string|null;
   workoutPlans:any[]|null;
   itemsPerPage = 2;
   currentPage = 1;
-  searchText = '';
+
 
   constructor(
    private router:Router,
@@ -36,20 +35,19 @@ export class ClientWorkoutComponent implements OnInit {
     console.log(this.date, ">>>>>>>>>>");
     this.route.queryParams.subscribe(params => {
       this.userId = params['id'];
-  });
-   this.planService.getDailyWorkouts(this.trainerId).subscribe(
-    (response)=>{
-      this.dailWorkouts = response
-      console.log(response,">>>>>");
-      
-    }
-   )
+    });
+  
    this.getAllWorkoutPlans()
    this.getUserDetails()
   }
 
   getAllWorkoutPlans(){
-    this.planService.getWorkoutPlans(this.trainerId).subscribe(
+    const data = {
+      userId : this.userId,
+      trainerId:this.trainerId
+    }
+
+    this.planService.getWorkoutPlans(data).subscribe(
       (response)=>{
         console.log(response,"workoutplans>>>>>>>>>>>>>>");
         this.workoutPlans = response
@@ -76,26 +74,20 @@ export class ClientWorkoutComponent implements OnInit {
   changePage(page: number) {
     this.currentPage = page;
   }
-  search(): void {
-    if (this.searchText.trim() === '') {
-      this.getAllWorkoutPlans();
-    } else {
+  // search(): void {
+  //   if (this.searchText.trim() === '') {
+  //     this.getAllWorkoutPlans();
+  //   } else {
     
-      this.workoutPlans = this.workoutPlans.filter(workout =>
-        workout.name.toLowerCase().includes(this.searchText.toLowerCase())
-      );
-    }
-  }
+  //     this.workoutPlans = this.workoutPlans.filter(workout =>
+  //       workout.name.toLowerCase().includes(this.searchText.toLowerCase())
+  //     );
+  //   }
+  // }
 
  
 
-  handleDateSelect(event: any) {
-    this.date = event.value; // Access the selected date from the event object
-    console.log("Selected date:", this.date); // Example usage
-  }
-  dailyWorkout(){
-    
-  }
+  
   addWorkout(){
     this.router.navigate(['/trainer/addClientPlans'], { queryParams: { id: this.userId} });
   }

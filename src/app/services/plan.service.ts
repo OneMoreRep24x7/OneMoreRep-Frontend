@@ -14,8 +14,8 @@ declare var Razorpay:any;
   providedIn: 'root'
 })
 export class PlanService {
- 
- 
+  
+
   constructor(
     private http:HttpClient,
     private router:Router
@@ -76,9 +76,8 @@ export class PlanService {
   addWorkoutPlans(data: WorkoutPlanParams):Observable<CommonResponse> {
     return this.http.post<CommonResponse>("api/v1/plans/addWorkoutPlan",data);
   }
-  getWorkoutPlans(trainerId: string):Observable<any[]> {
-    const url = `api/v1/plans/getTrainerWorkoutPlan?trainerId=${trainerId}`;
-    return this.http.get<any[]>(url)
+  getWorkoutPlans(data: { userId: string; trainerId: string; }):Observable<any[]> {
+    return this.http.post<any[]>("api/v1/plans/getTrainerWorkoutPlan",data);
   }
   
   setPrimaryGoal(data: TrackingRequest):Observable<CommonResponse> {
@@ -109,8 +108,26 @@ export class PlanService {
     const url = `api/v1/plans/getLatestFoodTracking?userId=${userId}`;
     return this.http.get<FoodTrackingResponses[]>(url);
   }
+  addDailyDiet(data: { ownerId: string; breakfast: any[]; lunch: any[]; dinner: any[]; day: any; }):Observable<CommonResponse> {
+   return this.http.post<CommonResponse>("api/v1/plans/addDailyDiet",data);
+  }
+  getDailyDiet(trainerId:string):Observable<any[]> {
+    const url = `api/v1/plans/getDailyDiet?ownerId=${trainerId}`
+    return this.http.get<any[]>(url);
+  }
+  getAllDailyDiets():Observable<any[]> {
+    return this.http.get<any[]>("api/v1/plans/getAllDailyDiet")
+  }
 
- 
+  addDietPlans(data: { userId: string; trainerId: string; startDate: any; planName: any; repeat: any; dailyDiets: any[]; }):Observable<CommonResponse> {
+    return this.http.post<CommonResponse>("api/v1/plans/addDietPlan",data);
+  }
+  getDietPlan(data: { userId: string; trainerId: string; }):Observable<any[]> {
+   return this.http.post<any[]>("api/v1/plans/getTrainerDietPlan",data);
+  }
+  getDailyDietByDate(data: { date: string; userId: string; trainerId: string; }):Observable<any> {
+    return this.http.post<any>("api/v1/plans/getDietPlan",data);
+  }
   
   createTransaction(amount: number): Observable<TransactionDetails> {
     return this.http.get<TransactionDetails>(`api/v1/plans/createTransaction?amount=${amount}`);

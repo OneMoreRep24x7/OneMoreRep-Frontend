@@ -53,6 +53,8 @@ export class AddPlansComponent implements OnInit {
     this.planService.getDailyWorkouts(this.trainerId).subscribe(
       (response) => {
         this.dailyWorkouts = response;
+        console.log(response);
+        
        
       },
       (error) => {

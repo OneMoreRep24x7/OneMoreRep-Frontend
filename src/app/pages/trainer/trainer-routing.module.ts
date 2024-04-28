@@ -11,6 +11,10 @@ import { AddDailyworkoutComponent } from './add-dailyworkout/add-dailyworkout.co
 import { ShowWorkoutsComponent } from './show-workouts/show-workouts.component';
 import { AddPlansComponent } from './add-plans/add-plans.component';
 import { ConnectComponent } from './connect/connect.component';
+import { ShowDailydietComponent } from './show-dailydiet/show-dailydiet.component';
+import { AddDailydietComponent } from './add-dailydiet/add-dailydiet.component';
+import { ClientDietComponent } from './client-diet/client-diet.component';
+import { AddDietplansComponent } from './add-dietplans/add-dietplans.component';
 
 
 const routes: Routes = [
@@ -24,7 +28,11 @@ const routes: Routes = [
   {path:'addDailyWorkout',component:AddDailyworkoutComponent},
   {path:'showDailyWorkouts',component:ShowWorkoutsComponent},
   {path:'addClientPlans',component:AddPlansComponent},
-  {path:'connectClients',component:ConnectComponent}
+  {path:'connectClients',component:ConnectComponent},
+  {path:'showDailyDiet',component:ShowDailydietComponent},
+  {path:'addDailyDiet',component:AddDailydietComponent},
+  {path:'clientDiet',component:ClientDietComponent},
+  {path:'addClientDietPlans',component:AddDietplansComponent}
 ];
 
 @NgModule({

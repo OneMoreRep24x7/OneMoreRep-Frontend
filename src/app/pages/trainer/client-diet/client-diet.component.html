@@ -6,10 +6,10 @@
                 <div class="flex flex-col px-6 py-4 border-b border-orange-500">
                     <div class="max-w-7xl w-full flex flex-col items-center justify-center gap-3">
                     <h2 class="text-3xl text-center md:text-5xl text-white font-semibold uppercase tracking-wide">
-                        Workout <span class="text-orange-500">Plans</span>
+                       Diet <span class="text-orange-500">Plans</span>
                     </h2>
                     <p class="text-lg md:text-xl text-gray-600">
-                       Mange Clients Workout plans here
+                       Mange Clients Diet plans here
                     </p>
                     </div>
                     <!-- <div class="flex items-center justify-center lg:justify-start mt-4">
@@ -22,7 +22,7 @@
                         </button>
                     </div> -->
                     <div class="flex justify-center lg:justify-end mt-4">
-                        <app-button (click)="addWorkout()" name="Add Workout Plans" shade="D"></app-button>
+                        <app-button (click)="addDietPlans()" name="Add Diet Plans" shade="D"></app-button>
                     </div>
                 </div>
                 <div class="flex flex-col px-6 py-4">
@@ -35,21 +35,21 @@
                                     <th class="px-4 py-3 text-white text-left">Plan Name</th>
                                     <th class="px-4 py-3 text-white text-left">Plan Start</th>
                                     <th class="px-4 py-3 text-white text-left">Plan Expire</th>
-                                    <th class="px-4 py-3 text-white text-left">Workouts</th>
+                                    <th class="px-4 py-3 text-white text-left">Daily Diets</th>
                                     <th class="px-4 py-3 text-white text-left">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-gray-700 divide-y divide-gray-200">
-                                <ng-container *ngFor="let workoutPlans of paginatedData">
+                                <ng-container *ngFor="let dietPlans of paginatedData">
                                     <tr class="text-white">
                                         <td class="px-4 py-2 whitespace-nowrap">{{ user.firstName}} {{user.lastName}}</td>
-                                        <td class="px-4 py-2 whitespace-nowrap">{{ workoutPlans.planName}}</td>
-                                        <td class="px-4 py-2 whitespace-nowrap">{{ workoutPlans.startDate }}</td>
-                                        <td class="px-4 py-2 whitespace-nowrap">{{ workoutPlans.planExpire }}</td>
+                                        <td class="px-4 py-2 whitespace-nowrap">{{ dietPlans.planName}}</td>
+                                        <td class="px-4 py-2 whitespace-nowrap">{{ dietPlans.startDate }}</td>
+                                        <td class="px-4 py-2 whitespace-nowrap">{{ dietPlans.planExpire }}</td>
                                         <td class="py-2 text-gray-100 font-bold whitespace-nowrap ">
-                                            <ng-container *ngFor="let dailyWorkout of workoutPlans.dailyWorkouts">
-                                               <li>{{ dailyWorkout.workoutType }}</li> 
-                                                <br> <!-- Line break between workouts -->
+                                            <ng-container *ngFor="let dailydiet of dietPlans.dailyDiets">
+                                               <li>{{ dailydiet.day }}</li> 
+                                                <br> 
                                             </ng-container>
                                         </td>
                                         <td class="px-4 py-2 whitespace-nowrap">
@@ -68,7 +68,8 @@
                     </div>
                     <!-- Pagination Component -->
                     <app-pagination
-                    [totalItems]="workoutPlans.length"
+                    *ngIf="dietPlans.length>0"
+                    [totalItems]="dietPlans.length"
                     [itemsPerPage]="itemsPerPage" 
                     [currentPage]="currentPage" 
                     (pageChanged)="changePage($event)"

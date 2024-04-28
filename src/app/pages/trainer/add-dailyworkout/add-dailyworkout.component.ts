@@ -115,6 +115,7 @@ export class AddDailyworkoutComponent implements OnInit {
           workoutType: this.workoutForm.get('workoutType')?.value,
           workouts: this.selectedWorkouts
         };
+      
        
         
         this.planService.addDailyWorkout(data).subscribe(

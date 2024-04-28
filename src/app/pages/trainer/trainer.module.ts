@@ -20,6 +20,10 @@ import { DialogModule } from 'primeng/dialog';
 import { ShowWorkoutsComponent } from './show-workouts/show-workouts.component';
 import { AddPlansComponent } from './add-plans/add-plans.component';
 import { ConnectComponent } from './connect/connect.component';
+import { ShowDailydietComponent } from './show-dailydiet/show-dailydiet.component';
+import { AddDailydietComponent } from './add-dailydiet/add-dailydiet.component';
+import { ClientDietComponent } from './client-diet/client-diet.component';
+import { AddDietplansComponent } from './add-dietplans/add-dietplans.component';
 
 
 
@@ -37,6 +41,10 @@ import { ConnectComponent } from './connect/connect.component';
     ShowWorkoutsComponent,
     AddPlansComponent,
     ConnectComponent,
+    ShowDailydietComponent,
+    AddDailydietComponent,
+    ClientDietComponent,
+    AddDietplansComponent,
   ],
   imports: [
     CommonModule,

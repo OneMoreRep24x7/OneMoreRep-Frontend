@@ -4,19 +4,27 @@
     <div class="w-fit lg:w-[50%] bg-black border border-orange-500 rounded-lg shadow-md overflow-hidden flex flex-col justify-between p-8">
         <h2 class="text-2xl font-semibold text-orange-500 text-center mb-4">Add Daily Workout</h2>
         <form class="flex flex-col gap-4" enctype="multipart/form-data" [formGroup]="workoutForm">
-            <div class="flex flex-col w-full">
-                <label for="day" class="font-semibold text-white mb-1">Day:</label>
-                <input 
-                    type="text"
-                    name="day" 
-                    id="day" 
-                    placeholder="Enter day" 
-                    class="input-field rounded-md bg-orange-200 border border-gray-300 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
-                    formControlName="day">
-                <div *ngIf="workoutForm.get('day').invalid && (workoutForm.get('day').dirty || workoutForm.get('day').touched)" class="text-red-500 text-sm mt-1">
-                    Day is required.
-                </div>
+          <div class="flex flex-col w-full">
+            <label for="day" class="font-semibold text-white mb-1">DAY:</label>
+            <select
+              name="day"
+              id="day"
+              class="rounded-md bg-orange-200 border border-gray-300 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
+              formControlName="day"
+            >
+              <option value="" disabled selected>Choose a day...</option>
+              <option value="MONDAY">MONDAY</option>
+              <option value="TUESDAY">TUESDAY</option>
+              <option value="WEDNESDAY">WEDNESDAY</option>
+              <option value="THURSDAY">THURSDAY</option>
+              <option value="FRIDAY">FRIDAY</option>
+              <option value="SATURDAY">SATURDAY</option>
+            </select>
+            <div *ngIf="workoutForm.get('day').invalid && (workoutForm.get('day').dirty || workoutForm.get('day').touched)" class="text-red-500 text-sm mt-1">
+              Day is required
             </div>
+          </div>
+          
             <div class="flex flex-col w-full">
                 <label for="workoutType" class="font-semibold text-white mb-1">Workout Type:</label>
                 <input 

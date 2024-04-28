@@ -34,7 +34,12 @@ export class TrainerdashboardComponent {
    {
     routerLink:"/trainer/connectClients",
     icon:'fas fa-comments',
-    lable:'Chats'
+    label:'Chats'
+   },
+   {
+    routerLink:"/trainer/showDailyDiet",
+    icon: 'fas fa-utensils',
+    label: 'Daily Diet'
    }
 
   ];

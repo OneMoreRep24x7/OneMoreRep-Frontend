@@ -67,7 +67,7 @@ ngOnInit() {
   
  }
  addDiet(){
-  console.log("Diet added.....");
+  this.router.navigate(['/trainer/clientDiet'],{queryParams:{id:this.clientId}})
   
  }
 

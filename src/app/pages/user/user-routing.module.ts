@@ -18,6 +18,7 @@ import { WaterIntakeComponent } from './water-intake/water-intake.component';
 import { WeightTrackingComponent } from './weight-tracking/weight-tracking.component';
 import { FoodDetailsComponent } from './food-details/food-details.component';
 import { TrainerWorkoutplanComponent } from './trainer-workoutplan/trainer-workoutplan.component';
+import { TrainerDietplanComponent } from './trainer-dietplan/trainer-dietplan.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
   {path:'waterIntake',component:WaterIntakeComponent},
   {path:'weightTracking',component:WeightTrackingComponent},
   {path:'foodDetails/:id',component:FoodDetailsComponent},
-  {path:'workoutPlans',component:TrainerWorkoutplanComponent}
+  {path:'workoutPlans',component:TrainerWorkoutplanComponent},
+  {path:'dietPlans',component:TrainerDietplanComponent}
 ];
 
 @NgModule({
