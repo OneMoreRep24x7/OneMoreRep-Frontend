@@ -16,7 +16,9 @@
                 </div>
                 <input type="file" id="profile-pic" name="profile-pic" accept="image/*" class="hidden"  (change)="onFileSelected($event)" required>
             </label>
+           
         </div>
+        <div *ngIf="errorMessage$ | async as error" class="error-message text-red-600 text-sm">Selected image is too Large!</div>
         
         
         <div class="flex justify-center mb-6" >
@@ -150,7 +152,7 @@
         
             <!-- Repeat for other input fields -->
             <!-- Weight -->
-            <div class="flex flex-col">
+            <div *ngIf="!isEditMode" class="flex flex-col">
               <label for="weight" class="font-bold text-orange-500 mt-4 mb-2">Current Weight (kg):</label>
               <input type="number" id="weight" name="weight" formControlName="weight" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
               <!-- Validation message -->
@@ -160,17 +162,7 @@
               </div>
             </div>
         
-            <!-- Repeat for other input fields -->
-            <!-- Target Weight -->
-            <div class="flex flex-col">
-              <label for="target-weight" class="font-bold text-orange-500 mt-4 mb-2">Target Weight (kg):</label>
-              <input type="number" id="target-weight" name="target-weight" formControlName="targetWeight" class="rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
-              <!-- Validation message -->
-              <div *ngIf="profileForm.get('targetWeight').invalid && (profileForm.get('targetWeight').dirty || profileForm.get('targetWeight').touched)" class="text-red-500 mt-1">
-                <span *ngIf="profileForm.get('targetWeight').errors?.required">Target weight is required</span>
-                <span *ngIf="profileForm.get('targetWeight').errors?.min || profileForm.get('targetWeight').errors?.max">Target weight must be between 10kg and 500kg</span>
-              </div>
-            </div>
+          
           </div>
     
         <div class="flex justify-center gap-2 mt-6">

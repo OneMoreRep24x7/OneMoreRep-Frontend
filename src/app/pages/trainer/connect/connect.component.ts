@@ -35,12 +35,15 @@ export class ConnectComponent implements OnInit {
     // Fetch chat rooms for the trainer
     this.chatService.getChatRoomsForTrainer(this.trainerId).subscribe((rooms) => {
       this.chatRooms = rooms;
+      console.log(this.chatRooms,">>>>>>>");
+
+      
     });
 
     // Subscribe to WebSocket messages
     this.communicationService.message$.subscribe((msg) => {
       const receivedMessage = JSON.parse(msg);
-      if (this.selectedChatRoom && receivedMessage.chatRoomId === this.selectedChatRoom.id) {
+      if (this.selectedChatRoom && receivedMessage.chatRoomId === this.selectedChatRoom.id && receivedMessage.senderId !== this.trainerId) {
         this.chatMessages.push(receivedMessage);
       }
     });
@@ -48,12 +51,24 @@ export class ConnectComponent implements OnInit {
 
   selectChatRoom(chatRoom: any): void {
     this.selectedChatRoom = chatRoom;
+    if (this.selectedChatRoom) {
+      this.communicationService.disconnect();
+    }
+
+    console.log(chatRoom.id,"ChtRomm");
+
+    this.selectedChatRoom = chatRoom;
+    console.log(this.selectChatRoom,"SElected")
+
+
+
+    // Connect to the selected chat room
+    
+    
+    this.communicationService.connect(`${chatRoom.id}`);
 
     // Load previous messages
-    this.chatService.getMessagesBetweenUsers(
-      chatRoom.participants[0],
-      this.trainerId
-    ).subscribe((messages) => {
+    this.chatService.getMessagesBetweenUsers(chatRoom.participants[1], this.trainerId).subscribe((messages) => {
       this.chatMessages = messages.map((msg) => ({
         sender: msg.senderId,
         content: msg.content,
@@ -74,10 +89,12 @@ export class ConnectComponent implements OnInit {
   }
 
   sendMessage(): void {
+    console.log("send message triggerd");
+    
     if (this.messageContent.trim()) {
       const content = this.messageContent.trim();
       const senderId = this.trainerId;
-      const recipientId = this.selectedChatRoom.participants[0];
+      const recipientId = this.selectedChatRoom.participants[1];
 
       // Send the message
       this.communicationService.sendPrivateMessage(

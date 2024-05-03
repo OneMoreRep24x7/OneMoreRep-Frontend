@@ -15,6 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { UsersComponent } from './users/users.component';
 import { TrainersComponent } from './trainers/trainers.component';
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { TrainersComponent } from './trainers/trainers.component';
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    ChartModule
     
   ]
 })

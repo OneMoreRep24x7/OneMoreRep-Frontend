@@ -43,4 +43,46 @@ export class TrainerdashboardComponent {
    }
 
   ];
+  chartData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [
+      {
+        label: 'Clients per Month',
+        data: [5, 10,8,2,9], // Example client data
+        borderColor: '#FF5733', // Optional: Border color
+        backgroundColor: 'rgba(255, 87, 51, 0.5)', // Optional: Transparent background color
+      },
+    ],
+  };
+
+  // Options for the chart
+  chartOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Month',
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Client Count',
+        },
+        beginAtZero: true,
+        min: 0,
+        max: 10, // Set a max value to ensure consistent scaling
+      },
+    },
+    plugins: {
+      legend: {
+        display: true,
+      },
+      tooltip: {
+        enabled: true,
+      },
+    },
+  };
 }

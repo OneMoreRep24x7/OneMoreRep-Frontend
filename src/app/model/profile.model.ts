@@ -9,7 +9,7 @@ export interface ProfileRequest{
     medicalConditions:string
     height:number,
     weight:number,
-    targetWeight:number,
+    
     
 }
 

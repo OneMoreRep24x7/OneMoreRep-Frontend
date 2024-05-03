@@ -44,31 +44,61 @@
                     
         </ng-container>
      
-      <div class="grid  gap-4 w-full mt-4 rounded-2xl">
-        <div class="bg-gray-800 rounded-lg text-center p-4">
-          <h2 class="text-xl font-bold text-orange-500">Basic Information</h2>
-          <div class="flex flex-col  items-start gap-2 mt-4 ">
-            <p class="text-lg font-semibold ">Gender: <span class="text-orange-500 ml-2">{{ user.gender }}</span></p>
-            <p class="text-lg font-semibold">Age: <span class="text-orange-500 ml-2">{{ user.age }}</span></p>
-            <p class="text-lg font-semibold">City: <span class="text-orange-500 ml-2"> {{ user.city }}</span></p>
+        <div class="grid gap-6 w-full mt-4 rounded-2xl">
+          <!-- Basic Information Section -->
+          <div class="bg-gray-800 rounded-lg p-6 text-center">
+            <h2 class="text-2xl font-extrabold text-orange-500">Basic Information</h2>
+            <div class="flex flex-col items-start gap-3 mt-4">
+              <p class="text-lg font-semibold text-white">Gender: <span class="text-orange-500 ml-2">{{ user.gender }}</span></p>
+              <p class="text-lg font-semibold text-white">Age: <span class="text-orange-500 ml-2">{{ user.age }}</span></p>
+              <p class="text-lg font-semibold text-white">City: <span class="text-orange-500 ml-2"> {{ user.city }}</span></p>
+            </div>
+          </div>
+        
+          <!-- Health Status Section -->
+          <div class="bg-gradient-to-r from-orange-600 to-red-700 rounded-lg p-6 text-center">
+            <h2 class="text-2xl font-extrabold text-white">Health Status</h2>
+            <div class="flex flex-col items-start gap-3 mt-4">
+              <p class="text-lg font-semibold text-white">Daily Activity: 
+                <span class="text-gray-900 ml-2">{{ user.dailyActivity }}</span>
+              </p>
+              <p class="text-lg font-semibold text-white">Medical Conditions: 
+                <span class="text-gray-900 ml-2">{{ user.medicalConditions }}</span>
+              </p>
+              <p class="text-lg font-semibold text-white">Emotional Health: 
+                <span class="text-gray-900 ml-2">{{ user.emotionalHealth }}</span>
+              </p>
+              <p class="text-lg font-semibold text-white">Height: 
+                <span class="text-gray-900 ml-2">{{ user.height }} CM</span>
+              </p>
+              <p class="text-lg font-semibold text-white">Weight: 
+                <span class="text-gray-900 ml-2"> {{ user.weight }} KG</span>
+              </p>
+            </div>
+          </div>
+        
+          <!-- Action Buttons Section -->
+          <div class="flex justify-center gap-6 mt-3">
+            <app-button 
+              *ngIf="user.dailyActivity !== null" 
+              (click)="edit()" 
+              name="Edit Profile" 
+              size="M" 
+              shade="W" 
+            
+            ></app-button>
+            
+            <app-button 
+              *ngIf="user.dailyActivity === null" 
+              (click)="add()" 
+              name="Add Profile" 
+              size="M" 
+              shade="W" 
+             
+            ></app-button>
           </div>
         </div>
-
-        <div class=" bg-gradient-to-r from-orange-600 to-red-700 rounded-lg text-center p-4">
-          <h2 class="text-xl font-bold text-white">Health Status</h2>
-          <div class="flex flex-col items-start gap-2 mt-4">
-            <p class="text-lg font-semibold">Daily Activity:<span class="text-gray-900 ml-2">{{ user.dailyActivity }}</span></p>
-            <p class="text-lg font-semibold">Medical Conditions:<span class="text-gray-900  ml-2">{{ user.medicalConditions }}</span></p>
-            <p class="text-lg font-semibold">Emotional Health:<span class="text-gray-900 ml-2">{{ user.emotionalHealth }}</span></p>
-            <p class="text-lg font-semibold">Height:<span class="text-gray-900 ml-2">{{ user.height }} CM</span></p>
-            <p class="text-lg font-semibold">Weight:<span class="text-gray-900 ml-2"> {{ user.weight }} KG</span></p>
-          </div>
-        </div>
-        <div class="flex  justify-center gap-4 ">
-        <app-button *ngIf="user.dailyActivity !== null" (click)="edit()" name="Edit Profile" size="M" shade="W"></app-button>
-        <app-button *ngIf="user.dailyActivity === null" (click)="add()" name="Add Profile" size="M" shade="W"></app-button>
-        </div>
-      </div>
+        
 
       
 

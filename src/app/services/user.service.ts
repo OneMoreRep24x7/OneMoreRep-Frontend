@@ -86,6 +86,11 @@ export class UserService {
     const url = `api/v1/user/blockUser?userId=${userId}`;
     return this.http.get<CommonResponse>(url)
   }
+  getCalories(userId: string):Observable<any> {
+    const url = `api/v1/user/getCalories?userId=${userId}`;
+    return this.http.get<any>(url);
+  }
+ 
  
  
 }

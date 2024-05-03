@@ -58,6 +58,7 @@ export class TrackingDetailsComponent implements OnInit {
       (response) => {
         console.log(response.message, ">>>>>>>>>>>>>");
         this.getUserTargetWeight();
+        this.getUserDetails();
       }
     );
   }

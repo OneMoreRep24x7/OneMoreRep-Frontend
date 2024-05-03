@@ -14,8 +14,7 @@ declare var Razorpay:any;
   providedIn: 'root'
 })
 export class PlanService {
-  
-
+ 
   constructor(
     private http:HttpClient,
     private router:Router
@@ -127,6 +126,9 @@ export class PlanService {
   }
   getDailyDietByDate(data: { date: string; userId: string; trainerId: string; }):Observable<any> {
     return this.http.post<any>("api/v1/plans/getDietPlan",data);
+  }
+  getTotalPayment():Observable<any> {
+    return this.http.get<any>("api/v1/plans/getTotalPayment")
   }
   
   createTransaction(amount: number): Observable<TransactionDetails> {

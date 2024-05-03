@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { ProfileRequest } from '../../../model/profile.model';
@@ -9,6 +9,7 @@ import { User } from '../../../model/user.model';
 import { UserService } from '../../../services/user.service';
 import { updateRequest } from '../../../store/auth/auth.action';
 import { AuthState } from '../../../store/auth/auth.state';
+import { selectError } from '../../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-adduserprofile',
@@ -23,6 +24,7 @@ export class AdduserprofileComponent implements OnInit {
   firstName:string | null;
   lastName:string | null;
   isEditMode: boolean = false;
+  errorMessage$: Observable<string>;
   
   profileForm: FormGroup;
   preview: string = 'https://imgs.search.brave.com/SDvjesyFfC_6qOio8MKVLC8YzWLdAgSHXgDV2UCF_AA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5naXRlbS5jb20v/cGltZ3MvbS8xNDYt/MTQ2ODg0M19wcm9m/aWxlLWljb24tb3Jh/bmdlLXBuZy10cmFu/c3BhcmVudC1wbmcu/cG5n';
@@ -50,8 +52,7 @@ export class AdduserprofileComponent implements OnInit {
         conditions: ['', Validators.required],
         emotion: ['', Validators.required],
         height: ['', [Validators.required, Validators.min(50), Validators.max(300)]],
-        weight: ['', [Validators.required, Validators.min(10), Validators.max(500)]],
-        targetWeight: ['', [Validators.required, Validators.min(10), Validators.max(500)]]
+        weight: ['', [Validators.required, Validators.min(10), Validators.max(500)]]
       });
   
     this.service.getUserDetails(this.userId).subscribe((response) => {
@@ -77,8 +78,7 @@ export class AdduserprofileComponent implements OnInit {
         conditions: [this.user$.medicalConditions || '', Validators.required],
         emotion: [this.user$.emotionalHealth || '', Validators.required],
         height: [this.user$.height || '', [Validators.required, Validators.min(50), Validators.max(300)]],
-        weight: [this.user$.weight || '', [Validators.required, Validators.min(10), Validators.max(500)]],
-        targetWeight: [this.user$.targetWeight || '', [Validators.required, Validators.min(10), Validators.max(500)]]
+        weight: [this.user$.weight || '', [Validators.required, Validators.min(10), Validators.max(500)]]
       });
   
       if (this.user$.imageName) {
@@ -87,6 +87,7 @@ export class AdduserprofileComponent implements OnInit {
       }
       this.isEditMode = true; 
     } 
+    this.errorMessage$ = this.store.pipe(select(selectError))
   }
 
   
@@ -107,8 +108,7 @@ export class AdduserprofileComponent implements OnInit {
         phone : this.profileForm.value.phone,
         city : this.profileForm.value.city,
         medicalConditions : this.profileForm.value.conditions,
-        height : this.profileForm.value.height,
-        targetWeight : this.profileForm.value.targetWeight,
+        height : this.profileForm.value.height
         
 
       }
@@ -130,8 +130,7 @@ export class AdduserprofileComponent implements OnInit {
         phone : this.profileForm.value.phone,
         city : this.profileForm.value.city,
         medicalConditions : this.profileForm.value.conditions,
-        height : this.profileForm.value.height,
-        targetWeight : this.profileForm.value.targetWeight, 
+        height : this.profileForm.value.height
       }
       console.log(data,">>>>>>>");
       console.log(this.image,">>>>>");

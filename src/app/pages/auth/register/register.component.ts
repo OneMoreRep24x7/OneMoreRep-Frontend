@@ -15,6 +15,7 @@ import { RegisterRequest } from '../../../model/auth.model';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  isButtonClicked =false
  
   constructor(
     private service : AuthService,
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -46,8 +48,10 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  proceedregister() {
-    if(this.registerForm.valid){
+  onClickButton() {
+    if (!this.isButtonClicked && this.registerForm.valid) {
+      this.isButtonClicked = true;
+
       const data: RegisterRequest = {
         firstName: this.registerForm.value.firstName,
         lastName: this.registerForm.value.lastName,
@@ -58,43 +62,23 @@ export class RegisterComponent implements OnInit {
       this.service.test().subscribe((response)=>{
         console.log(response)
       })
-      
 
       this.service.register(data).subscribe((response)=>{
         console.log(response);
-        
-        
+
         if(response.statusCode == 200){
           const user : User = response.user;
           const email = user.email;
-          this.router.navigate(['otp',email] )
+          this.router.navigate(['otp', email]);
           this.toster.success(response.message);
-
-        }else if(response.statusCode == 409){
+        } else if(response.statusCode == 409) {
           this.toster.error(response.message);
         }
 
+        this.isButtonClicked = false; // Enable the button after processing response
       });
     }
   }
 
-  registerWithGoogle(){
-    this.service.getGoogleAuthUrl().subscribe(
-      (urlDto: any) => {
-        if (urlDto && urlDto.authURL) {
-          // Extract the URL from the UrlDto object
-          const url = urlDto.authURL;
-          // Redirect the user to the Google authentication URL
-          window.location.href = url;
-        } else {
-          console.error('Invalid response from server:', urlDto);
-          this.toster.error("Invalid response from server")
-        }
-      },
-      (error) => {
-         console.error('Error generating Google authentication URL:', error);
-         this.toster.error("Error generateing Google authentication Url")
-      }
-    );
-  }
+  
 }

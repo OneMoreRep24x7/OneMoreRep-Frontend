@@ -48,7 +48,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         if (event.type === HttpEventType.Response) {
           const httpResponse = event as HttpResponse<any>;
           const { accessToken, user } = httpResponse.body;
-
+    
           if (accessToken) {
             // Update the access token in the service
             this.service.setAccessToken(accessToken);
@@ -59,14 +59,14 @@ export class AuthInterceptorService implements HttpInterceptor {
             });
             console.log('Updated access token:', accessToken);
           }
-
+    
           console.log('Response from body:', httpResponse.body);
-
+    
           // Check if user object exists and has trialValid property
           if (user && user.role === 'USER' && user.trialValid) {
             const trailValidDate = new Date(user.trialValid);
             const currentDate = new Date();
-
+    
             if (currentDate > trailValidDate) {
               // Redirect user to 'user/payment'
               window.location.href = '/user/payment';
@@ -79,10 +79,12 @@ export class AuthInterceptorService implements HttpInterceptor {
           console.log('unauthorized');
         }
         return throwError(error);
-      }),
+      })
+    ).pipe(
       finalize(() => {
         this.store.dispatch(setLoadingSpinner({ status: false }));
       })
     );
+    
   }
 }

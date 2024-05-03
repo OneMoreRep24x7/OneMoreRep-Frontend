@@ -14,6 +14,7 @@ import { User } from '../../../model/user.model';
 })
 export class TrainerRegisterComponent implements OnInit{
   registerForm: FormGroup;
+  isButtonClicked = false; // Add this property
 
   constructor(
     private service : AuthService,
@@ -41,8 +42,10 @@ export class TrainerRegisterComponent implements OnInit{
       formGroup.get("confirmPassword")?.setErrors(null);
     }
   }
-  proceedregister() {
-    if(this.registerForm.valid){
+  
+  onClickButton() {
+    if (!this.isButtonClicked && this.registerForm.valid) {
+      this.isButtonClicked = true;
       const data: RegisterRequest = {
         firstName: this.registerForm.value.firstName,
         lastName: this.registerForm.value.lastName,
