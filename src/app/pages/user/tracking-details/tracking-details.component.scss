@@ -1,0 +1,16 @@
+body {
+    height:fit-content;
+    margin: 0;
+    padding: 0;
+    background-color: black/* Set background color using hex code */
+      
+}
+
+button[disabled] {
+    background-color:gray; /* Change background color to gray */
+    cursor:not-allowed; /* Change cursor to not-allowed */
+  }
+  
+ 
+  
+  

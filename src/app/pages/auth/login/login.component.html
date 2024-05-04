@@ -1,0 +1,64 @@
+<body>
+  <img src="assets/images/logo.png" alt="Logo" class="hidden md:block md:absolute md:top-[-41px] md:left-[36px] md:w-[150px] md:h-[200px] md:object-cover cursor-pointer z-[1]">
+  <!-- Add your logo here -->
+
+  <div class="w-full min-h-screen md:relative bg-black overflow-hidden tracking-[normal] text-left text-[36px] text-sienna font-noto-sans bg-blend-darken">
+    <img class="absolute top-0 left-0 w-[900px] h-[1013px] object-cover" alt="" src="assets/images/authlogin.jpeg" />
+
+    <div class="absolute top-[45%] transform translate-y-[-50%] w-full max-w-[400px] lg:left-[80%] sm:left-1/2 sm:transform sm:-translate-x-1/2 sm:-translate-y-1/2 rounded-[20px] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.14)] shadow-[-8px 4px 5px rgba(0,0,0,0.24)] mr-2 backdrop-filter backdrop-blur-[53px] box-border  md:h-fit flex flex-col items-start justify-start pt-[70px] px-10 z-[1] md:border-[1px] md:border-solid md:border-glass1-stroke-carey mt-2">
+      
+      <div class="self-stretch flex flex-col items-start justify-start gap-[14px] cursor-pointer" id="upperSectionContainer">
+      
+        <div class="flex flex-col items-start justify-start">
+          <img src="assets/images/logo.png" alt="Logo" class="md:hidden">
+          <h1 class="m-0 relative font-semibold inline-block min-w-[122px] mq450:text-[22px] mq750:text-[29px] text-white">Login</h1>
+          <div class="relative text-base font-medium text-orange-500">Welcome back.!</div>
+        </div>
+        <form (ngSubmit)="proceedlogin()" class="m-0 self-stretch flex flex-col items-start justify-start gap-[25px]" [formGroup]="loginForm">
+          <div class="self-stretch rounded-xl flex items-center py-3.5 px-4 border border-white">
+            <input class="flex-1 outline-none bg-transparent text-white text-xl placeholder-gray-500" type="email" name="email" id="email" placeholder="Enter your Email" formControlName="email">
+          </div>
+          <div *ngIf="loginForm.get('email').hasError('required') && (loginForm.get('email').dirty || loginForm.get('email').touched)" class="mt-1 text-red-500 text-sm">Email is required</div>
+
+          <!-- Display error message for invalid email format -->
+          <div *ngIf="loginForm.get('email').hasError('email') && (loginForm.get('email').dirty || loginForm.get('email').touched)" class="mt-1 text-red-500 text-sm">Please enter a valid email address</div>
+
+          <div class="self-stretch rounded-xl flex items-center py-3.5 px-4 border border-white">
+            <input class="flex-1 outline-none bg-transparent text-white text-xl placeholder-gray-500" type="password" name="password" id="password" placeholder="Enter your password" formControlName="password">
+          </div>
+          <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)" class="text-red-500 text-sm">Password is required</div>
+          <div *ngIf="errorMessage$ | async as error" class="error-message text-red-600 text-sm">{{ error }}</div>
+          <!-- Submit Button -->
+          <button type="submit" class="cursor-pointer border-none p-0 bg-orange-700 rounded-lg self-stretch flex flex-col items-center justify-center gap-[12px]">
+            <div class="self-stretch rounded-xl background:linear-gradient(90.57deg,_#c0714b,_#e87e4c_53.13%,_#cc764d_98.5%) flex flex-row items-center justify-center py-3.5 px-5">
+              <button class="relative text-xl font-semibold font-noto-sans text-white text-left inline-block min-w-[68px] mq450:text-base" type="submit">Login</button>
+            </div>
+          </button>
+        </form>
+        <div class="self-stretch h-[60px] flex flex-col items-center justify-start gap-[5px] top-[0] z-[99] sticky text-base text-white">
+          <div class="w-[199px] h-[22px] relative font-medium inline-block">
+            Not Registered? <a routerLink="/register">Signup</a>
+          </div>
+          <!-- Terms & Conditions -->
+          <div class="self-stretch flex-1 rounded-md [background:linear-gradient(180deg,_rgba(98,_98,_98,_0),_rgba(98,_98,_98,_0.07))] flex flex-row items-center justify-between py-1 px-1.5 gap-[20px]">
+            <div class="self-stretch w-[147px] flex flex-row items-start justify-start">
+              <div class="self-stretch flex-1 relative whitespace-nowrap">
+                Terms & Conditions
+              </div>
+            </div>
+            <!-- Support -->
+            <div class="self-stretch w-[61px] flex flex-row items-start justify-start">
+              <div class="self-stretch flex-1 relative">Support</div>
+            </div>
+            <!-- Customer Care -->
+            <div class="hidden md:block self-stretch w-[113px]  flex-row items-start justify-start">
+              <div class="self-stretch flex-1 relative whitespace-nowrap">
+                Customer Care
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

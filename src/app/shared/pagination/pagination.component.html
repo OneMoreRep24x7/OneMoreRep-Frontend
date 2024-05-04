@@ -1,0 +1,19 @@
+<nav aria-label="Page navigation example" class="mt-4 flex justify-center">
+    <ul class="inline-flex -space-x-px text-base h-10">
+      <!-- Previous button -->
+      <li class="cursor-pointer" [class.disabled]="currentPage === 1" (click)="pageClicked(currentPage - 1)">
+        <a class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-r-0 border-gray-300 rounded-l-lg hover:bg-orange-500 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+      </li>
+  
+      <!-- Page numbers -->
+      <li *ngFor="let page of pages" [class.active]="page === currentPage" (click)="pageClicked(page)">
+        <a class=" cursor-pointer flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-orange-500 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ page }}</a>
+      </li>
+  
+      <!-- Next button -->
+      <li class="cursor-pointer" [class.disabled]="currentPage === totalPages" (click)="pageClicked(currentPage + 1)">
+        <a class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-l-0 border-gray-300 rounded-r-lg hover:bg-orange-500 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+      </li>
+    </ul>
+  </nav>
+  

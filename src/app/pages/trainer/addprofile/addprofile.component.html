@@ -1,0 +1,77 @@
+
+<body>
+    <app-header class="fixed top-0 w-full z-50"></app-header>
+ 
+    <div class="container pt-48 flex justify-center items-center min-h-screen bg-gray-950" >
+      <form enctype="multipart/form-data"
+      (ngSubmit)="isEditMode ? edit() : add()"
+      class="form bg-black rounded-lg shadow-md p-6 max-w-full w-full lg:w-7xl relative" 
+      *ngIf="profileForm"
+      [formGroup]="profileForm">
+      
+      <!-- Profile Picture Input -->
+      <div class="flex justify-center mb-6" [ngClass]="{'error': profileForm.get('profile-pic')?.invalid && profileForm.get('profile-pic')?.touched}">
+        <label for="profile-pic" class="relative cursor-pointer">
+            <img [src]="preview" alt="Profile Picture" class="rounded-full w-32 h-32 object-cover border-4 border-orange-500">
+            <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <span class="text-white text-lg">Change Picture</span>
+            </div>
+            <input type="file" id="profile-pic" name="profile-pic" accept="image/*" class="hidden" (change)="onFileSelected($event)" required>
+        </label>
+        <!-- Validation message -->
+        <div *ngIf="profileForm.get('profile-pic')?.invalid && profileForm.get('profile-pic')?.touched" class="text-red-500">Profile picture is required</div>
+      </div>
+    
+      <!-- Trainer Name -->
+      <div class="flex justify-center mb-6" >
+          <h3 class="text-3xl font-bold text-white text-center">
+              {{trainer?.firstName}} {{ trainer?.lastName}} <!-- Add "?" to safely access properties in case trainer is null -->
+          </h3>
+      </div>
+    
+      <!-- Qualifications Select -->
+      <div>
+        <label for="qualification" class="text-white">Qualification:</label>
+        <select id="qualification" name="qualification" formControlName="qualification" class="rounded-md p-2 bg-gray-800 text-white w-full" required>
+            <option value="" disabled selected>Select Qualification</option>
+            <option value="REPS level 1 fitness trainer">REPS level 1 fitness trainer</option>
+            <option value="REPS level 2 fitness trainer">REPS level 2 fitness trainer</option>
+            <option value="REPS level 3 fitness trainer">REPS level 3 fitness trainer</option>
+            <option value="ACE Certified Personal Trainer">ACE Certified Personal Trainer</option>
+            <option value="NASM Certified Personal Trainer">NASM Certified Personal Trainer</option>
+            <option value="ISSA Certified Personal Trainer">ISSA Certified Personal Trainer</option>
+            <!-- Add more qualification options here -->
+        </select>
+        <!-- Validation message -->
+        <div *ngIf="profileForm.get('qualification')?.invalid && profileForm.get('qualification')?.touched" class="text-red-500">Qualification is required</div>
+      </div>
+      
+      <!-- Slots Input -->
+      <div>
+          <label for="slots" class="text-white">Slots:</label>
+          <input type="number" id="slots" name="slots" formControlName="slots" class="rounded-md p-2 bg-gray-800 text-white w-full" required>
+          <!-- Validation message -->
+          <div *ngIf="profileForm.get('slots')?.invalid && profileForm.get('slots')?.touched" class="text-red-500">Slots are required</div>
+      </div>
+    
+      <!-- Buttons -->
+      <div class="flex justify-center gap-2 mt-6">
+          <button *ngIf="!isEditMode" type="submit" class="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600">Save</button>
+          <button *ngIf="isEditMode" type="submit" class="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600">Update</button>
+          <button (click)="onCancel()" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">Cancel</button>
+      </div>
+    
+    </form>
+    
+    
+    
+    </div>
+          
+   <app-footer></app-footer>
+   
+ 
+   </body>
+ 
+ 
+
+

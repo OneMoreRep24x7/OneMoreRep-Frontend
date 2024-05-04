@@ -1,0 +1,31 @@
+<body>
+    <img src="assets/images/logo.png" alt="Logo" class="hidden md:block md:absolute md:top-[-41px] md:left-[36px] md:w-[150px] md:h-[200px] md:object-cover cursor-pointer z-[1]">
+    <!-- Add your logo here -->
+
+    <div class="w-full min-h-screen md:relative bg-black overflow-hidden tracking-[normal] text-left text-[36px] text-sienna font-noto-sans bg-blend-darken">
+        <img class="absolute top-0 left-0 w-[900px] h-[1013px] object-cover" alt="" src="assets/images/authlogin.jpeg" />
+
+        <div class="absolute top-[45%] transform translate-y-[-50%] w-full max-w-[400px] lg:left-[80%] sm:left-1/2 sm:transform sm:-translate-x-1/2 sm:-translate-y-1/2 rounded-[20px] bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.14)] shadow-[-8px 4px 5px rgba(0,0,0,0.24)] mr-2 backdrop-filter backdrop-blur-[53px] box-border md:h-[400px] flex flex-col items-start justify-start pt-[70px] px-10 z-[1] md:border-[1px] md:border-solid md:border-glass1-stroke-carey mt-10">
+
+            <div class="self-stretch flex flex-col items-start justify-start gap-[14px] cursor-pointer" id="upperSectionContainer">
+
+                <div class="flex flex-col items-start justify-start">
+                    <img src="assets/images/logo.png" alt="Logo" class="md:hidden">
+                    <h1 class="m-0 relative font-semibold inline-block min-w-[122px] mq450:text-[22px] mq750:text-[29px] text-white">OTP Verification</h1>
+                    <div class="relative text-base font-medium text-orange-500">Please enter the OTP sent to your registered email!</div>
+                </div>
+                <form (ngSubmit)="proceedVerification()" class="m-0 self-stretch flex flex-col items-start justify-start gap-[25px]" [formGroup]="otpForm">
+                    <div class="self-stretch rounded-xl flex items-center py-3.5 px-4 border border-white">
+                        <input class="flex-1 outline-none bg-transparent text-white text-xl placeholder-gray-500" type="text" name="otp" id="otp" placeholder="Enter your OTP" formControlName="otp">
+                    </div>
+
+                    <div class="self-stretch rounded-xl flex bg-gradient-to-r from-[#c0714b] to-[#e87e4c] flex-row items-center justify-center py-3.5 px-5 gap-4">
+                        <button class="relative text-xl font-semibold font-noto-sans text-white text-left inline-block min-w-[68px] mq450:text-base" type="submit">Verify</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</body>

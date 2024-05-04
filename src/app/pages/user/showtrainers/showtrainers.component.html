@@ -1,0 +1,43 @@
+<body class="bg-gray-100">
+    <app-header class="fixed top-0 w-full z-50"></app-header>
+    <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
+        <div class="max-w-7xl w-full flex flex-col items-center justify-start gap-3">
+            <h2 class="text-3xl md:text-5xl text-white font-semibold uppercase tracking-wide">
+                Our <span class="text-orange-500">Trainers</span>
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600">
+                We train you to achieve your goals.
+            </p>
+            <div class="flex items-center justify-center lg:justify-start mt-4">
+                <input type="text" placeholder="Search Trainers" class="border border-orange-500 px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-orange-500" [(ngModel)]="searchText" (input)="search()">
+                <button class="bg-orange-500 px-4 py-2 rounded-r-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500" (click)="search()">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                  </svg>
+                </button>
+              </div>
+             <div *ngIf="proTrainers.length > 0" class="flex justify-center flex-wrap gap-4 mt-4">
+              <div class="max-w-sm bg-black rounded-2xl shadow border hover:border-orange-500" *ngFor="let trainer of paginatedData">
+                <img class="lg:w-[300px] lg:h-[300px] object-contain" [src]="trainer?.imageName" alt="Trainer Image">
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{trainer.firstName}} <span class="text-orange-500" >{{trainer.lastName}}</span></h5>
+                    </a>
+                    <p class="mb-3 font-normal text-center text-gray-700 dark:text-gray-400">{{trainer.qualifications}}</p>
+                   <div class="flex justify-center" >
+                    <app-button [routerLink]="['/user/viewTrainer',trainer?.id]" name="View Deatils" shade="D" ></app-button>
+                   </div>
+                </div>
+            </div>
+        </div>
+            <app-pagination
+                [totalItems]="proTrainers.length"
+                [itemsPerPage]="itemsPerPage" 
+                [currentPage]="currentPage" 
+                (pageChanged)="changePage($event)"
+            ></app-pagination>
+            
+     </div>            
+    </section>
+    <app-footer></app-footer>
+</body>

@@ -1,0 +1,74 @@
+<body class="bg-gray-100">
+
+    <app-header class="fixed w-full top-0 z-50"></app-header>
+
+    <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex flex-col items-center justify-center min-h-screen ">       
+
+        <!-- Select Goals Modal -->
+        <div id="select-modal" tabindex="-1" aria-hidden="true" class="w-full max-w-md rounded-2xl bg-black">
+            <div class="bg-black rounded-lg shadow-lg border border-orange-500 p-6">
+                <h2 class="text-4xl font-bold mb-4 text-center text-orange-500">Set Your Goals</h2>
+                <p class="text-green-800 mb-4 text-center">Your current BMI is {{ userBMI }}</p>
+                <div *ngIf="selectedWeight" class="p-2 mt-2">
+                    <p class="text-white text-center text-2xl"> 
+                      
+                      <span *ngIf="selectedWeight > currentWeight" class="text-white">Gain {{ (selectedWeight - currentWeight).toFixed(1) }} kg </span>
+                      <span *ngIf="selectedWeight < currentWeight" class="text-white">Loss {{ (currentWeight - selectedWeight).toFixed(1) }} kg </span>
+                    </p>
+                  </div>
+                  
+                <div *ngIf="showMessage" [ngClass]="{'bg-green-200': isWithinRange(), 'bg-red-200': !isWithinRange()}" class="m-3 px-4 py-2 rounded-md">
+                    {{ warningMessage }}
+                </div>
+        
+                <div class="mb-4">
+                    <label for="target-weight" class="block text-gray-500 mb-2">Target Weight</label>
+                    <p *ngIf="selectedWeight" class="text-white bg-gray-800 rounded-md m-2 px-4 py-2">{{ selectedWeight }} kg</p>
+                    <div class="relative overflow-y-auto max-h-40 bg-gray-900 text-white rounded-md">
+                        <ul class="p-2">
+                            <li *ngFor="let weight of weights" 
+                                (click)="validateWeight(weight)" 
+                                [class.disabled]="weight < currentWeight && selectedGoal === 'gain'" 
+                                [class.disabled]="weight > currentWeight && selectedGoal === 'lose'"
+                                class="cursor-pointer hover:bg-orange-600 px-4 py-2"
+                            >
+                                {{ weight }} kg
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="goal" class="block text-gray-500 mb-2">Goal</label>
+                    <select id="goal" name="goal" 
+                            class="w-full bg-gray-200 border border-gray-300 rounded-md px-4 py-2 custom-dropdown" 
+                            [(ngModel)]="selectedGoal"
+                    >
+                        <option value="*">Select an option</option>
+                
+                        <option value="gain" [disabled]="selectedWeight < currentWeight">Weight Gain</option>
+                        <option value="lose" [disabled]="selectedWeight > currentWeight">Weight Loss</option>
+                    </select>
+                </div>
+                
+        
+                <button 
+                class="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 rounded-md transition duration-300" 
+                [disabled]="!selectedWeight || !selectedGoal || !isWithinRange()" 
+                (click)="track()" 
+                
+              >
+                Track
+              </button>
+              
+            </div>
+        </div>
+        
+
+        
+        
+    </section>
+
+    <app-footer></app-footer>
+
+</body>

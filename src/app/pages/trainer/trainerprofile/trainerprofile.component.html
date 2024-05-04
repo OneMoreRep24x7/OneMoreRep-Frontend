@@ -1,0 +1,61 @@
+<body>
+    <app-header  class="fixed top-0 w-full z-50"></app-header>
+    <main class="min-h-screen flex flex-col items-center justify-center px-5 pb-24 lg:pb-16">
+        
+
+          
+        <section class="container mt-48 w-fit md:w-[500px] lg:w-[800px] rounded-lg bg-black border border-orange-500 shadow-md p-8 text-center">
+            
+            <div class="flex justify-center">
+                <div class="flex flex-col items-center justify-center">
+                    <ng-container *ngIf="!trainer.imageName">
+                        <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class=" text-orange-500 w-40 h-40">
+                          <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                        </svg>
+                        
+                      </ng-container>
+                      
+                      <ng-container *ngIf="trainer.imageName">
+                        <img class="h-40 w-40 md:h-52 md:w-52 rounded-full object-cover" loading="lazy" alt="Profile Picture" [src]="trainer.imageName" />
+                      </ng-container>
+        
+                    <h2 class="text-4xl mt-4 font-bold text-white">{{trainer.firstName}} <span class="text-orange-500">{{trainer.lastName}}</span></h2>
+                    <p class="text-gray-500 text-lg mt-2 mb-6">{{trainer.qualifications}}</p>
+                    <div class="flex justify-center gap-6">
+                        <div>
+                            <span class="text-4xl font-bold text-orange-500">{{trainer.clients}}</span>
+                            <p class="text-gray-500 text-sm">Clients</p>
+                        </div>
+                        <div>
+                            <span class="text-4xl font-bold text-orange-500">{{trainer.slots}}</span>
+                            <p class="text-gray-500 text-sm">Slots</p>
+                        </div>
+                    </div>
+                   
+                </div>
+            
+            </div>
+            <div class="m-2 flex justify-end">
+                <app-button *ngIf="trainer.qualifications" (click)="edit()" name="Edit Profile" size="M" shade="D"></app-button>
+    
+                <app-button *ngIf="trainer.qualifications === null" (click)="add()" name="Add Profile" size="M" shade="D"></app-button>
+            </div>
+            
+            <h1 class="text-4xl font-semibold text-gray-300 m-4">Certifications</h1>
+            <div class="grid grid-cols-1 gap-4">
+               <app-carousel [images]="images"></app-carousel>
+            </div>
+            
+            <button (click)="openCertificateModal()" class="mt-8 bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition duration-300 focus:outline-none">Add Certificates</button>
+
+            <app-certificate-modal (uploadAndCloseModalEvent)="onUploadAndCloseModal($event)"></app-certificate-modal>
+
+        </section>
+    </main>
+    
+    <app-footer></app-footer>
+    
+      
+    
+</body>
+

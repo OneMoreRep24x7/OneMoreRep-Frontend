@@ -1,0 +1,61 @@
+
+<body>
+    <app-header class="fixed top-0 w-full z-50"></app-header>
+    <section >
+        <div class="container pt-48 flex justify-center items-center min-h-screen bg-gray-950">
+            <form class="form bg-black rounded-lg shadow-md p-6 max-w-full w-full lg:w-7xl relative">
+                <div class="absolute">
+                    <label for="profile-pic" class="border border-orange-500 block cursor-pointer rounded-full overflow-hidden mr-2  h-32 w-32">
+                        <img src="https://imgs.search.brave.com/xC4krvX7PjzBA5wv_1Ttk3zQHtqodJ0tkR7HRnnEujo/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZnJlZWltYWdl/cy5jb20vaW1hZ2Uv/cHJldmlld3MvYjNm/L2luc3RhLXByb2Zp/bGUtaWNvbi1wbmct/NTY5MDM4OS5wbmc_/Zm10" alt="Profile Picture" class="object-cover h-full w-full rounded-full">
+                        <input type="file" id="profile-pic" name="profile-pic" accept="image/*" class="hidden">
+                    </label>
+                </div>
+                
+                <h2 class="text-3xl font-semibold text-orange-500 text-center">Profile</h2>
+                <h3 class="text-sm text-gray-300 text-center mb-4">Can be edited later</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 py-20">
+                    <div class="flex flex-col">
+                        <label for="name" class="font-bold text-orange-500 mb-2">Name:</label>
+                        <input type="text" id="name" name="name" class=" rounded-md px-3 py-2 focus:outline-none bg-gray-500 focus:ring-1 focus:ring-orange-500">
+                        <label for="gender" class="font-bold text-gray-700 mt-4 mb-2">Gender:</label>
+                        <input type="text" id="gender" name="gender" class="border rounded-md px-3 py-2 focus:outline-none  bg-gray-500  focus:ring-1 focus:ring-orange-500">
+                        <label for="phone" class="font-bold text-gray-700 mt-4 mb-2">Phone number:</label>
+                        <input type="tel" id="phone" name="phone" class="border rounded-md px-3 py-2 focus:outline-none  bg-gray-500  focus:ring-1 focus:ring-orange-500">
+                        <label for="email" class="font-bold text-gray-700 mt-4 mb-2">Email:</label>
+                        <input type="email" id="email" name="email" class="border rounded-md px-3 py-2 focus:outline-none  bg-gray-500  focus:ring-1 focus:ring-orange-500">
+                        <label for="age" class="font-bold text-gray-700 mt-4 mb-2">Age:</label>
+                        <input type="number" id="age" name="age" class="border rounded-md px-3 py-2 focus:outline-none  bg-gray-500  focus:ring-1 focus:ring-orange-500">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="activity" class="font-bold text-gray-700 mb-2">Daily Activity:</label>
+                        <input type="text" id="activity" name="activity" class="border rounded-md px-3 py-2 focus:outline-none  bg-gray-500  focus:ring-1 focus:ring-blue-500">
+                        <label for="conditions" class="font-bold text-gray-700 mt-4 mb-2">Medical Conditions:</label>
+                        <input type="text" id="conditions" name="conditions" class="border rounded-md px-3 py-2 focus:outline-none  bg-gray-500  focus:ring-1 focus:ring-blue-500">
+                        <label for="height" class="font-bold text-gray-700 mt-4 mb-2">Height:</label>
+                        <input type="text" id="height" name="height" class="border rounded-md px-3 py-2 focus:outline-none  bg-gray-500  focus:ring-1 focus:ring-blue-500">
+                        <label for="weight" class="font-bold text-gray-700 mt-4 mb-2">Current Weight:</label>
+                        <input type="text" id="weight" name="weight" class="border rounded-md px-3 py-2 focus:outline-none  bg-gray-500  focus:ring-1 focus:ring-blue-500">
+                        <label for="target-weight" class="font-bold text-gray-700 mt-4 mb-2">Target Weight:</label>
+                        <input type="text" id="target-weight" name="target-weight" class="border rounded-md px-3 py-2  bg-gray-500  focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    </div>
+                </div>
+                <app-button name="Save" shade="D"  size="M"></app-button>
+            </form>
+        </div>
+        
+   </section>
+   
+   
+   
+   
+ 
+      
+   <app-footer></app-footer>
+   
+ 
+   </body>
+ 
+ 
+
+
+

@@ -1,0 +1,59 @@
+<body>
+  <app-header class="fixed top-0 w-full z-50"></app-header>
+
+  <section class="pt-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center">
+    
+      <div class="w-full sm:w-3/4 bg-gray-900 p-4 rounded-lg">
+        <div class="chat-window bg-black rounded-lg shadow-lg">
+          <!-- Chat Header -->
+          <div class="flex items-center p-4">
+            <div class="relative">
+              <img class="w-[80px] h-[80px] rounded-full object-cover" [src]="trainer?.imageName" alt="Avatar">
+            </div>
+            <div class="ml-4">
+              <div class="font-semibold text-white text-xl">
+                {{ trainer?.firstName }} <span class="text-orange-500">{{ trainer?.lastName }}</span>
+              </div>
+              <div class="text-sm text-gray-600 flex items-center">
+                <span class="mr-1">{{ currentDate | date: 'MMM d, y' }}</span>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Chat History -->
+          <div class="chat-history p-4 overflow-y-auto min-h-[300px]" style="max-height: 60vh;">
+            <div *ngFor="let message of chatMessages">
+              <div class="flex" [ngClass]="{'justify-end': message.sender === user?.id, 'justify-start': message.sender !== user?.id}">
+                <div 
+                  [ngClass]="{
+                    'bg-gradient-to-r from-orange-500 to-orange-300 text-white': message.sender === user?.id,
+                    'bg-white text-gray-800 border border-orange-200': message.sender !== user?.id
+                  }" 
+                  class="p-3 rounded-lg max-w-md m-2"
+                >
+                  <p class="text-sm">{{ message.content }}</p>
+                  <p class="text-xs text-right">{{ message.timestamp | date: 'shortTime' }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+  
+          <!-- Chat Input -->
+          <div class="chat-input flex items-center p-4">
+            <input 
+              type="text" 
+              [(ngModel)]="messageContent" 
+              class="w-full py-2 px-3 mr-2 bg-gray-200 rounded-lg focus:outline-none" 
+              placeholder="Type your message..."
+            >
+            <button class="bg-orange-500 text-white py-2 px-4 rounded-lg" (click)="sendMessage()">Send</button>
+          </div>
+        </div>
+      </div>
+   
+  </section>
+  
+
+  <app-footer></app-footer>
+</body>

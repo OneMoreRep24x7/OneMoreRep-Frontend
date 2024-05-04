@@ -1,0 +1,68 @@
+<body>
+    <app-header class="fixed top-0 w-full z-50"></app-header>
+    
+    <section class="container lg:pt-48 pt-[150px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 ">
+      
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 ">
+            <!-- Card 1: Calorie Tracking -->
+            <div class="bg-gradient-to-tr from-orange-500 to-orange-600 rounded-lg shadow-lg text-white card">
+                <div class="p-6 text-center">
+                    <img src="assets/images/food-tracking.webp" class="w-24 h-24 mx-auto mb-6 rounded-full" alt="Food Tracking Image">
+                    <h5 class="text-xl font-bold mb-2">Eat up to 2000 <span class="text-yellow-200">Calories</span></h5>
+                    <p class="text-sm">Hurry up, you have 2000 calories left.</p>
+                </div>
+                <div (click)="trackCaloriesEaten()" class="cursor-pointer flex justify-center items-center p-4 bg-gradient-to-b from-orange-600 to-orange-700 rounded-b-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-200">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </div>
+            </div>
+    
+            <!-- Card 2: Workout Tracking -->
+            <div class="bg-gradient-to-tr from-purple-500 to-purple-600 rounded-lg shadow-lg text-white card">
+                <div class="p-6 text-center">
+                    <img src="assets/images/workout.png" class="w-24 h-24 mx-auto mb-6 rounded-full" alt="Workout Image">
+                    <h5 class="text-xl font-bold mb-2">Track Your <span class="text-yellow-200">Workout</span></h5>
+                    <p class="text-sm">Burning your calories helps you get fitter and healthier.</p>
+                </div>
+                <div (click)="trackCaloriesBurned()" class=" cursor-pointer flex justify-center items-center p-4 bg-gradient-to-b from-purple-600 to-purple-700 rounded-b-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-200">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </div>
+            </div>
+    
+            <!-- Card 3: Water Intake -->
+            <div class="bg-gradient-to-tr from-blue-500 to-blue-600 rounded-lg shadow-lg text-white card">
+                <div class="p-6 text-center">
+                    <img src="assets/images/water-tracking.png" class="w-24 h-24 mx-auto mb-6 rounded-full" alt="Water Intake Image">
+                    <h5 class="text-xl font-bold mb-2">Drink 10 glasses of <span class="text-yellow-200">Water</span></h5>
+                    <p class="text-sm">Stay hydrated!</p>
+                </div>
+                <div (click)="trackWaterIntake()" class=" cursor-pointer flex justify-center items-center p-4 bg-gradient-to-b from-blue-600 to-blue-700 rounded-b-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-200">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </div>
+            </div>
+    
+            <!-- Card 4: Weight Tracking -->
+            <div class="bg-gradient-to-tr from-green-500 to-green-600 rounded-lg shadow-lg text-white card">
+                <div class="p-6 text-center">
+                    <img src="assets/images/weight-scale.png" class="w-24 h-24 mx-auto mb-6 rounded-full" alt="Weight Tracking Image">
+                    <h5 class="text-xl font-bold mb-2">Track Your <span class="text-yellow-200">Weight</span></h5>
+                    <p class="text-sm">Monitoring your weight helps you stay on track with your fitness goals.</p>
+                </div>
+                <div (click)="trackWeight()" class=" cursor-pointer flex justify-center items-center p-4 bg-gradient-to-b from-green-600 to-green-700 rounded-b-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-yellow-200">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <app-footer></app-footer>
+</body>

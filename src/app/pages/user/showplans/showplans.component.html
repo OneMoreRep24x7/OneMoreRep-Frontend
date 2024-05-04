@@ -1,0 +1,42 @@
+<body class="bg-gray-100">
+  <app-header  class="fixed top-0 w-full z-50"></app-header>
+  <div class="pt-48 flex justify-center bg-cover bg-center bg-no-repeat " style="background-image: url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+    <section class=" mb-32 bg-cover bg-center bg-no-repeat rounded-xl shadow-xl max-w-md" style="padding-top: 6rem; padding-bottom: 6rem;">
+          <form [formGroup]="planForm" (ngSubmit)="onSubmit()" class="p-6">
+              <h1 class="text-3xl text-center font-bold text-orange-500 mb-4">Choose Your Plan</h1>
+              <div class="grid grid-cols-2 gap-4">
+                  <div class="w-full lg:w-[200px]">
+                      <button type="button" class="w-full p-4 bg-gray-500 text-white rounded-lg hover:bg-gray-600" (click)="selectPlan('Super Plan')"  [class.selected]="planForm.get('selectedPlan').value === 'Super Plan'">
+                          <div class="grid grid-cols-1 gap-2">
+                              <div class="text-white font-semibold">Super Plan</div>
+                              <div>
+                                  <sup class="text-white">₹</sup>
+                                  <span class="text-white text-lg font-bold">149</span>
+                                  <span class="text-white">/1 Month</span>
+                              </div>
+                          </div>
+                      </button>
+                  </div>
+                  <div class="w-full lg:w-[200px]">
+                      <button type="button" class="w-full p-4 bg-gray-500 text-white rounded-lg hover:bg-gray-600" (click)="selectPlan('premium plan')"  [class.selected]="planForm.get('selectedPlan').value === 'premium plan'">
+                          <div class="grid grid-cols-1 gap-2">
+                              <div class="text-white font-semibold">Premium Plan</div>
+                              <div>
+                                  <sup class="text-white">₹</sup>
+                                  <span class="text-white text-lg font-bold">800</span>
+                                  <span class="text-white">/6 Months</span>
+                              </div>
+                          </div>
+                      </button>
+                  </div>
+              </div>
+              <div class="mt-6">
+                  <button type="submit" class="w-full p-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700">
+                      <span class="font-semibold">{{ buttonText }}</span>
+                  </button>
+              </div>
+          </form>
+      </section>
+  </div>
+  <app-footer></app-footer>
+</body>

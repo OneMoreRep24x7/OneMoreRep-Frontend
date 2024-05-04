@@ -1,0 +1,10 @@
+body {
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+.card:hover {
+    transform: scale(1.15);
+    transition: transform 0.3s ease;
+}

@@ -1,0 +1,168 @@
+<nav class="absolute w-full top-0 left-0 h-screen z-50 {{ isSideBarShowing ? 'flex' : 'hidden' }}">
+    <div class="bg-black w-full md:max-w-sm shadow-2xl">
+        <div class="flex justify-end text-white p-5">
+            <svg (click)="closeSideBar()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+        </div>
+        <div>
+            <div class="mt-3"><app-phone></app-phone></div>
+            <div class="mt-3"><app-email></app-email></div>
+
+            
+            <ng-container *ngIf="!isLoggedIn(); else authLinksTemplate">
+                <div class="mt-3">
+                    <app-auth-links></app-auth-links>
+                </div>
+            </ng-container>
+            
+           
+            <ng-template #authLinksTemplate>
+                <!-- Check if the user is logged in -->
+                <div class="" *ngIf="isLoggedIn()">
+                  <!-- Conditional rendering based on userRole -->
+                  <div *ngIf="userRole !== 'ADMIN'; else adminTemplate">
+                    <!-- User Image with Dropdown -->
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 rounded-full p-2" (click)="toggleDropdown()">
+                            <ng-container *ngIf="user?.imageName">
+                                <img [src]="user?.imageName" alt="User Image" class="rounded-full w-16 h-16" />
+                            </ng-container>
+                            <ng-container *ngIf="!user?.imageName">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-orange-500 ">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                  </svg>
+                                  
+                            </ng-container>
+                        </button>
+                        
+              
+                      <!-- Dropdown Menu -->
+                      <div
+                        *ngIf="isDropdownOpen"
+                        class="absolute top-10 right-0 w-48 bg-white rounded-lg shadow-lg transition-transform transform"
+                        [class.scale-100]="isDropdownOpen"
+                        [class.scale-95]="!isDropdownOpen"
+                      >
+                        <a
+                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+                          (click)="navigateToProfile(); toggleDropdown()"
+                        >
+                          Profile
+                        </a>
+                        <a
+                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+                          (click)="logout(); toggleDropdown()"
+                        >
+                          Logout
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <!-- If userRole is ADMIN, show a simple logout button -->
+                  <ng-template #adminTemplate>
+                    <div class="mt-6 flex justify-center">
+                      <app-button name="Logout" (click)="logout()"></app-button>
+                    </div>
+                  </ng-template>
+                </div>
+              </ng-template>
+              
+              
+           
+            <div class="mt-6">
+                <ng-container *ngIf="userRole === 'TRAINER'; else adminMenu">
+                    <app-trainer-menu></app-trainer-menu>
+               </ng-container>
+               <ng-template #adminMenu>
+                   <ng-container *ngIf="userRole === 'ADMIN'; else userMenu">
+                       <app-admin-menu></app-admin-menu>
+                   </ng-container>
+                   <ng-template #userMenu>
+                       <app-menu></app-menu>
+                   </ng-template>
+               </ng-template>
+            </div>
+            <div class="mt-6">
+                <app-social-links></app-social-links>
+            </div>
+        </div>
+    </div>
+    <div (click)="closeSideBar()" class="bg-gray-900 opacity-75 hidden md:block md:w-full"></div>
+</nav>
+
+<header class="absolute w-full">
+    <div class="bg-gray-800 hidden lg:block">
+        <div class="container  text-white py-2">
+            <ul class="flex justify-between">
+                <li>Track your daily <span class="text-orange-500">Calories</span></li>
+                <li>
+                    <img src="assets/shapes/shape-1.webp" alt="">
+                </li>
+                <li >
+
+                <app-phone></app-phone>
+                      
+                </li>
+                <li class="flex gap-2">
+                <app-email></app-email>
+
+                </li>
+                <li>
+                    <img src="assets/shapes/shape-2.webp" alt="">
+                </li>
+                <li class="flex">
+                    <app-social-links></app-social-links>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    
+   <div class=" px-5 {{isMenuScrolled?'fixed top-0 w-full bg-black shadow-xl animate-slideInDown animate-faster ':'pt-5'}}">
+    <div class=" flex items-center justify-between container {{isMenuScrolled?'border-b':'border bg-black'}}  border-orange-500  rounded-xl ">
+        <a [routerLink]="userRole === 'ADMIN' ? '/admin' : (userRole === 'TRAINER' ? '/trainer' : '/user')">
+            <img src="assets/images/logo.png" class="w-[110px] h-[110px]" alt="">
+        </a>
+        
+        <div class="text-white lg:hidden">
+            <svg (click)="openSideBar()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+              
+        </div>
+        <div class="mt-6 hidden lg:block">
+            <ng-container *ngIf="userRole === 'TRAINER'; else adminMenu">
+                 <app-trainer-menu></app-trainer-menu>
+            </ng-container>
+            <ng-template #adminMenu>
+                <ng-container *ngIf="userRole === 'ADMIN'; else userMenu">
+                    <app-admin-menu></app-admin-menu>
+                </ng-container>
+                <ng-template #userMenu>
+                    <app-menu></app-menu>
+                </ng-template>
+            </ng-template>
+        </div>
+        
+        <div class="mt-6 hidden lg:block">
+        <ng-container *ngIf="!isLoggedIn(); else authLinksTemplate">
+            <div class="mt-3">
+                <app-auth-links class="hidden lg:block"></app-auth-links>
+            </div>
+        </ng-container>
+        
+       
+        <ng-template #authLinksTemplate>
+          
+            <div class="mt-6 flex justify-center "   *ngIf="isLoggedIn()">
+                <app-button class="hidden lg:block" name="Logout" shade="W" (click)="logout()"></app-button>
+            </div>
+        </ng-template>
+        </div>
+    
+       
+    </div>
+   </div>
+</header>

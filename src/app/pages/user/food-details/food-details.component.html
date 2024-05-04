@@ -1,0 +1,63 @@
+<body class="bg-gray-900 text-white">
+    <app-header class="fixed top-0 w-full z-50"></app-header>
+
+    <section class="py-48 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex justify-center items-center">
+        <div class="w-full max-w-3xl bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-orange-500">
+            <!-- Food image with hover effect and gradient overlay -->
+            <div class="relative h-64 overflow-hidden">
+                <img
+                    class="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+                    [src]="food.imageUrl" alt="Food Image" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black to-transparent opacity-60"></div>
+                <div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-gradient-to-t from-black to-transparent">
+                    <h2 class="text-white text-3xl font-bold">{{ food.name }}</h2>
+                </div>
+            </div>
+
+            <!-- Food details with smooth transitions -->
+            <div class="p-8 flex flex-col gap-4">
+                <div class="text-gray-400 transition duration-300 hover:text-orange-400">
+                    <span class="font-semibold text-xl">Description:</span>
+                    <span class="text-white ml-2">{{ food.description }}</span>
+                </div>
+
+                <div class="text-gray-400 transition duration-300 hover:text-orange-400">
+                    <span class="font-semibold text-xl">Category:</span>
+                    <span class="text-white ml-2">{{ food.category }}</span>
+                </div>
+
+                <!-- Dropdown for selecting variants -->
+                <div class="flex flex-col">
+                    <label class="font-semibold text-xl text-gray-400 mb-2">Variants:</label>
+                    <select
+                        class="p-2 bg-gray-700 border border-gray-600 rounded-lg text-white transition duration-300 hover:border-orange-500"
+                        (change)="onVariantSelect($event)">
+                        <option value="" disabled selected>Select a variant...</option>
+                        <option *ngFor="let variant of food.variants" [value]="variant.id">
+                            {{ variant.quantity }} {{ variant.unit }}
+                        </option>
+                    </select>
+
+                    <!-- Selected variant details with grid layout -->
+                    <div *ngIf="selectedVariant" class="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-700 text-white">
+                        <h3 class="font-bold text-lg text-orange-400">Nutrient Information:</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><strong>Calories:</strong> {{ selectedVariant.calories }}</div>
+                            <div><strong>Carbs:</strong> {{ selectedVariant.carbs }}</div>
+                            <div><strong>Fat:</strong> {{ selectedVariant.fat }}</div>
+                            <div><strong>Fiber:</strong> {{ selectedVariant.fiber }}</div>
+                            <div><strong>Protein:</strong> {{ selectedVariant.protein }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action button with hover effect -->
+                <div class="flex justify-end gap-2 mt-4">
+                    <app-button (click)="addFoodToTracking()" name="Add" shade="D"></app-button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <app-footer></app-footer>
+</body>
