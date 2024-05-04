@@ -26,7 +26,7 @@
                         <app-button (click)="addDiet()" name="Add Daily Diet" shade="D"></app-button>
                     </div>
                 </div>
-                <div class="flex flex-col px-6 py-4">
+                <div *ngIf="dailyDiets" class="flex flex-col px-6 py-4">
                     <div class="overflow-x-auto">
                         <!-- Table to Display Workout Patterns -->
                         <table class="min-w-max w-full table-auto rounded-xl shadow-md overflow-hidden border divide-y divide-gray-200">

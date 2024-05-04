@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { PlanService } from '../../../services/plan.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../../model/user.model';
+import { UserService } from '../../../services/user.service';
+import { TrainerService } from '../../../services/trainer.service';
 
 @Component({
   selector: 'app-add-dietplans',
@@ -13,6 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddDietplansComponent implements OnInit{
   trainer:Trainer|null;
   trainerId:string|null;
+  user:User|null;
   userId:string|null;
   visible:boolean = false;
   dailyDiets: any[] = [];
@@ -26,7 +30,9 @@ export class AddDietplansComponent implements OnInit{
     private route:ActivatedRoute,
     private planService:PlanService,
     private toster:ToastrService,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private userService:UserService,
+    private trainerService:TrainerService
   ){
 
   }
@@ -46,6 +52,8 @@ export class AddDietplansComponent implements OnInit{
     searchQuery: ['']
   });
    this.getAllDailyDiets();
+   this.getUserDetails();
+   this.getTrainerDetails();
   }
   getAllDailyDiets(){
     this.planService.getAllDailyDiets().subscribe(
@@ -56,6 +64,22 @@ export class AddDietplansComponent implements OnInit{
       }
     )
   }
+  getUserDetails(){
+    this.userService.getUserDetails(this.userId).subscribe(
+      (response)=>{
+        this.user = response;
+      }
+    )
+  }
+
+  getTrainerDetails(){
+    this.trainerService.getTrainerById(this.trainerId).subscribe(
+      (response)=>{
+        this.trainer = response.trainer;
+      }
+    )
+  }
+
   searchDailydiets(): void {
     const keyword = this.dietForm.get('searchQuery')?.value.trim().toLowerCase();
     if (keyword.trim() !== '') {
@@ -84,16 +108,25 @@ export class AddDietplansComponent implements OnInit{
       return;
    }
     if (this.dietForm.valid) {
+      const userFullName = `${this.user.firstName} ${this.user.lastName}`;
+      const trainerFullName = `${this.trainer.firstName} ${this.trainer.lastName}`;
+      const userEmail = this.user.email;
+      const userPhoneNumber = this.user.phone;
       const data = {
         userId: this.userId,
         trainerId: this.trainerId,
         startDate: this.dietForm.get('startDate').value,
         planName: this.dietForm.get('planName').value,
         repeat: this.dietForm.get('repeat').value,
-        dailyDiets: this.selectedDiets
+        dailyDiets: this.selectedDiets,
+        userFullName:userFullName,
+        trainerFullName:trainerFullName,
+        userEmail:userEmail,
+        userPhoneNumber:userPhoneNumber
       };
 
       console.log(data,">>>>>>>>>>>>>>>>>>>>>>");
+     
       this.planService.addDietPlans(data).subscribe(
         (response)=>{
           if(response.statusCode === 200){

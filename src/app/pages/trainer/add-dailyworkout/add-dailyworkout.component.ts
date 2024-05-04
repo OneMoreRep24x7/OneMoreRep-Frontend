@@ -54,6 +54,7 @@ export class AddDailyworkoutComponent implements OnInit {
 
   closeModal(): void {
     this.visible = false;
+    this.selectedWorkouts = []
   }
 
   canAddWorkout(workout: any): boolean {

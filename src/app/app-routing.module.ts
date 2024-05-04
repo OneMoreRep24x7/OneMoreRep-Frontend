@@ -4,6 +4,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { OtpComponent } from './pages/auth/otp/otp.component';
 import { RoomComponent } from './pages/auth/room/room.component';
+import { AuthGuard } from './Guards/guards';
 
 
 
@@ -17,16 +18,16 @@ const routes: Routes = [
   { path: 'room/:roomId', component: RoomComponent },
   
   {
-     path: 'admin',
+     path: 'admin',canActivate: [AuthGuard],
       loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
   { 
-    path: 'user',
+    path: 'user',canActivate: [AuthGuard],
      loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule) 
     },
     { path: '', redirectTo: '/user', pathMatch: 'full' },
   
   {
-     path: 'trainer',
+     path: 'trainer', canActivate: [AuthGuard],
       loadChildren: () => import('./pages/trainer/trainer.module').then(m => m.TrainerModule) },
   
 ];

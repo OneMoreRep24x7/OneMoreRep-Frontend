@@ -83,35 +83,20 @@ export class AuthService {
 
 
   setAccessToken(token:string){
-    localStorage.setItem(this._ACCESS_TOKEN_KEY,token)
+    sessionStorage.setItem(this._ACCESS_TOKEN_KEY,token)
   }
   setRefreshToken(token:string){
-    localStorage.setItem(this._REFRESH_TOKEN_KEY,token);
+    sessionStorage.setItem(this._REFRESH_TOKEN_KEY,token);
   }
 
   getAccessToken():string | null {
-    return localStorage.getItem (this._ACCESS_TOKEN_KEY);
+    return sessionStorage.getItem (this._ACCESS_TOKEN_KEY);
   }
   getRefreshToken():string | null{
-    return localStorage.getItem(this._REFRESH_TOKEN_KEY)
+    return sessionStorage.getItem(this._REFRESH_TOKEN_KEY)
   }
 
 
 
-  getMessage():Observable<any>{
-    return this.http.get(TEST_URL+"/hello",{
-      headers:this.createAuthorizationHeader()
-    })
-  }
-  private createAuthorizationHeader() {
-    const jwtToken = localStorage.getItem("JWT");
-    if(jwtToken){
-      return new HttpHeaders().set(
-        'Authorization','Bearer '+jwtToken
-      )
-    }else{
-      console.log("JWT token not found in the local storage")
-    }
-    return null;
-  }
+ 
 }

@@ -10,7 +10,7 @@ import { TrainerService } from '../../../services/trainer.service';
 export class ShowtrainersComponent implements OnInit{
   itemsPerPage = 3;
   currentPage = 1;
-  proTrainers:Trainer[] | null;
+  proTrainers:Trainer[] | null = [];
   searchText:string|null;
 
   constructor(private trainerService:TrainerService){}

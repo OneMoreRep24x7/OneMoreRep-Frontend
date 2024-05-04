@@ -16,7 +16,7 @@
                   </svg>
                 </button>
               </div>
-             <div class="flex justify-center flex-wrap gap-4 mt-4">
+             <div *ngIf="proTrainers.length > 0" class="flex justify-center flex-wrap gap-4 mt-4">
               <div class="max-w-sm bg-black rounded-2xl shadow border hover:border-orange-500" *ngFor="let trainer of paginatedData">
                 <img class="lg:w-[300px] lg:h-[300px] object-contain" [src]="trainer?.imageName" alt="Trainer Image">
                 <div class="p-5">

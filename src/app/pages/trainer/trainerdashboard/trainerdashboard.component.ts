@@ -1,11 +1,23 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { CommonState } from '../../../store/common/common.state';
+import { setLoadingSpinner } from '../../../store/common/common.action';
 
 @Component({
   selector: 'app-trainerdashboard',
   templateUrl: './trainerdashboard.component.html',
   styleUrl: './trainerdashboard.component.scss'
 })
-export class TrainerdashboardComponent {
+export class TrainerdashboardComponent implements AfterViewInit  {
+ 
+  constructor(   private store: Store<CommonState>){
+
+  }
+
+  ngAfterViewInit(): void {
+    this.store.dispatch(setLoadingSpinner({status:false}))
+    
+  }
   logoText:String = "Trainer"
   logoIcon:String = "T"
   navbarData = [

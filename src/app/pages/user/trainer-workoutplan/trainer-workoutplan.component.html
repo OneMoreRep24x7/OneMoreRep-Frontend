@@ -56,8 +56,9 @@
                     (click)="playWorkoutVideo(workout.videoUrl)"
                   >
                     <span class="flex items-center gap-2">
-                      <span class="w-3 h-3 bg-orange-500 rounded-full"></span>
-                      {{ workout.name }} - {{ workout.description }}
+                      <span class="w-3 h-3 bg-orange-500 rounded-full"></span>  
+                      
+                      {{ workout.name }} - (  <span class="text-green-500" > {{workout.durationMinutes}} mintues x {{workout.caloriesBurned}} calories </span> )
                     </span>
                     <i class="fas fa-angle-right text-gray-400 hover:text-orange-500"></i>
                   </li>

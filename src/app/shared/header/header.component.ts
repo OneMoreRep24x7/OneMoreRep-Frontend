@@ -67,6 +67,7 @@ export class HeaderComponent implements OnInit {
     // Clear user data from session storage
     sessionStorage.removeItem('user');
     localStorage.clear();
+    sessionStorage.clear()
     // Redirect to the login page or any other appropriate page
     this.router.navigate(['/login']);
   }

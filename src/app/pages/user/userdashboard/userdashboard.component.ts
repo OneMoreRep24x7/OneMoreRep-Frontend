@@ -6,6 +6,9 @@ import { TrackingDetails, User } from '../../../model/user.model';
 import { UserService } from '../../../services/user.service';
 import {  ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { CommonState } from '../../../store/common/common.state';
+import { setLoadingSpinner } from '../../../store/common/common.action';
 
 @Component({
   selector: 'app-userdashboard',
@@ -27,7 +30,8 @@ export class UserdashboardComponent implements OnInit{
               private trainerService:TrainerService,
               private userService:UserService,
               private toster:ToastrService,
-              private router:Router){}
+              private router:Router,
+              private store: Store<CommonState>){}
 
   ngOnInit(): void {
     window.scrollTo(0, 0);  
@@ -49,6 +53,10 @@ export class UserdashboardComponent implements OnInit{
       this.getTrackingDetails();
    
   }
+  ngAfterViewInit(): void {
+    this.store.dispatch(setLoadingSpinner({status:false}))
+    
+  }
   getTrackingDetails(){
     this.userService.getTrackingDetails(this.userId).subscribe(
       (respone)=>{
@@ -60,14 +68,6 @@ export class UserdashboardComponent implements OnInit{
    }
  
 
-  getMessage(){
-    this.service.getMessage().subscribe(
-      (response)=>{
-           this.message = response.message;
-           console.log(this.message)
-      }
-    )
-  }
   checkStatus(){
       if(this.user === null){
         this.router.navigateByUrl("/login")

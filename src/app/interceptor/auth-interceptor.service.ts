@@ -12,7 +12,6 @@ import { AuthService } from '../services/auth.service';
 import { Store } from '@ngrx/store';
 import { CommonState } from '../store/common/common.state';
 import { setLoadingSpinner } from '../store/common/common.action';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -52,6 +51,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           if (accessToken) {
             // Update the access token in the service
             this.service.setAccessToken(accessToken);
+            
             apiRequest = apiRequest.clone({
               setHeaders: {
                 Authorization: `Bearer ${accessToken}`,
@@ -85,6 +85,5 @@ export class AuthInterceptorService implements HttpInterceptor {
         this.store.dispatch(setLoadingSpinner({ status: false }));
       })
     );
-    
   }
 }

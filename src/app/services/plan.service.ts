@@ -14,7 +14,7 @@ declare var Razorpay:any;
   providedIn: 'root'
 })
 export class PlanService {
- 
+
   constructor(
     private http:HttpClient,
     private router:Router
@@ -118,7 +118,7 @@ export class PlanService {
     return this.http.get<any[]>("api/v1/plans/getAllDailyDiet")
   }
 
-  addDietPlans(data: { userId: string; trainerId: string; startDate: any; planName: any; repeat: any; dailyDiets: any[]; }):Observable<CommonResponse> {
+  addDietPlans(data: { userId: string; trainerId: string; startDate: any; planName: any; repeat: any; dailyDiets: any[];  userFullName: string; trainerFullName: string; userEmail: string; userPhoneNumber: string; }):Observable<CommonResponse> {
     return this.http.post<CommonResponse>("api/v1/plans/addDietPlan",data);
   }
   getDietPlan(data: { userId: string; trainerId: string; }):Observable<any[]> {
