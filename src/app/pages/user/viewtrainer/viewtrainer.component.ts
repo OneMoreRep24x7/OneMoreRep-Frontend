@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TrainerService } from '../../../services/trainer.service';
 import {  Trainer } from '../../../model/trainer.model';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 import { UserService } from '../../../services/user.service';
 import { PlanService } from '../../../services/plan.service';
 import { ToastrService } from 'ngx-toastr';

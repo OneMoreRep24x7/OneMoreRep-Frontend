@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Trainer } from '../../../model/trainer.model';
 import { TrainerService } from '../../../services/trainer.service';
-import { TrackingDetails, User } from '../../../model/user.model';
+import { TrackingDetails, User } from '../../../model/User.model';
 import { UserService } from '../../../services/user.service';
 import {  ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';

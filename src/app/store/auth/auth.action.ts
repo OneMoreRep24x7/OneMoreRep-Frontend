@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { LoginModel } from "../../model/auth.model";
-import { User } from "../../model/user.model";
+import { User } from "../../model/User.model";
 import { ProfileRequest } from "../../model/profile.model";
 
 export const LOGIN_REQUEST = '[Auth] Login User';

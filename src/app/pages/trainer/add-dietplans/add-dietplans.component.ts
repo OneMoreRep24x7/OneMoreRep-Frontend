@@ -4,9 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { PlanService } from '../../../services/plan.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../model/user.model';
+
 import { UserService } from '../../../services/user.service';
 import { TrainerService } from '../../../services/trainer.service';
+import { User } from '../../../model/User.model';
 
 @Component({
   selector: 'app-add-dietplans',

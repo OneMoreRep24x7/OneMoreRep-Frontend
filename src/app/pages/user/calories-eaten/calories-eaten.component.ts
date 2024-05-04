@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TrackingDetails, User } from '../../../model/user.model';
+import { TrackingDetails, User } from '../../../model/User.model';
 import { Food, FoodTrackingResponse, FoodTrackingResponses } from '../../../model/plan.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../services/user.service';

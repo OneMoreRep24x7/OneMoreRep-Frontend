@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Food } from '../../../model/plan.model';
 import { PlanService } from '../../../services/plan.service';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 

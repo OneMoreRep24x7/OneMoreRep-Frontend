@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 import { RegisterRequest } from '../../../model/auth.model';
 
 @Component({

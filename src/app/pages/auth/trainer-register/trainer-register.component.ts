@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterRequest } from '../../../model/auth.model';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 
 @Component({
   selector: 'app-trainer-register',

@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { ProfileRequest } from '../../../model/profile.model';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 import { UserService } from '../../../services/user.service';
 import { updateRequest } from '../../../store/auth/auth.action';
 import { AuthState } from '../../../store/auth/auth.state';

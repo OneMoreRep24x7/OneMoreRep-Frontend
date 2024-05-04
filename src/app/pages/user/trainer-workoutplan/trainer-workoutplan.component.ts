@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { PlanService } from '../../../services/plan.service';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../../../model/user.model';
+
 import { Trainer } from '../../../model/trainer.model';
 import { TrainerService } from '../../../services/trainer.service';
 import { DailyWorkout, Workout, WorkoutPlan, WorkoutPlanRequest } from '../../../model/plan.model';
+import { User } from '../../../model/User.model';
 
 @Component({
   selector: 'app-trainer-workoutplan',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 

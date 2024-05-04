@@ -4,7 +4,7 @@ import { ProfileRequest } from '../model/profile.model';
 import { Observable, tap } from 'rxjs';
 import { CommonResponse, EditResponse, LoginResponse } from '../model/auth.model';
 import { Route, Router } from '@angular/router';
-import { TrackingDetailsResponse, TragetWeightResponse, User } from '../model/user.model';
+import { TrackingDetailsResponse, TragetWeightResponse, User } from '../model/User.model';
 import { Trainer, TrainerProfileRequest, TrainerProfileResponse } from '../model/trainer.model';
 
 @Injectable({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 import { UserService } from '../../../services/user.service';
 function getWeekday(dateString: string): string {
   const date = new Date(dateString); // Create a Date object from the string

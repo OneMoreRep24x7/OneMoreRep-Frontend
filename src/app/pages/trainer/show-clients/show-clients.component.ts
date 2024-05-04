@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Trainer } from '../../../model/trainer.model';
 import { TrainerService } from '../../../services/trainer.service';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 import { Router } from '@angular/router';
 
 @Component({

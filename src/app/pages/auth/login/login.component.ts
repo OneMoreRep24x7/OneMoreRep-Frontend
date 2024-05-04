@@ -7,7 +7,7 @@ import { AuthState } from '../../../store/auth/auth.state';
 import { LoginModel } from '../../../model/auth.model';
 import { loginRequest } from '../../../store/auth/auth.action';
 import { Observable, switchMap, timer } from 'rxjs';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 import { selectError, selectUser } from '../../../store/auth/auth.selectors';
 import { CommunicationService } from '../../../services/communication.service';
 

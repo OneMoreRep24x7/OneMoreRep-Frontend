@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from '../../../services/communication.service';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 import { Trainer } from '../../../model/trainer.model';
 import { UserService } from '../../../services/user.service';
 import { ChatService } from '../../../services/chat.service';

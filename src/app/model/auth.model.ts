@@ -3,6 +3,7 @@ import { User } from "./User.model"
 
 
 
+
 export interface AuthRes {
    message:string,
    statusCode:number

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PlanService } from '../../../services/plan.service';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/User.model';
 
 @Component({
   selector: 'app-showplans',
