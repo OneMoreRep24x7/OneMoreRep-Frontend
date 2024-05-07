@@ -17,6 +17,7 @@ interface ChatMessage {
 export class ConnectComponent implements OnInit {
   trainer: Trainer;
   trainerId: string;
+  userId:string;
   chatRooms: any[] = [];
   selectedChatRoom: any = null;
   chatMessages: ChatMessage[] = [];
@@ -51,6 +52,13 @@ export class ConnectComponent implements OnInit {
 
   selectChatRoom(chatRoom: any): void {
     this.selectedChatRoom = chatRoom;
+    let chatRoomId = chatRoom.id;
+    let parts: string[] = chatRoomId.split('_');
+     this.userId  = parts[0];
+    
+    
+   
+
     if (this.selectedChatRoom) {
       this.communicationService.disconnect();
     }
@@ -68,7 +76,7 @@ export class ConnectComponent implements OnInit {
     this.communicationService.connect(`${chatRoom.id}`);
 
     // Load previous messages
-    this.chatService.getMessagesBetweenUsers(chatRoom.participants[1], this.trainerId).subscribe((messages) => {
+    this.chatService.getMessagesBetweenUsers(this.userId, this.trainerId).subscribe((messages) => {
       this.chatMessages = messages.map((msg) => ({
         sender: msg.senderId,
         content: msg.content,
@@ -94,13 +102,13 @@ export class ConnectComponent implements OnInit {
     if (this.messageContent.trim()) {
       const content = this.messageContent.trim();
       const senderId = this.trainerId;
-      const recipientId = this.selectedChatRoom.participants[1];
+      const recipientId = this.userId;
 
       // Send the message
       this.communicationService.sendPrivateMessage(
         senderId,
         recipientId,
-        `${senderId}_${recipientId}`,
+        `${recipientId}_${senderId}`,
         content
       );
 

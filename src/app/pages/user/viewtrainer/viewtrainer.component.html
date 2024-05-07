@@ -29,7 +29,7 @@
           <app-carousel [images]="images"></app-carousel>
         </div>
         <ng-container *ngIf="showBuyTrainerButton">
-          <app-button name="Connect Trainer" shade="D" size="M"></app-button>
+          <app-button (click)="connect()" name="Connect Trainer" shade="D" size="M"></app-button>
         </ng-container>
         
         <ng-container *ngIf="!showBuyTrainerButton">

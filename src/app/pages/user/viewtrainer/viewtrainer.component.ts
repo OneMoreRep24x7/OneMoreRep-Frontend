@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TrainerService } from '../../../services/trainer.service';
 import {  Trainer } from '../../../model/trainer.model';
 import { User } from '../../../model/User.model';
@@ -7,6 +7,8 @@ import { UserService } from '../../../services/user.service';
 import { PlanService } from '../../../services/plan.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommunicationService } from '../../../services/communication.service';
+import { ChatService } from '../../../services/chat.service';
+import { ChatUserRegisterRequest } from '../../../model/chat.modle';
 
 
 @Component({
@@ -32,6 +34,8 @@ export class ViewtrainerComponent {
     private userService:UserService,
     private planService:PlanService,
     private toaster:ToastrService,
+    private router:Router,
+    private chatService:ChatService
 
     ) { }
 
@@ -123,6 +127,24 @@ export class ViewtrainerComponent {
         this.showBuyTrainerButton = true;
       }
     }
+    registerChatUsers(){
+      const data:ChatUserRegisterRequest={
+        userId:this.userId,
+        trainerId:this.trainerId,
+        userFistName:this.user.firstName,
+        userLastName:this.user.lastName,
+        trainerFirstName:this.trainer.firstName,
+        trainerLastName:this.trainer.lastName
+      }
+      
+      
+      this.chatService.registerUser(data).subscribe(
+        (response)=>{
+          console.log(response,">>>>>>>>");
+          
+        }
+      )
+    }
 
     showSelectModal() {
       this.popUp = true;
@@ -136,6 +158,10 @@ export class ViewtrainerComponent {
   
     closePopup(): void {
      this.showModal =false
+    }
+    connect(){
+      this.registerChatUsers()
+     this.router.navigateByUrl("/user/trainerConnect")
     }
 
 }

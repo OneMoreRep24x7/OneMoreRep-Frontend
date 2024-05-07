@@ -26,7 +26,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const BASE_URL = 'http://localhost:8765/';
+    const BASE_URL = 'https://api.mygenuineprotein.shop/';
     let apiRequest = req.clone({
       url: BASE_URL + req.url,
     });
