@@ -20,7 +20,7 @@ export class CommunicationService {
     this.currentChatRoomId = chatRoomId;
 
     // Create a factory function for SockJS
-    const sockJsFactory = () => new SockJS('https://api.mygenuineprotein.shop/ws');
+    const sockJsFactory = () => new SockJS('https://chat.mygenuineprotein.shop/ws');
     // const sockJsFactory = () => new SockJS('http://localhost:8083/ws');
     
     this.stompClient = Stomp.over(sockJsFactory);
