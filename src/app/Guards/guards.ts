@@ -1,12 +1,19 @@
-import { Inject, inject } from "@angular/core";
-import { CanActivateFn, Router } from "@angular/router";
+import {  inject } from "@angular/core";
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from "@angular/router";
 
-export const AuthGuard: CanActivateFn = ()=> {
+export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
 
-    const router = inject(Router)
-    if(sessionStorage.getItem('user')){
+    const router = inject(Router);
+    const allowedEndpoints = ['/trainer/register']; // Add other allowed endpoints if needed
+
+    if (sessionStorage.getItem('user')) {
         return true;
     }
-    router.navigate(['/login'])
+
+    if (allowedEndpoints.includes(state.url)) {
+        return true;
+    }
+
+    router.navigate(['/login']);
     return false;
 }
