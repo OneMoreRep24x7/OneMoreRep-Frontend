@@ -36,7 +36,7 @@ export class RoomComponent implements OnInit,AfterViewInit{
       serverSecret, 
       this.roomID,  
       Date.now.toString(),
-      Date.now.toString()
+      Date.now.toString(),
     );
     // Create instance object from Kit Token.
     const zp = ZegoUIKitPrebuilt.create(kitToken);
