@@ -20,15 +20,16 @@ import { FoodDetailsComponent } from './food-details/food-details.component';
 import { TrainerWorkoutplanComponent } from './trainer-workoutplan/trainer-workoutplan.component';
 import { TrainerDietplanComponent } from './trainer-dietplan/trainer-dietplan.component';
 import { VideoCallComponent } from './video-call/video-call.component';
+import { canDeactivateGuard } from '../../Guards/guards';
 
 
 const routes: Routes = [
   {path:'',component:UserdashboardComponent},
   {path:'profile',component:UserprofileComponent},
   {path:'addProfile',component:AdduserprofileComponent},
-  {path:'payment',component:PaymentComponent},
+  {path:'payment',component:PaymentComponent,canDeactivate: [canDeactivateGuard]},
   {path:'viewTrainer/:id',component:ViewtrainerComponent},
-  {path:'showPlans',component:ShowplansComponent},
+  {path:'showPlans',component:ShowplansComponent,canDeactivate: [canDeactivateGuard]},
   {path:'paymentSuccess',component:PaymentsuccessComponent},
   {path:'showTrainers',component:ShowtrainersComponent},
   {path:'trainerPayment',component:TrainerPaymentComponent},

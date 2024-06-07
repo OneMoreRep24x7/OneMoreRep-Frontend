@@ -26,6 +26,7 @@
     "@ngrx/store-devtools": "^17.1.1",
     "@stomp/ng2-stompjs": "^8.0.0",
     "@stomp/rx-stomp": "^2.0.0",
+    "@sweetalert2/ngx-sweetalert2": "^12.3.0",
     "@zegocloud/zego-uikit-prebuilt": "^2.0.1",
     "animated-tailwindcss": "^3.3.0",
     "chart.js": "^4.4.2",
@@ -37,6 +38,7 @@
     "rxjs": "~7.8.0",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
+    "sweetalert2": "^11.11.1",
     "swiper": "^11.1.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"

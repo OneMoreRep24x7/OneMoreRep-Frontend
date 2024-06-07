@@ -29,6 +29,7 @@ import { TrainerWorkoutplanComponent } from './trainer-workoutplan/trainer-worko
 import { CalendarModule } from 'primeng/calendar';
 import { TrainerDietplanComponent } from './trainer-dietplan/trainer-dietplan.component';
 import { VideoCallComponent } from './video-call/video-call.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 
@@ -88,6 +89,7 @@ import { VideoCallComponent } from './video-call/video-call.component';
       "showInnerStroke": false,
       "responsive": false}),
       CalendarModule,
+      SweetAlert2Module.forRoot()
       
     
   ]
