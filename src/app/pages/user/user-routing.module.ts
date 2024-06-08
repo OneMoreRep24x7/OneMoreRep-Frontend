@@ -29,7 +29,7 @@ const routes: Routes = [
   {path:'addProfile',component:AdduserprofileComponent},
   {path:'payment',component:PaymentComponent,canDeactivate: [canDeactivateGuard]},
   {path:'viewTrainer/:id',component:ViewtrainerComponent},
-  {path:'showPlans',component:ShowplansComponent,canDeactivate: [canDeactivateGuard]},
+  {path:'showPlans',component:ShowplansComponent},
   {path:'paymentSuccess',component:PaymentsuccessComponent},
   {path:'showTrainers',component:ShowtrainersComponent},
   {path:'trainerPayment',component:TrainerPaymentComponent},
